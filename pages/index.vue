@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2> I am index page</h2>
+    <h1> I am index page</h1>
   </div>
 </template>
 
@@ -9,3 +9,11 @@ export default {
   name: 'IndexPage'
 }
 </script>
+
+
+<style scoped lang="scss">
+  .test{
+   //
+  }
+
+</style>

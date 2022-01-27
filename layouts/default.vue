@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <h1>Default Layout</h1>
+    <h1 class="main-heading">Default Layout</h1>
     <div>
       <Nuxt />
     </div>
