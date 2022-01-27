@@ -1,6 +1,50 @@
+@import './_mixins.scss';
+
+
+a{
+  //text-decoration: none;
+  color:inherit;
+}
+
+.flexbox{
+  display: flex;
+}
+
+.full-height{
+  min-height: 100vh;
+  height: auto;
+}
 
 .main-heading{
   font-size: 2.2rem;
-  color: $clear;
   margin:0;
+}
+
+.sub-heading{
+  font-size: 1.2rem;
+  margin:0;
+}
+
+.error-message{
+  color:  var(--v-error-base);;
+  font-size:1.5rem;
+  font-weight: bold;
+  padding:3rem;
+}
+
+
+.bg-success{
+  @include gradient-bg($success-light, var(--v-success-base));
+}
+
+.bg-warning{
+  @include gradient-bg($warning-light, var(--v-warning-base));
+}
+
+.bg-error{
+  @include gradient-bg($error-light, var(--v-error-base));
+}
+
+.bg-secondary{
+  @include gradient-bg($secondary-color-light, var(--v-secondary-base));
 }

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1> I am index page</h1>
+    <h3> Default</h3>
+
   </div>
 </template>
 
