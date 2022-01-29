@@ -1,6 +1,5 @@
 @import './_mixins.scss';
 
-
 a{
   //text-decoration: none;
   color:inherit;
@@ -12,7 +11,8 @@ a{
 
 .full-height{
   min-height: 100vh;
-  height: auto;
+  //height: auto;
+  max-height: 100vh;
 }
 
 .main-heading{

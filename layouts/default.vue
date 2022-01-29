@@ -1,19 +1,86 @@
 <template>
   <v-app dark>
-    <h1 class="main-heading">Default Layout</h1>
-    <div>
-      <Nuxt />
-    </div>
+    <v-container class="pa-0" fluid>
+      <v-row class="d-flex" align="start" no-gutters>
+        <v-col cols="12" md="5" lg="4" xs="6">
+          <v-container class="pa-0 full-height">
+            <v-row class="d-flex flex-column" no-gutters>
+              <v-col ref="panel">
+                <v-card 
+                  class="pa-0 overflow-y-auto" 
+                  outlined tile  
+                  :class="$vuetify.breakpoint.mdAndUp?'panel-height'+multiplier:''"
+                >
+                Left Pane
+                <!--<!--<left-pane/>-->            
+                </v-card>
+              </v-col>
+              <v-col class="d-none d-md-block fix-it">
+                <navigation/>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-col>
+        <v-col cols="12" md="7" lg="8" xs="6">
+          <v-main>
+            <v-container class="pa-0 green" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
+              <Nuxt />
+            </v-container>
+          </v-main>
+        </v-col>
+      </v-row>
+      <v-row class="d-md-none" no-gutters>
+        <v-col>
+          <navigation/>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
 <script>
+
 export default {
   name: 'DefaultLayout',
-  data () {
+
+  data: () => {
     return {
-    
+      multiplier:1
     }
+  },
+  
+  computed: {
+
+  },
+
+  methods:{
+
+  },
+
+  created() {
+    this.$nuxt.$on('menu-height-changed',(multiplier)=>{
+      this.multiplier=multiplier
+    })
+  },
+
+  beforeDestroy(){
+    this.$nuxt.$off('menu-height-changed')
   }
 }
+
 </script>
+
+<style scoped lang="scss">
+  .fix-it{
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    bottom: 0;
+  }
+
+  .panel-height1{
+    height:calc(100vh - 56px);
+  }
+  .panel-height2{
+    height:calc(100vh - 112px);
+  }
+</style>
