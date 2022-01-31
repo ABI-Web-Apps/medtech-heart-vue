@@ -78,5 +78,7 @@ export default {
         implementation: require('sass'),
       },
     }
-  }
+  },
+
+  target: 'static'
 }
