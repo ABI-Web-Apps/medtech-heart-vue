@@ -54,7 +54,7 @@ hr{
 }
 
 .bg-warning{
- @include gradient-bg($warning-light,var(--v-warning-base)); 
+  @include gradient-bg($warning-light,var(--v-warning-base)); 
 }
 
 .bg-error{

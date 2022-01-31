@@ -54,7 +54,7 @@ export default {
           accent: colors.grey.darken3,
           secondary: "#7d1e7d",
           info: colors.teal.lighten1,
-          warning:"#C0CA33",    
+          warning:"#9E9D24",    
           error: "#DD2C00",
           success: "#558B2F"
         }

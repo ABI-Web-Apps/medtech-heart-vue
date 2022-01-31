@@ -45,7 +45,7 @@ export default {
   data: () => {
     return {
       multiplier:1,
-      panelHeight:''
+      panelHeight:0
     }
   },
 

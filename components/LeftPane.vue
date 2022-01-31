@@ -46,7 +46,8 @@ export default {
     },
     panelHeightStyle(){
       return{
-        'height':this.panelHeight+'px'
+        'min-height':this.panelHeight-2+'px',
+        'height':'auto'
       }
     }
   },
