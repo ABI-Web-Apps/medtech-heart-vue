@@ -1,13 +1,12 @@
 <template>
   <div>
     <div v-if="$route.name=='index' || $route.name=='topics-slug'"> 
-      <v-card class="pa-4" :class="currentBg" tile>
+      <v-card class="pa-4" :class="currentBg" tile :style="panelHeightStyle">
         <panel 
           :topicHeading="topicHeading"
           :subTopicHeading="subTopicHeading"
           :dataFile="dataFile"
-          :category="category"
-          @play-video="playVideo"/> 
+          :category="category"/> 
       </v-card>
     </div>
     <div v-if="$route.name=='about'">
@@ -25,9 +24,9 @@ export default {
   name: 'LeftPane',
   
   props: {
-    /*panelHeightClass: {
+    panelHeight: {
       type:String
-    }*/
+    }
   },
 
   computed:{
@@ -45,19 +44,17 @@ export default {
     },
     currentBg(){
       return this.category? 'bg-'+this.category : 'bg-success'
+    },
+    panelHeightStyle(){
+      return{
+        'height':this.panelHeight+'px'
+      }
     }
   },
 
-  methods:{
-    playVideo:function(videoId){
-      $nuxt.$emit('load-video-player',videoId)
-    },
-  }
 }
 </script>
 
 <style scoped lang="scss">
-  .left-pane{
-    height:100vh;
-  }
+
 </style>

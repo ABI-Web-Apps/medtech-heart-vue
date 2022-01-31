@@ -44,7 +44,7 @@ export default {
 
   methods:{
     play: function(event) {
-      this.$emit('play-video', event.target.id)
+      $nuxt.$emit('load-video-player',event.target.id)
     },
     refreshContent:function(fileName){      
       try {

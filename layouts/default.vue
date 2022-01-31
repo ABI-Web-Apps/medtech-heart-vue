@@ -10,8 +10,8 @@
                   class="pa-0 overflow-y-auto" 
                   outlined tile  
                   :class="$vuetify.breakpoint.mdAndUp?'panel-height'+multiplier:''" 
-                ><!-- panel-height-class='panel-height'+multiplier-->
-                  <left-pane />          
+                >
+                  <left-pane :panel-height="panelHeight"/>          
                 </v-card>
               </v-col>
               <v-col class="d-none d-md-block fix-it">
@@ -44,10 +44,19 @@ export default {
 
   data: () => {
     return {
-      multiplier:1
+      multiplier:1,
+      panelHeight:''
     }
   },
-  
+
+  mounted(){
+    this.panelHeight=this.$refs.panel.clientHeight
+  },
+
+  updated(){
+    this.panelHeight=this.$refs.panel.clientHeight
+  },
+
   created() {
     this.$nuxt.$on('menu-height-changed',(multiplier)=>{
       this.multiplier=multiplier

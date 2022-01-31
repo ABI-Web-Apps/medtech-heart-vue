@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h3> Default</h3>
-
+    <right-pane/>
   </div>
 </template>
 
