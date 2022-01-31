@@ -10,9 +10,8 @@
       </v-card>
     </div>
     <div v-if="$route.name=='about'">
-     <v-card class="pa-4 bg-secondary">
-        About
-        <!--<about-us/>-->
+     <v-card class="pa-4 bg-secondary" :style="panelHeightStyle">
+        <about-us/>
       </v-card>
     </div>
   </div>
@@ -25,7 +24,7 @@ export default {
   
   props: {
     panelHeight: {
-      type:String
+      type:Number
     }
   },
 

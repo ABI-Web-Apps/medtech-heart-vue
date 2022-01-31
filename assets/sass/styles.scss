@@ -1,12 +1,12 @@
 @import './_mixins.scss';
 
-html,body{
+/*html,body{
   height: 100%;
   overflow: hidden;
-}
+}*/
 
 a{
-  //text-decoration: none;
+  text-decoration: none;
   color:inherit;
 }
 
@@ -22,8 +22,8 @@ hr{
 
 .full-height{
   min-height: 100vh;
-  height: auto;
-  //max-height: 100vh;
+  //height: auto;
+  max-height: 100vh;
 }
 
 .main-heading{
@@ -72,12 +72,11 @@ hr{
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--v-success-base);       /* color of the tracking area */
-  
+  background: inherit;       /* color of the tracking area */ 
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color:var(--v-success-base-lighten-3);    /* color of the scroll thumb */
+  background-color:transparent;    /* color of the scroll thumb */
   border-radius: 20px;       /* roundness of the scroll thumb */
-  //border: 1px solid transparent;  /* creates padding around scroll thumb */
+  border: 1px solid transparent;  /* creates padding around scroll thumb */
 }

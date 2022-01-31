@@ -52,7 +52,7 @@ export default {
         dark: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
-          secondary: "#961e96",
+          secondary: "#7d1e7d",
           info: colors.teal.lighten1,
           warning:"#C0CA33",    
           error: "#DD2C00",

@@ -93,7 +93,7 @@ export default {
     padding:1rem 3rem;
     flex-direction:column;
     row-gap:1rem; 
-    jistify-content:space-between;  
+    //justify-content:space-between;  
   }
 
   .display-video{

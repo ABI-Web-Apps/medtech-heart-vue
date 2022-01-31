@@ -22,7 +22,7 @@
         </v-col>
         <v-col cols="12" md="7" lg="8" xs="6">
           <v-main>
-            <v-container class="pa-0 green" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
+            <v-container class="pa-0 black overflow-y-auto" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
               <Nuxt/>
             </v-container>
           </v-main>
