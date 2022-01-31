@@ -13,8 +13,5 @@ export default {
 
 
 <style scoped lang="scss">
-  .test{
-   //
-  }
 
 </style>

@@ -3,16 +3,15 @@
     <v-container class="pa-0" fluid>
       <v-row class="d-flex" align="start" no-gutters>
         <v-col cols="12" md="5" lg="4" xs="6">
-          <v-container class="pa-0 full-height">
+          <v-container class="pa-0" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
             <v-row class="d-flex flex-column" no-gutters>
               <v-col ref="panel">
                 <v-card 
                   class="pa-0 overflow-y-auto" 
                   outlined tile  
-                  :class="$vuetify.breakpoint.mdAndUp?'panel-height'+multiplier:''"
-                >
-                Left Pane
-                <!--<!--<left-pane/>-->            
+                  :class="$vuetify.breakpoint.mdAndUp?'panel-height'+multiplier:''" 
+                ><!-- panel-height-class='panel-height'+multiplier-->
+                  <left-pane />          
                 </v-card>
               </v-col>
               <v-col class="d-none d-md-block fix-it">
@@ -24,7 +23,7 @@
         <v-col cols="12" md="7" lg="8" xs="6">
           <v-main>
             <v-container class="pa-0 green" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
-              <Nuxt />
+              <Nuxt/>
             </v-container>
           </v-main>
         </v-col>
@@ -49,14 +48,6 @@ export default {
     }
   },
   
-  computed: {
-
-  },
-
-  methods:{
-
-  },
-
   created() {
     this.$nuxt.$on('menu-height-changed',(multiplier)=>{
       this.multiplier=multiplier
@@ -77,10 +68,4 @@ export default {
     bottom: 0;
   }
 
-  .panel-height1{
-    height:calc(100vh - 56px);
-  }
-  .panel-height2{
-    height:calc(100vh - 112px);
-  }
 </style>
