@@ -16,6 +16,23 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        type: 'text/javascript',
+        src: 'zincJS/three.min.js',
+        body: true
+      },
+      {
+        type: 'text/javascript',
+        src: 'zincJS/zinc_3js_renderer.js',
+        body: true
+      },
+      {
+        type: 'text/javascript',
+        src: 'zincJS/zinc_threejs_control.js',
+        body: true
+      }
     ]
   },
 
