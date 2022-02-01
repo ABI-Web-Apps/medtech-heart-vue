@@ -1,15 +1,15 @@
 <template>
-  <div class="pa-2">
+  <div>
     <h1 class="main-heading">
       About Us
     </h1>
     <div class="navigate flexbox">
-      <div class="button" :style="researchSelected?selectedStyle:unselectedStyle">
+      <div class="button" :class="researchSelected?'button --active':'button --inactive'">
         <v-btn plain @click="toggleNavigation('research')">
           Our Research
         </v-btn>
       </div>
-      <div class="button" :style="teamSelected?selectedStyle:unselectedStyle">
+      <div class="button" :class="teamSelected?'button --active':'button --inactive'">
         <v-btn plain @click="toggleNavigation('team')">
           Our Team
         </v-btn>
@@ -40,21 +40,6 @@ export default {
       this.researchSelected=!(this.researchSelected)
       $nuxt.$emit('about-navigation',componentName)
     }
-  },
-
-  computed: {
-    selectedStyle() {
-      return {
-        'background-color':'rgba(150,30,150,0.6)',
-        'color':'white'
-      }
-    },
-    unselectedStyle () {
-      return {
-          'background-color': 'rgba(255,255,255,0.2)',
-          'color':'rgb(175,175,175)'  
-      }
-    }
   }
 }
 
@@ -79,6 +64,15 @@ export default {
       span{
         font-size:1.3rem;
         font-weight:600;
+      }
+
+      &.--active{
+        color:white;
+        background-color:rgba(150,30,150,0.6);
+      }
+      &.--inactive{
+        color:rgba(175,175,175);
+        background-color:rgba(255,255,255,0.2);
       }
     }
   }

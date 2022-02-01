@@ -1,12 +1,12 @@
 <template>
   <div>
     <div v-if="section=='research'" 
-      class="research-page flexbox"
+      class="container-default research-page flexbox"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     >
-      <div class="title">
-        <h3 class="title__main">Heart Mechanics Research at the Auckland Bioengineering Institute</h3>
-        <span class="title__sub">
+      <div class="heading">
+        <h3 class="heading__main">Heart Mechanics Research at the Auckland Bioengineering Institute</h3>
+        <span class="heading__sub">
           Improving diagnosis and management of heart diseases
           using personalised biomechanics and image-driven computer modelling
         </span>
@@ -19,12 +19,12 @@
       </iframe>
     </div>
     <div v-if="section=='team'" 
-      class="research-page flexbox"
+      class="container-default research-page flexbox"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     >
-      <div class="title">
-        <h3 class="title__main">Our Heart Mechanics Research Team</h3>
-        <span class="title__sub">
+      <div class="heading">
+        <h3 class="heading__main">Our Heart Mechanics Research Team</h3>
+        <span class="heading__sub">
           An inter-disciplinary collaboration between experts in
           bioengineering, physiology, software development, and medical imaging
         </span>
@@ -49,7 +49,6 @@ export default {
       section:'research',
     }
   },
-
  
   created() {
     this.$nuxt.$on('about-navigation', (componentName) => {
@@ -67,21 +66,20 @@ export default {
 
   .research-page{
     align-items:center; 
-    padding:2rem 4rem;
     flex-direction:column;
     row-gap:1rem;  
   }
 
-  .title{
+  .heading{
     text-align:center;
     &__main{
       color:$clear;
       font-size:1.5rem;
     }
     &__sub{
-      padding-top:2px;
-      font-size:1.2rem;
-      color:$text-color;
+      padding-top:1px;
+      font-size:1.1rem;
+      color:$text-color;;
     }  
   }
 
@@ -93,10 +91,10 @@ export default {
   }
   
   .detail{
-    width:100%;
-    padding-bottom:2px;
+    width:80%;
+    padding-bottom:1rem;
     img{
-      width:90%;
+      width:100%;
       height:auto;
     }   
   }

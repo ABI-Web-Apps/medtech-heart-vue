@@ -1,27 +1,25 @@
 <template>
   <div>
     <div v-if="videoFound" 
-      class="video-player flexbox"
+      class=" container-default video-player flexbox"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     >      
       <iframe 
-          frameborder="0" 
-          class="display-video"
-          :src="require('@/assets/videos/'+selectedVideo.link)"
-          allowfullscreen>
+        frameborder="0" 
+        :class="$vuetify.breakpoint.mdAndUp?'display-video --big' : 'display-video --small'"
+        :src="require('@/assets/videos/'+selectedVideo.link)"
+        allowfullscreen>
       </iframe>
       <div class="credits flexbox">
         <img src="@/assets/images/Annie-Jones.png" class="img-icon"/>
         <div class="credit-button">
           <div class="d-none d-sm-block">
             <span class="annie-liz">
-              <i>
                 Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland
-              </i>
             </span>
           </div>
           <div class="button">
-            <v-btn block class="secondary" @click="close">
+            <v-btn class="bg-secondary" elevation="8" small block @click="close">
               <span> Click to Close</span>
             </v-btn>
           </div>
@@ -30,7 +28,7 @@
       </div>
       <div class="annie-liz d-sm-none">
         <span>
-          <i>Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland</i>
+          Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland
         </span>
       </div>
     </div>
@@ -90,20 +88,19 @@ export default {
 
 <style scoped lang="scss">
   .video-player{
-    padding:1rem 3rem;
     flex-direction:column;
-    row-gap:1rem; 
-    //justify-content:space-between;  
+    row-gap:1rem;  
   }
 
   .display-video{
     width:100%;
-    height:30rem; 
+    &.--big{height:80vh;}
+    &.--small{height:15rem;}  
   }
 
   .img-icon{
-    height:5rem;
-    width:5rem;
+    height:4rem;
+    width:4rem;
   }
 
   .credits{
@@ -117,7 +114,6 @@ export default {
     flex-direction:column;
     flex-grow:1;
     row-gap:0.5rem;
-    align-content:center;
     align-items: center;
   }
 
@@ -128,8 +124,11 @@ export default {
 
   .annie-liz{
     display:flex;
-    padding:0px 2px;
+    padding:0px 1px;
     text-align:center;
     align-items:centre;
+    font-size:0.8rem;
+    font-style:italic;
+    color:$text-color;
   }
 </style>
