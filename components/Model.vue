@@ -1,7 +1,48 @@
 <template>
-  <div class="pa-2">
-    I am  Model
-    <div ref="myRenderer" class="model"></div>
+  <div>
+    <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
+      <v-container class="pa-0">
+        <v-row class="d-flex" no-gutters>
+          <v-col cols="12" xs="12" sm="7" md="7" lg="8" class="">
+            <div class="model-container">
+              <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'model --big' : 'model --small'">
+              </div>
+              <div class="rate-2 d-flex d-sm-none">
+                <heart-rate/>
+              </div>
+            </div>
+          </v-col>
+          <v-col cols="12" xs="12" sm="5" md="5" lg="4" class="">
+            <v-container class="pa-0 fill-height">
+              <v-row class="d-flex flex-column" no-gutters>
+                <v-col class="d-none d-sm-flex">
+                  ECG
+                </v-col>
+                <v-col class="d-none d-sm-flex">
+                  Pressure
+                </v-col>
+                <v-col class="d-none d-sm-flex">
+                  <heart-rate/>
+                </v-col>
+                <v-col class="d-none d-md-block">
+                  <div class="logo">
+                    <img src="~assets/images/medtechcore-abi-logo.png"/>
+                  </div>
+                </v-col>
+              </v-row>
+              <v-row class="d-flex flex-nowrap d-sm-none"  :class="$vuetify.breakpoint.width<=400?'flex-column':''" no-gutters>
+                <v-col>
+                  ECG
+                </v-col>
+                <v-col>
+                  Pressure
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-col>
+        </v-row>   
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -76,8 +117,32 @@ export default {
 
 
 <style scoped lang="scss">
+
+  .model-container{
+    position:relative;
+  }
+
   .model{
-    height:500px;
-    width:500px;
+    z-index:9999;
+    width:100%;
+    &.--big{height:90vh;}
+    &.--small{height:20rem;}  
+  }
+
+  .rate-2{
+    position:absolute;
+    bottom:0;
+    right:0;
+    width:200px;
+    height:30px;
+  }
+
+  .logo{
+    width:80%;
+    padding:0.2rem;
+    img{
+      width:100%;
+      height:auto;
+    }   
   }
 </style>

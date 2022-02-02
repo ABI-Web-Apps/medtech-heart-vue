@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="right-pane">
     <div v-if="!showVideo">
       <model/>
     </div>
@@ -38,3 +38,11 @@ export default {
 
 }
 </script>
+
+
+<style scoped lang="scss">
+  .right-pane{
+    color:$text-color;
+  }
+
+</style>
