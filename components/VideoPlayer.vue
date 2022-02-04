@@ -1,21 +1,21 @@
 <template>
   <div>
     <div v-if="videoFound" 
-      class=" container-default video-player flexbox"
+      class="container-default video-player flexbox"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     >      
       <iframe 
         frameborder="0" 
-        :class="$vuetify.breakpoint.mdAndUp?'display-video --big' : 'display-video --small'"
+        :class="getVideoStyle()"
         :src="require('@/assets/videos/'+selectedVideo.link)"
         allowfullscreen>
       </iframe>
       <div class="credits flexbox">
         <img src="@/assets/images/Annie-Jones.png" class="img-icon"/>
         <div class="credit-button">
-          <div class="d-none d-sm-block">
-            <span class="annie-liz">
-                Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland
+          <div class="annie-liz d-none d-sm-block">
+            <span>
+              Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland
             </span>
           </div>
           <div class="button">
@@ -70,6 +70,16 @@ export default {
     },
     close:function(){
       this.$emit('close-video')
+    },
+    getVideoStyle(){
+      let css='display-video --mdAndUp'
+      if (this.$vuetify.breakpoint.sm){ 
+        css='display-video --sm'
+      }
+      else if (this.$vuetify.breakpoint.xs){
+        css='display-video --xs'
+      }
+      return css
     }
   },
 
@@ -94,8 +104,9 @@ export default {
 
   .display-video{
     width:100%;
-    &.--big{height:80vh;}
-    &.--small{height:15rem;}  
+    &.--mdAndUp{height:80vh;}
+    &.--sm{height:25rem}  
+    &.--xs{height:15rem}  
   }
 
   .img-icon{
@@ -126,9 +137,11 @@ export default {
     display:flex;
     padding:0px 1px;
     text-align:center;
-    align-items:centre;
-    font-size:0.8rem;
-    font-style:italic;
-    color:$text-color;
+    justify-content:center;
+    span{
+      font-size:0.8rem;
+      font-style:italic;
+      color:$text-color;
+    }
   }
 </style>
