@@ -45,10 +45,10 @@ export default {
       return this.category? 'bg-'+this.category : 'bg-success'
     },
     panelHeightStyle(){
-      return{
-        'min-height':this.panelHeight-2+'px',
-        'height':'auto'
-      }
+      if(this.$vuetify.breakpoint.mdAndUp)
+        return{'min-height':this.panelHeight-2+'px'}
+      else
+        return{'height':'auto'} 
     }
   },
 
