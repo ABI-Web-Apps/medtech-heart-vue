@@ -3019,6 +3019,11 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
+dojo@^1.16.4:
+  version "1.16.4"
+  resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.16.4.tgz#b7dc831d5837aa222fa4e19fce465756b090bb95"
+  integrity sha512-mdW1ZLPpzUp+2ZajgyeuJH+5y9g+drUekrZplDK/mv28uDtfGRi66f7GJx138Zm9zWkYaDa1MRlz7aE9PpSQOw==
+
 dom-converter@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/dom-converter/-/dom-converter-0.2.0.tgz#6721a9daee2e293682955b6afe416771627bb768"

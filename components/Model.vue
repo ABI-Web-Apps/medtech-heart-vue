@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
+    <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':'auto-height'">
       <v-container class="pa-0">
         <v-row class="d-flex" no-gutters>
-          <v-col cols="12" xs="12" sm="7" md="7" lg="8" class="">
+          <v-col cols="12" xs="12" sm="9" md="8" lg="9" class="">
             <div class="model-container">
               <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'model --big' : 'model --small'">
               </div>
@@ -12,25 +12,26 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="12" xs="12" sm="5" md="5" lg="4" class="">
+          <v-col cols="12" xs="12" sm="3" md="4" lg="3" class="">
             <v-container class="pa-0 fill-height">
               <v-row class="d-flex flex-column" no-gutters>
                 <v-col class="d-none d-sm-flex">
-                  ECG
+                  <traces/>
                 </v-col>
                 <v-col class="d-none d-sm-flex">
-                  Pressure
-                </v-col>
-                <v-col class="d-none d-sm-flex">
-                  <heart-rate/>
+                  <div class="item" style="height:8rem">
+                    <heart-rate @beat-change="changeHeartRate"/>
+                  </div>
                 </v-col>
                 <v-col class="d-none d-md-block">
-                  <div class="logo">
-                    <img src="~assets/images/medtechcore-abi-logo.png"/>
+                  <div class="item" style="height:8rem">
+                    <div class="logo">
+                      <img src="~assets/images/medtechcore-abi-logo.png"/>
+                    </div>
                   </div>
                 </v-col>
               </v-row>
-              <v-row class="d-flex flex-nowrap d-sm-none"  :class="$vuetify.breakpoint.width<=400?'flex-column':''" no-gutters>
+              <v-row class="d-flex flex-nowrap d-sm-none" :class="$vuetify.breakpoint.width<=400?'flex-column':''" no-gutters>
                 <v-col>
                   ECG
                 </v-col>
@@ -65,10 +66,12 @@ export default {
           "heartFailure/compensated_view.json",
         ]
       },
+      currentRate:6,
+      str:"123"
     };
   },
   mounted() {
-    this.start();
+    //this.start()
   },
 
   methods: {
@@ -81,14 +84,14 @@ export default {
       zincRenderer.initialiseVisualisation();
       zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
 
-      loadModel("NoInfarct", 5.0);
-      //loadModel("NormalElectricity", 1.0);
+      //loadModel("NoInfarct", 6.0);
+      
+      loadModel("NormalElectricity", 5.0);
       //loadModel("CompensatedFailure", 8.1);
       zincRenderer.animate();
 
       function loadModel(model_name, rateScaling) {
         let model_prefix = "_highres";
-
         const metaURL = that.modelURLsArray[model_name + model_prefix][0];
         const viewURL = that.modelURLsArray[model_name + model_prefix][1];
         let scene = zincRenderer.getSceneByName(model_name);
@@ -110,6 +113,15 @@ export default {
         };
       }
     },
+    changeHeartRate(rate){
+      this.currentRate=rate/10;
+    }
+  },
+  
+  watch:{
+    currentRate:function (rate) {     
+      this.currentRate=rate
+    }
   }
 }
 
@@ -123,22 +135,30 @@ export default {
   }
 
   .model{
-    z-index:9999;
+    //border:1px solid red;
     width:100%;
     &.--big{height:90vh;}
-    &.--small{height:20rem;}  
+    &.--small{height:30rem;}  
+  }
+
+  .item{
+    display:flex;
+    align-items:center;
+    width:100%;
+    margin:auto;
+    font-weight:bold;
   }
 
   .rate-2{
     position:absolute;
-    bottom:0;
-    right:0;
-    width:200px;
-    height:30px;
+    left:0px;
+    top:20px;
+    width:120px;
+    //height:30px;
   }
 
   .logo{
-    width:80%;
+    width:85%;
     padding:0.2rem;
     img{
       width:100%;
