@@ -14,6 +14,30 @@ var currentECGName = 'None';
 var currentLVPName = 'None';
 var timeLineOffset = 0.0;
 
+//Added
+ECGurls["Normal"] = "ECG/NormalECG.json";
+ECGurls["Diastolic"] = "ECG/DiastolicECG.json";
+ECGurls["Systolic"] = "ECG/SystolicECG_shifted.json";
+LVPurls["Normal"] = "LVP/NormalLVP.json";
+LVPurls["Diastolic"] = "LVP/DiastolicLVP.json";
+LVPurls["Systolic"] = "LVP/SystolicLVP_shifted.json";
+ECGurls["NoInfarct"] = "ECG/NormalECG.json";
+ECGurls["SmallInfarct"] = "ECG/MildInfarctECG_shifted.json";
+ECGurls["LargeInfarct"] = "ECG/LargeInfarctECG_shifted.json";
+LVPurls["NoInfarct"] = "LVP/NormalLVP.json";
+LVPurls["SmallInfarct"] = "LVP/smallInfarctLVP.json";
+LVPurls["LargeInfarct"] = "LVP/largeInfarctLVP_shifted.json";
+ECGurls["Arrhythmia"] = "ECG/ArrhythmiaECG.json";
+LVPurls["Arrhythmia"] = "LVP/ArrhythmiaLVP.json";
+ECGurls["NoFailure"] = "ECG/NormalECG.json";
+LVPurls["NoFailure"] = "LVP/NormalLVP.json";
+ECGurls["CompensatedFailure"] = "ECG/DiastolicECG_shifted.json";
+LVPurls["CompensatedFailure"] = "LVP/DiastolicLVP_shifted.json";
+ECGurls["DecompensatedFailure"] = "ECG/SystolicECG_shifted.json";
+LVPurls["DecompensatedFailure"] = "LVP/SystolicLVP_shifted.json";
+//
+
+require(["dijit/Dialog"]);
 
 require(["dojo/ready"], function(ready){
 	ready(function(){
@@ -107,11 +131,13 @@ require(["dojo/ready"], function(ready){
 		        			offset: { y: -7, x: -10 },
 		        			values: 0.0});
 						lvpIndicator = LVPchart.getPlot("time");
-						loadFirstPage();
-					});
+						////loadFirstPage();
+						showECGAndLVP("Normal", 0.0);
+					});			
 			});
-	});
+	 });		
 });
+
 
 var showLVPInternal = function(chartName) {
 	if (chartName != currentLVPName) {
@@ -150,7 +176,7 @@ var rescaleXAxis = function(viewData) {
 	return viewData;
 }
 
-var onLVPLoaded = function(xmlhttp, chartName) {
+function onLVPLoaded (xmlhttp, chartName) {
 	return function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			var viewData = JSON.parse(xmlhttp.responseText);
@@ -187,7 +213,7 @@ var showECGInternal = function(chartName) {
 	}
 }
 
-var onECGLoaded = function(xmlhttp, chartName) {
+function onECGLoaded(xmlhttp, chartName){
 	return function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			var viewData = JSON.parse(xmlhttp.responseText);
@@ -219,10 +245,12 @@ function showECGAndLVP(chartName, timeOffset) {
 		xmlhttp.open("GET", requestURL, true);
 		xmlhttp.send();
 	}
+	/*
 	if (ECGTexts[chartName])
 		document.getElementById('ECGDescription').innerHTML = ECGTexts[chartName];
 	if (LVPTexts[chartName])
 		document.getElementById('LVPDescription').innerHTML = LVPTexts[chartName];
+		*/
 }
 
 function updateIndicator(normaliseTime) {

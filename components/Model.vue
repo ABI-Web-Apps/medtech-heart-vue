@@ -3,7 +3,7 @@
     <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':'auto-height'">
       <v-container class="pa-0">
         <v-row class="d-flex" no-gutters>
-          <v-col cols="12" xs="12" sm="9" md="8" lg="9" class="">
+          <v-col cols="12" xs="12" sm="9" md="8" lg="9">
             <div class="model-container">
               <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'model --big' : 'model --small'">
               </div>
@@ -12,14 +12,14 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="12" xs="12" sm="3" md="4" lg="3" class="">
+          <v-col cols="12" xs="12" sm="3" md="4" lg="3">
             <v-container class="pa-0 fill-height">
               <v-row class="d-flex flex-column" no-gutters>
                 <v-col class="d-none d-sm-flex">
                   <traces/>
                 </v-col>
                 <v-col class="d-none d-sm-flex">
-                  <div class="item" style="height:8rem">
+                  <div class="item" style="width:80%;height:8rem">
                     <heart-rate @beat-change="changeHeartRate"/>
                   </div>
                 </v-col>
@@ -31,12 +31,9 @@
                   </div>
                 </v-col>
               </v-row>
-              <v-row class="d-flex flex-nowrap d-sm-none" :class="$vuetify.breakpoint.width<=400?'flex-column':''" no-gutters>
+              <v-row class="d-flex d-sm-none" no-gutters>
                 <v-col>
-                  ECG
-                </v-col>
-                <v-col>
-                  Pressure
+                  <traces/>
                 </v-col>
               </v-row>
             </v-container>
@@ -144,9 +141,9 @@ export default {
   .item{
     display:flex;
     align-items:center;
+    justify-content:center;
     width:100%;
     margin:auto;
-    font-weight:bold;
   }
 
   .rate-2{
@@ -154,7 +151,6 @@ export default {
     left:0px;
     top:20px;
     width:120px;
-    //height:30px;
   }
 
   .logo{
