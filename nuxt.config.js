@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - medtech-heart-vue',
+    //titleTemplate: '%s - medtech-heart-vue',
     title: 'MedTechHeart',
     htmlAttrs: {
       lang: 'en'
@@ -18,22 +18,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      /*{
-        type: 'text/javascript',
-        src: 'zincJS/three.min.js'
-      },
-      {
-        type: 'text/javascript',
-        src: 'zincJS/zinc_3js_renderer.js'
-      },
-      {
-        type: 'text/javascript',
-        src: 'zincJS/zinc_threejs_control.js'
-      },*/
-      /*{
-        type:'text/javascript',
-        src:'js/require.js',
-      },*/
       {
         "data-dojo-config":"async: 1, dojoBlankHtmlUrl: '/blank.html'",
         /*"packages":[
@@ -48,7 +32,19 @@ export default {
         hid: 'chartMaker',
         type:'text/javascript',
         src:'js/LVPandECG.js',
-      }
+      },
+      {
+        type: 'text/javascript',
+        src: 'zincJS/three.min.js'
+      },
+      {
+        type: 'text/javascript',
+        src: 'zincJS/zinc_3js_renderer.js'
+      },
+      {
+        type: 'text/javascript',
+        src: 'zincJS/zinc_threejs_control.js'
+      },
     ]
   },
 

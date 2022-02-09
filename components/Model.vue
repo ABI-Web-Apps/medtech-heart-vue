@@ -2,7 +2,7 @@
   <div>
     <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':'auto-height'">
       <v-container class="pa-0">
-        <v-row class="d-flex" no-gutters>
+        <v-row class="d-flex justify-space-between" no-gutters>
           <v-col cols="12" xs="12" sm="9" md="8" lg="9">
             <div class="model-container">
               <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'model --big' : 'model --small'">
@@ -15,7 +15,7 @@
           <v-col cols="12" xs="12" sm="3" md="4" lg="3">
             <v-container class="pa-0 fill-height">
               <v-row class="d-flex flex-column" no-gutters>
-                <v-col class="d-none d-sm-flex">
+                <v-col class="d-none d-sm-flex flex-grow">
                   <traces/>
                 </v-col>
                 <v-col class="d-none d-sm-flex">
@@ -24,7 +24,7 @@
                   </div>
                 </v-col>
                 <v-col class="d-none d-md-block">
-                  <div class="item" style="height:8rem">
+                  <div class="item mt-auto">
                     <div class="logo">
                       <img src="~assets/images/medtechcore-abi-logo.png"/>
                     </div>
@@ -68,7 +68,7 @@ export default {
     };
   },
   mounted() {
-    //this.start()
+    this.start()
   },
 
   methods: {
@@ -81,9 +81,9 @@ export default {
       zincRenderer.initialiseVisualisation();
       zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
 
-      //loadModel("NoInfarct", 6.0);
+      loadModel("NoInfarct", 6.0);
       
-      loadModel("NormalElectricity", 5.0);
+      //loadModel("NormalElectricity", 5.0);
       //loadModel("CompensatedFailure", 8.1);
       zincRenderer.animate();
 

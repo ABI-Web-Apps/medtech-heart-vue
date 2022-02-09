@@ -7,7 +7,7 @@
       <div id="rightECG" ref="rightECG" class="chart">
       </div>
       <div id="ECGDescription" ref="ECGDescription" class="text-caption text-sm-body-2">
-        Some description text here
+        electrical waves make the heart muscle contract
       </div>
     </div>
     <div class="item text-center">
@@ -17,7 +17,7 @@
       <div id="rightLVP" ref="rightLVP" class="chart">
       </div>
       <div id="LVPDescription" ref="LVPDescription" class="text-caption text-sm-body-2">
-        Some description text here
+        muscle contraction generates pump pressure
       </div>  
     </div>
   </div>
@@ -42,6 +42,7 @@ export default {
 
   .traces{
     width:100%;
+    height:58vh;
   }
   .item{
     width:100%;
@@ -49,6 +50,7 @@ export default {
 
   .chart{
     width:100%;
-    height:120px;
+    height:100px;
+    padding-bottom:2px;
   }
 </style>

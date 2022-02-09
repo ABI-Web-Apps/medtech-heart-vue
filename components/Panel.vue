@@ -18,7 +18,7 @@ export default {
 
   data() {
     return {
-      currentPanel:'I am panel',
+      currentPanel:'',
       fileFound:false,
     }
   },
@@ -26,19 +26,15 @@ export default {
   props: {
     topicHeading: {
       type:String,
-      default:'Te Manawa'
     },
     subTopicHeading:{
       type:String,
-      default:'The Heart'
     },
     dataFile: {
       type:String,
-      default:'heart-main'
     },
     category:{
       type:String,
-      default:'success'
     }
   },
 

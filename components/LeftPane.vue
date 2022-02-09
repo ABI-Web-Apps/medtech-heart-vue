@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-if="$route.name=='index' || $route.name=='topics-slug'"> 
+    <div v-if="$route.name=='index'"> 
       <v-card class="pa-4" :class="currentBg" tile :style="panelHeightStyle">
         <panel 
-          :topicHeading="topicHeading"
-          :subTopicHeading="subTopicHeading"
-          :dataFile="dataFile"
-          :category="category"/> 
+          :topicHeading="currentContent.parentHeading"
+          :subTopicHeading="currentContent.heading"
+          :dataFile="currentContent.dataFile"
+          :category="currentContent.category"/> 
       </v-card>
     </div>
     <div v-if="$route.name=='about'">
@@ -22,6 +22,12 @@
 export default {
   name: 'LeftPane',
   
+  data() {
+    return {
+      currentContent:{},
+    }
+  },
+
   props: {
     panelHeight: {
       type:Number
@@ -29,20 +35,8 @@ export default {
   },
 
   computed:{
-    topicHeading(){
-      return this.$route.params.mainHeading
-    },
-    subTopicHeading(){
-      return this.$route.params.subHeading 
-    },
-    dataFile(){
-      return this.$route.params.slug
-    },
-    category(){
-      return this.$route.params.category
-    },
     currentBg(){
-      return this.category? 'bg-'+this.category : 'bg-success'
+      return this.currentContent.category? 'bg-'+this.currentContent.category : 'bg-success'
     },
     panelHeightStyle(){
       if(this.$vuetify.breakpoint.mdAndUp)
@@ -52,6 +46,26 @@ export default {
     }
   },
 
+  methods:{
+    registerRefreshEvent(){
+      this.$nuxt.$on('content-changed', (currentContent) => {
+      this.currentContent=currentContent
+      })
+    }
+  },
+
+  created() {
+    this.registerRefreshEvent()
+  },
+
+  updated() {
+    this.registerRefreshEvent()
+  },
+
+  beforeDestroy(){
+    this.$nuxt.$off('content-changed')
+  }
+  
 }
 </script>
 

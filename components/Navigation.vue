@@ -1,15 +1,14 @@
 <template>
   <div class="navi">
-    <div v-if="subMenuActive" :class="$vuetify.breakpoint.smAndDown ? 'sub-menu' : '' ">  
+    <div v-if="subMenuActive" :class="$vuetify.breakpoint.smAndDown ? 'sub-menu' : '' "> 
       <v-bottom-navigation grow
-        :input-value="subMenuActive" 
-        :color="activeColor"       
+        :input-value="subMenuActive"        
       >
         <v-btn class="button-default"
           v-for="subTopic in selectedTopic.subTopics" 
           :key="subTopic.title"   
+          :disabled="isSubTopicDisabled(subTopic)"
           @click="updateSubTopic(subTopic)" 
-          :to="{name:'topics-slug', params:{'slug':subTopic.dataFile,'mainHeading':selectedTopic.heading,'subHeading':subTopic.heading,'category':subTopic.category}}"
         >
           <span>{{subTopic.title}}</span>
           <v-icon>mdi-heart</v-icon>
@@ -17,18 +16,14 @@
       </v-bottom-navigation>
     </div>
     <v-bottom-navigation grow         
-      :color="activeColor"
       :fixed="$vuetify.breakpoint.smAndDown ? true : false"
     >
-      <v-btn class="button-default" to="/" exact @click="updateHome">
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
       <v-btn v-for="topic in topics" 
         class="button-default"
-        :key="topic.title"  
+        :key="topic.title" 
+        :disabled=isTopicDisabled(topic)  
         @click="updateTopic(topic)"
-        :to="{name:'topics-slug', params:{'slug':topic.subTopics[0].dataFile,'mainHeading':topic.heading,'subHeading':topic.subTopics[0].heading,'category':topic.subTopics[0].category}}"
+        to="/"
       >
         <span>{{topic.title}}</span>
         <v-icon>{{topic.icon}}</v-icon>
@@ -51,35 +46,59 @@
       selectedTopic: {},
       topics:topicsData,
       subMenuActive:false,
-      activeColor:''
+      activeColor:'',
+      subActiveColor:'',
     }
   },
 
   methods:{
-    updateHome:function(){
-      this.subMenuActive=false
-      this.activeColor=this.$vuetify.theme.themes.dark.success
-    },
     updateAbout:function(){
       this.subMenuActive=false
       this.activeColor=this.$vuetify.theme.themes.dark.secondary
     },  
     updateTopic:function(topic){
       this.selectedTopic=topic
-      this.subMenuActive= topic.subTopics.length>0?  true : false 
-      this.activeColor=topic.subTopics[0].category
+      this.subMenuActive= topic.subTopics.length>1?  true : false 
+      this.updateSubTopic(topic.subTopics[0]) 
     },
     updateSubTopic:function(subTopic){
       this.activeColor=subTopic.category
+      this.refereshContent(subTopic)
     },
     getIconWidth(){
       let menuItemWidth=100 /(topics.length + 2)
       return menuItemWidth.toFixed(2)
+    },
+    refereshContent(subTopic){    
+      let currentContent={...subTopic, parentHeading : this.selectedTopic.heading}
+      this.$nuxt.$emit('content-changed',currentContent)
+    },
+    isTopicDisabled(topic){
+      let flag=true    
+      if(topic.subTopics){
+        if(topic.subTopics.length>0){
+          if(topic.subTopics[0].dataFile){
+            if(topic.subTopics[0].dataFile!=""){
+              flag=false
+            }
+          }
+        }
+      }     
+      return flag
+    },
+    isSubTopicDisabled(subTopic){
+      let flag=true
+      if(subTopic.dataFile){
+        if(subTopic.dataFile!=""){
+          flag=false
+        }
+      }
+      return flag  
     }
-
   },
 
   computed: {
+    /*
     activeButton(){
       return{
         'background':this.activeColor+ ' !important'
@@ -90,7 +109,7 @@
       return{
         'width': this.getIconWidth() + '%'
       }
-    }
+    }*/
   },
   
   watch:{
@@ -100,9 +119,10 @@
   },
 
   created(){
-    this.activeColor=this.$vuetify.theme.themes.dark.success
-  },
-
+    //let defaultTopic= this.topics.find(el => el.title === "Home");
+    let defaultTopic=this.topics[0]
+    this.updateTopic(defaultTopic)
+  }
 }
 </script>
 
@@ -127,9 +147,4 @@
   border-left: 2px rgb(5,5,5) solid;
 }
 
-/*
-.v-btn.v-btn--active{
-  background:green !important;
-  border-color: yellow;
-}*/
 </style>
