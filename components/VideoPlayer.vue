@@ -7,7 +7,7 @@
       <iframe 
         frameborder="0" 
         :class="getVideoStyle()"
-        :src="require('@/assets/videos/'+selectedVideo.link)"
+        :src="selectedVideo.link"
         allowfullscreen>
       </iframe>
       <div class="credits flexbox">
