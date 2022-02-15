@@ -1,7 +1,11 @@
 <template>
   <div class="pa-2">
-    <h1 class="main-heading">{{topicHeading}}</h1>
-    <h4 :class="'sub-heading '+category+'--text'">{{subTopicHeading}}</h4>
+    <h1 class="main-heading">
+      {{$parentHeading()}} 
+    </h1>
+    <h4 :class="'sub-heading '+$category()+'--text'">
+      {{$heading()}}
+    </h4>
     <div v-if="fileFound" ref="markedDiv" class="marked" v-html="markedText"></div>
     <div v-if="!fileFound" class="error-message">
       <span>Data Not Found</span>
@@ -19,22 +23,7 @@ export default {
   data() {
     return {
       currentPanel:'',
-      fileFound:false,
-    }
-  },
-
-  props: {
-    topicHeading: {
-      type:String,
-    },
-    subTopicHeading:{
-      type:String,
-    },
-    dataFile: {
-      type:String,
-    },
-    category:{
-      type:String,
+      fileFound:false
     }
   },
 
@@ -42,7 +31,8 @@ export default {
     play: function(event) {
       $nuxt.$emit('load-video-player',event.target.id)
     },
-    refreshContent:function(fileName){      
+    refreshContent:function(){
+      const fileName=this.$dataFile()
       try {
         const panelData = require(`../assets/data/markdown/${fileName}.md`);
         this.fileFound=true
@@ -52,14 +42,16 @@ export default {
         this.fileFound=false
       }
     },
-    addVideoLinks(){         
-      const markedDiv=this.$refs.markedDiv
-      const links = markedDiv.getElementsByTagName('a')
-      let i;
-      for (i = 0; i < links.length; i++) {
-        let element=links[i]
-        if(element.getAttribute("data-play")=="video"){
-          element.addEventListener('click',this.play)
+    addVideoLinks:function(){ 
+      if(this.fileFound){      
+        const markedDiv=this.$refs.markedDiv
+        const links = markedDiv.getElementsByTagName('a')
+        let i;
+        for (i = 0; i < links.length; i++) {
+          let element=links[i]
+          if(element.getAttribute("data-play")=="video"){
+            element.addEventListener('click',this.play)
+          }
         }
       }
     }
@@ -70,31 +62,18 @@ export default {
       return marked(this.currentPanel)
     }
   },
-  
-  created() {
-    this.refreshContent(this.dataFile)
-  },
-  
-  watch:{
-    dataFile: function (currentFile) {
-      if(currentFile){
-        this.fileFound=true
-        this.refreshContent(currentFile)
-      }    
-      else{
-        this.fileFound=false
-      } 
-    }
-  },
 
   mounted() {
-    if(this.fileFound)
-      this.addVideoLinks()
+    this.addVideoLinks()
+  },
+
+  created() {
+    this.refreshContent()
   },
 
   updated() {
-    if(this.fileFound)
-      this.addVideoLinks()
+    this.refreshContent()
+    this.addVideoLinks()
   }
 }
 

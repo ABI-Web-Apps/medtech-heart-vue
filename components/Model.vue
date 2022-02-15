@@ -68,7 +68,7 @@ export default {
     };
   },
   mounted() {
-    this.start()
+    //this.start()
   },
 
   methods: {
@@ -106,7 +106,7 @@ export default {
 
       function meshReady() {
         return function () {
-          console.log("hello");
+          //console.log("hello");
         };
       }
     },

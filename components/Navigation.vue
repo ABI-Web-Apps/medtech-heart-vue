@@ -2,13 +2,14 @@
   <div class="navi">
     <div v-if="subMenuActive" :class="$vuetify.breakpoint.smAndDown ? 'sub-menu' : '' "> 
       <v-bottom-navigation grow
-        :input-value="subMenuActive"        
+        :input-value="subMenuActive" 
+        :color="activeColor"       
       >
         <v-btn class="button-default"
           v-for="subTopic in selectedTopic.subTopics" 
           :key="subTopic.title"   
-          :disabled="isSubTopicDisabled(subTopic)"
-          @click="updateSubTopic(subTopic)" 
+          :disabled="$isSubTopicDisabled(subTopic)"
+          :to="{ name: 'slug',params:{'slug':selectedTopic.title+'-'+subTopic.title}}"      
         >
           <span>{{subTopic.title}}</span>
           <v-icon>mdi-heart</v-icon>
@@ -17,18 +18,21 @@
     </div>
     <v-bottom-navigation grow         
       :fixed="$vuetify.breakpoint.smAndDown ? true : false"
+      :color="activeColor"
+      v-model="value"
     >
       <v-btn v-for="topic in topics" 
         class="button-default"
         :key="topic.title" 
-        :disabled=isTopicDisabled(topic)  
-        @click="updateTopic(topic)"
-        to="/"
+        :value="topic.title"
+        :disabled=$isTopicDisabled(topic)  
+        :to="{ name: 'slug',params:{'slug':topic.title+'-'+topic.subTopics[0].title}}"
+        @click="selectedTopic=topic"
       >
         <span>{{topic.title}}</span>
         <v-icon>{{topic.icon}}</v-icon>
       </v-btn>
-      <v-btn class="button-default" :to="{ name: 'about' }"  @click="updateAbout">
+      <v-btn class="button-default" :to="{ name: 'about' }"  @click="updateAbout()">
         <span>About</span>
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
@@ -37,93 +41,56 @@
 </template>
 
 <script>
-  import topicsData from '@/assets/data/topics.json'
 
-  export default {
+export default {
     
   data: () => {
     return {
       selectedTopic: {},
-      topics:topicsData,
+      topics:{},
       subMenuActive:false,
-      activeColor:'',
-      subActiveColor:'',
     }
   },
 
   methods:{
     updateAbout:function(){
       this.subMenuActive=false
-      this.activeColor=this.$vuetify.theme.themes.dark.secondary
     },  
-    updateTopic:function(topic){
-      this.selectedTopic=topic
-      this.subMenuActive= topic.subTopics.length>1?  true : false 
-      this.updateSubTopic(topic.subTopics[0]) 
-    },
-    updateSubTopic:function(subTopic){
-      this.activeColor=subTopic.category
-      this.refereshContent(subTopic)
-    },
     getIconWidth(){
-      let menuItemWidth=100 /(topics.length + 2)
+      let menuItemWidth=100 /(topics.length + 1)
       return menuItemWidth.toFixed(2)
+    }
+  },
+  
+  computed:{
+    activeColor(){
+      return this.$route.name==='about'? this.$vuetify.theme.themes.dark.secondary : this.$category()
     },
-    refereshContent(subTopic){    
-      let currentContent={...subTopic, parentHeading : this.selectedTopic.heading}
-      this.$nuxt.$emit('content-changed',currentContent)
-    },
-    isTopicDisabled(topic){
-      let flag=true    
-      if(topic.subTopics){
-        if(topic.subTopics.length>0){
-          if(topic.subTopics[0].dataFile){
-            if(topic.subTopics[0].dataFile!=""){
-              flag=false
-            }
-          }
-        }
-      }     
-      return flag
-    },
-    isSubTopicDisabled(subTopic){
-      let flag=true
-      if(subTopic.dataFile){
-        if(subTopic.dataFile!=""){
-          flag=false
-        }
-      }
-      return flag  
+    value(){
+      return this.$parentTitle()
     }
   },
 
-  computed: {
-    /*
-    activeButton(){
-      return{
-        'background':this.activeColor+ ' !important'
-      }
-    },
-
-    iconStyle(){
-      return{
-        'width': this.getIconWidth() + '%'
-      }
-    }*/
-  },
-  
   watch:{
+    selectedTopic:function(currentTopic){
+      this.subMenuActive= currentTopic.subTopics.length>1?  true : false 
+    },
     subMenuActive:function (isActive) {     
       $nuxt.$emit('menu-height-changed',isActive?'2':'1')
     }
   },
 
   created(){
-    //let defaultTopic= this.topics.find(el => el.title === "Home");
-    let defaultTopic=this.topics[0]
-    this.updateTopic(defaultTopic)
+    this.topics=this.$getTopics()
+    if(this.$route.name==='slug'){
+      const parentTitle= this.$parentTitle().toLowerCase()
+      this.selectedTopic=this.topics.filter(function (topic) {
+        return topic.title.toLowerCase()===parentTitle
+      })[0]
+    }
   }
 }
+
 </script>
 
 <style scoped lang="scss">

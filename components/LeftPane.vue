@@ -1,12 +1,8 @@
 <template>
   <div>
-    <div v-if="$route.name=='index'"> 
+    <div v-if="$route.name=='slug'">
       <v-card class="pa-4" :class="currentBg" tile :style="panelHeightStyle">
-        <panel 
-          :topicHeading="currentContent.parentHeading"
-          :subTopicHeading="currentContent.heading"
-          :dataFile="currentContent.dataFile"
-          :category="currentContent.category"/> 
+        <panel/> 
       </v-card>
     </div>
     <div v-if="$route.name=='about'">
@@ -36,7 +32,7 @@ export default {
 
   computed:{
     currentBg(){
-      return this.currentContent.category? 'bg-'+this.currentContent.category : 'bg-success'
+      return this.$category()? 'bg-'+this.$category() : 'bg-success'
     },
     panelHeightStyle(){
       if(this.$vuetify.breakpoint.mdAndUp)
@@ -44,28 +40,7 @@ export default {
       else
         return{'height':'auto'} 
     }
-  },
-
-  methods:{
-    registerRefreshEvent(){
-      this.$nuxt.$on('content-changed', (currentContent) => {
-      this.currentContent=currentContent
-      })
-    }
-  },
-
-  created() {
-    this.registerRefreshEvent()
-  },
-
-  updated() {
-    this.registerRefreshEvent()
-  },
-
-  beforeDestroy(){
-    this.$nuxt.$off('content-changed')
   }
-  
 }
 </script>
 
