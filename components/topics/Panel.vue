@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-2">
+  <div class="pa-1">
     <div class="flexbox demo-head">
       <div>
         <h1 class="main-heading">
@@ -9,7 +9,7 @@
           {{$heading()}}
         </h4>
       </div>
-      <div class="d-none d-md-block" v-if="$demoIcon()">
+      <div class="d-none d-sm-block" v-if="$demoIcon()">
         <v-hover v-slot="{ hover }">
           <img id="imgDemo" :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIcon"  :class="{ 'on-hover': hover }"/>
         </v-hover>
@@ -91,7 +91,7 @@ export default {
 <style scoped lang="scss">
 
   .marked{
-    margin-top:0.5rem;
+    padding-top:0.3rem;
     font-size:0.9rem;
   }
 

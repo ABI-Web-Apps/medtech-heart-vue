@@ -1,7 +1,15 @@
 <template>
   <div class="slider d-flex flex-column align-center">
-    <div class="font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
-      Heart Rate
+    <div class="d-flex align-center font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
+      <div class="pr-2">Heart Rate</div>
+      <div>
+        <v-tooltip>
+          <template v-slot:activator="{ on, attrs }">
+             <img src="~/assets/images/kiwirous.png" class="kiwirous" v-bind="attrs"  v-on="on"/>
+          </template>
+          <span>Got Kiwirous? Click here!</span>
+        </v-tooltip>  
+      </div>
     </div>
     <v-slider
         dense 
@@ -40,4 +48,8 @@
     width:100%;
   }
 
+  .kiwirous{
+    width:30px;
+    height:30px;
+  }
 </style>

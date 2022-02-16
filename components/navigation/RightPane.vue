@@ -18,7 +18,7 @@
             <v-container class="pa-0">
               <v-row class="d-flex flex-column" no-gutters>
                 <v-col class="d-none d-sm-flex">
-                  <div class="item" style="width:80%;height:6rem">
+                  <div class="item" style="width:90%;height:6rem">
                     <heart-rate/>
                   </div>
                 </v-col>
