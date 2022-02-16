@@ -1,18 +1,21 @@
 <template>
   <div class="right-pane">
-    <div v-if="!showVideo">
-      <model/>
-    </div>
-    <div v-if="showVideo">
-      <video-player :videoId="currentVideoId" @close-video="showVideo=false"/>
+    <div class="text-center">
+      <right-pane/>
+      <v-overlay :value="showVideo" absolute opacity=1>
+        <div class="overlay-video">
+          <video-player :videoId="currentVideoId" @close-video="showVideo=false"/>
+        </div>
+      </v-overlay>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
 
- async asyncData({route, $getContentBySlug,error,store}) {
+  async asyncData({route, $getContentBySlug,error,store}) {
     const slug = route.params.slug   
     let content=$getContentBySlug(slug)
     if(content===null){
@@ -25,6 +28,7 @@ export default {
     return {
       currentVideoId:null,
       showVideo:false,
+      overlay:false
     }
   },
 
@@ -41,7 +45,6 @@ export default {
   beforeDestroy(){
     this.$nuxt.$off('load-video-player')
     this.showVideo=false
-    this.$nuxt.$off('content-changed')
   }
 }
 </script>
@@ -50,6 +53,11 @@ export default {
 <style scoped lang="scss">
   .right-pane{
     color:$text-color;
+  }
+
+  .overlay-video{
+    //background-color:blue !important;
+    //width:700px;
   }
 
 </style>
