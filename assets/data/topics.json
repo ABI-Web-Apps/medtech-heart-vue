@@ -1,0 +1,79 @@
+[
+  {
+    "title":"Attack",
+    "heading":"Heart Attack",
+    "icon":"mdi-heart-broken",
+    "subTopics":[
+      {
+        "title":"Healthy",
+        "heading":"Coronary Arteries",
+        "icon":"attack_sub_healthy_icon.png",
+        "dataFile":"attack-healthy",
+        "category":"success"
+      },
+      {
+        "title":"Minor",
+        "heading":"Minor",
+        "icon":"attack_sub_moderate_icon.png",
+        "dataFile":"attack-minor",
+        "category":"warning"
+      },
+      {
+        "title":"Severe",
+        "heading":"Severe",
+        "icon":"attack_sub_severe_icon.png",
+        "dataFile":"attack-severe",
+        "category":"error"
+      }
+    ]
+  },
+  {
+    "title":"Electricity",
+    "heading":"Heart Electricity",
+    "icon":"mdi-lightning-bolt",
+    "subTopics":[
+      {
+        "title":"Healthy",
+        "heading":"Electrocardiograms",
+        "icon":"electricity_sub_healthy_icon.png",
+        "dataFile":"electricity-healthy",
+        "category":"success"
+      },
+      {
+        "title":"Fibrillation",
+        "heading":"Fibrillation",
+        "icon":"electricity_sub_fibrillation_icon.png",
+        "dataFile":"electricity-fibrillation",
+        "category":"error"
+      }
+    ]
+  },
+  {
+    "title":"Failure",
+    "heading":"Heart Failure",
+    "icon":"mdi-heart-off",
+    "subTopics":[
+      {
+        "title":"Healthy",
+        "heading":"Chronic Problems",
+        "icon":"failure_sub_healthy_icon.png",      
+        "dataFile":"failure-healthy",
+        "category":"success"
+      },
+      {
+        "title":"Compensated",
+        "heading":"Compensated",
+        "icon":"failure_sub_compensated_icon.png",
+        "dataFile":"failure-compensated",
+        "category":"warning"
+      },
+      {
+        "title":"Decompensated",
+        "heading":"Decompensated",
+        "icon":"failure_sub_decompensated_icon.png",
+        "dataFile":"failure-decompensated",
+        "category":"error"
+      }
+    ]
+  }
+]
