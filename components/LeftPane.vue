@@ -17,12 +17,6 @@
 
 export default {
   name: 'LeftPane',
-  
-  data() {
-    return {
-      currentContent:{},
-    }
-  },
 
   props: {
     panelHeight: {

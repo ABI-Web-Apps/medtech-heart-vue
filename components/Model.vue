@@ -1,54 +1,20 @@
 <template>
   <div>
-    <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':'auto-height'">
-      <v-container class="pa-0">
-        <v-row class="d-flex justify-space-between" no-gutters>
-          <v-col cols="12" xs="12" sm="9" md="8" lg="9">
-            <div class="model-container">
-              <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'model --big' : 'model --small'">
-              </div>
-              <div class="rate-2 d-flex d-sm-none">
-                <heart-rate/>
-              </div>
-            </div>
-          </v-col>
-          <v-col cols="12" xs="12" sm="3" md="4" lg="3">
-            <v-container class="pa-0 fill-height">
-              <v-row class="d-flex flex-column" no-gutters>
-                <v-col class="d-none d-sm-flex flex-grow">
-                  <traces/>
-                </v-col>
-                <v-col class="d-none d-sm-flex">
-                  <div class="item" style="width:80%;height:8rem">
-                    <heart-rate @beat-change="changeHeartRate"/>
-                  </div>
-                </v-col>
-                <v-col class="d-none d-md-block">
-                  <div class="item mt-auto">
-                    <div class="logo">
-                      <img src="~assets/images/medtechcore-abi-logo.png"/>
-                    </div>
-                  </div>
-                </v-col>
-              </v-row>
-              <v-row class="d-flex d-sm-none" no-gutters>
-                <v-col>
-                  <traces/>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-col>
-        </v-row>   
-      </v-container>
+    <div class="overlay flex-box">
+      <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'model --big' : 'model --small'">
+      </div>
     </div>
   </div>
 </template>
 
+
 <script>
 export default {
+
   data() {
     return {
-      flag: true,
+      heartRate:2000,
+      zincRenderer:null,
       modelURLsArray: {
         NoInfarct_highres: [
           "heartInfarct/noInfarct_highres_metadata.json",
@@ -58,34 +24,38 @@ export default {
           "heartElectricity/normalActivity_highres_metadata.json",
           "heartElectricity/normalActivity_view.json",
         ],
+        ArrythmiaElectricity:[
+          "heartElectricity/arrythmiaActivity_highres_metadata.json",
+          "heartElectricity/arrythmiaActivity_view.json",
+        ],
         CompensatedFailure_highres: [
           "heartFailure/compensated_highres_metadata.json",
           "heartFailure/compensated_view.json",
         ]
-      },
-      currentRate:6,
-      str:"123"
+      }
     };
   },
+
   mounted() {
-    //this.start()
+    this.start()
   },
 
   methods: {
     start() {
-      //let container = document.getElementById("myRenderer");
       let container = this.$refs.myRenderer;
-      let zincRenderer = new Zinc.Renderer(container, window);
+      this.zincRenderer = new Zinc.Renderer(container, window);
       Zinc.defaultMaterialColor = 0xffff9c;
+      let zincRenderer=this.zincRenderer;
+
       let that = this;
       zincRenderer.initialiseVisualisation();
       zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
 
-      loadModel("NoInfarct", 6.0);
-      
-      //loadModel("NormalElectricity", 5.0);
-      //loadModel("CompensatedFailure", 8.1);
-      zincRenderer.animate();
+      loadModel(this.$model().name, 1.0);
+      zincRenderer.animate();   	
+      that.updateSlider(that.heartRate);
+
+	    zincRenderer.addPreRenderCallbackFunction(updateIndicatorsAndTimer);
 
       function loadModel(model_name, rateScaling) {
         let model_prefix = "_highres";
@@ -109,56 +79,53 @@ export default {
           //console.log("hello");
         };
       }
+
+      function updateIndicatorsAndTimer (){
+        var newTime = new Date();
+        idleTime = idleTime + newTime.getTime() - oldTime.getTime();
+        oldTime = newTime;
+        //if (idleTime > idleTimeLimit) {
+        //	idleTimerReached();
+        //}
+
+        var normaliseTime = zincRenderer.getCurrentTime() / 3000.0;
+        updateIndicator(normaliseTime);
+		  }
     },
-    changeHeartRate(rate){
-      this.currentRate=rate/10;
+    updateSlider(heartRate){
+      this.zincRenderer.setPlayRate(heartRate)
     }
   },
-  
+
   watch:{
-    currentRate:function (rate) {     
-      this.currentRate=rate
+    heartRate:function(currentRate){
+      this.updateSlider(currentRate)
     }
+  },
+
+  created() {
+    this.$nuxt.$on('beat-change', (currentBeat) => {
+      this.heartRate=currentBeat
+    })
+  },
+
+  beforeDestroy(){
+    this.$nuxt.$off('beat-change')
   }
 }
 
 </script>
 
-
 <style scoped lang="scss">
 
-  .model-container{
-    position:relative;
-  }
-
-  .model{
+  .overlay{
     //border:1px solid red;
-    width:100%;
+    //opacity:0.5;
+    //width:800px;
+    //z-index: -1;
+  }
+  .model{
     &.--big{height:90vh;}
     &.--small{height:30rem;}  
-  }
-
-  .item{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    margin:auto;
-  }
-
-  .rate-2{
-    position:absolute;
-    left:0px;
-    top:20px;
-    width:120px;
-  }
-
-  .logo{
-    width:85%;
-    padding:0.2rem;
-    img{
-      width:100%;
-      height:auto;
-    }   
   }
 </style>

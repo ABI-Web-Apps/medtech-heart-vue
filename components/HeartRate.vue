@@ -6,13 +6,13 @@
     <v-slider
         dense 
         v-model="beat"    
-        min="1" max="200"
+        min="0" max="5000"
         thumb-color="info"
         track-color="secondary"
         track-fill-color="secondary"
         hide-details
         class="slider"
-        @change="$emit('beat-change',beat)"     
+        @change="$nuxt.$emit('beat-change',beat)"     
       >
       </v-slider>
       <div class="text-caption text-sm-body-2 font-italic">
@@ -28,7 +28,7 @@
   
     data() {
       return {
-        beat:80,
+        beat:2000,
       }
     }
   }
