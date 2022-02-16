@@ -10,9 +10,12 @@
         </h4>
       </div>
       <div class="d-none d-sm-block" v-if="$demoIcon()">
-        <v-hover v-slot="{ hover }">
-          <img id="imgDemo" :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIcon"  :class="{ 'on-hover': hover }"/>
-        </v-hover>
+        <v-tooltip>
+          <template v-slot:activator="{ on, attrs }">
+             <img :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIcon" v-bind="attrs"  v-on="on"/>
+          </template>
+          <img :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIconZoomed">
+        </v-tooltip> 
       </div>
     </div>
     <div v-if="fileFound" ref="markedDiv" class="marked" v-html="markedText"></div>
@@ -105,8 +108,11 @@ export default {
     opacity:0.5;
   }
 
-  #imgDemo.on-hover{
+  .demoIconZoomed{
+    width:90px;
+    height:90px;
     opacity:1;
   }
+
 
 </style>
