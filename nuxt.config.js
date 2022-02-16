@@ -116,5 +116,18 @@ export default {
     }
   },
 
-  target: 'static'
+  target: 'static',
+
+  generate: {
+    routes: [
+      '/Attack-Healthy',
+      '/Attack-Minor',
+      '/Attack-Severe',
+      '/Electricity-Healthy',
+      '/Electricity-Fibrillation',
+      '/Failure-Healthy',
+      '/Failure-Compensated',
+      '/Failure-Decompensated'
+    ]
+  }
 }
