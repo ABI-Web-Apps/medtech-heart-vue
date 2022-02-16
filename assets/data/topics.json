@@ -24,7 +24,7 @@
       {
         "title":"Healthy",
         "heading":"Coronary Arteries",
-        "demo":"attack_sub_healthy_icon.png",
+        "demoIcon":"attack_sub_healthy_icon.png",
         "icon":"mdi-heart-pulse",
         "dataFile":"attack-healthy",
         "category":"success",
@@ -35,7 +35,7 @@
       {
         "title":"Minor",
         "heading":"Minor",
-        "demo":"attack_sub_moderate_icon.png",
+        "demoIcon":"attack_sub_moderate_icon.png",
         "icon":"mdi-heart-half-full",
         "dataFile":"attack-minor",
         "category":"warning",
@@ -46,7 +46,7 @@
       {
         "title":"Severe",
         "heading":"Severe",
-        "demo":"attack_sub_severe_icon.png",
+        "demoIcon":"attack_sub_severe_icon.png",
         "icon":"mdi-heart-minus",
         "dataFile":"attack-severe",
         "category":"error",
@@ -64,7 +64,7 @@
       {
         "title":"Healthy",
         "heading":"Electrocardiograms",
-        "demo":"electricity_sub_healthy_icon.png",
+        "demoIcon":"electricity_sub_healthy_icon.png",
         "icon":"mdi-battery-heart",
         "dataFile":"electricity-healthy",
         "category":"success",
@@ -75,7 +75,7 @@
       {
         "title":"Fibrillation",
         "heading":"Fibrillation",
-        "demo":"electricity_sub_fibrillation_icon.png",
+        "demoIcon":"electricity_sub_fibrillation_icon.png",
         "icon":"mdi-heart-flash",
         "dataFile":"electricity-fibrillation",
         "category":"error",
@@ -93,7 +93,7 @@
       {
         "title":"Healthy",
         "heading":"Chronic Problems",
-        "demo":"failure_sub_healthy_icon.png",      
+        "demoIcon":"failure_sub_healthy_icon.png",      
         "icon":"mdi-account-heart",
         "dataFile":"failure-healthy",
         "category":"success",
@@ -104,7 +104,7 @@
       {
         "title":"Compensated",
         "heading":"Compensated",
-        "demo":"failure_sub_compensated_icon.png",
+        "demoIcon":"failure_sub_compensated_icon.png",
         "icon":"mdi-heart-cog",
         "dataFile":"failure-compensated",
         "category":"warning",
@@ -116,7 +116,7 @@
         "title":"Decompensated",
         "heading":"Decompensated",
         "icon":"mdi-heart-remove",
-        "demo":"failure_sub_decompensated_icon.png",
+        "demoIcon":"failure_sub_decompensated_icon.png",
         "dataFile":"failure-decompensated",
         "category":"error",
         "ecg":{"chartName":"DecompensatedFailure","chartDescription":"electrical pulses make the heart muscle contract"},

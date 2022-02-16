@@ -8,6 +8,7 @@ export default (context,inject) => {
   inject('title', () => {return context.store.getters.getCurrentContent.title}),
   inject('category', () => {return context.store.getters.getCurrentContent.category}),
   inject('dataFile', () => {return context.store.getters.getCurrentContent.dataFile}),
+  inject('demoIcon', () => {return context.store.getters.getCurrentContent.demoIcon}),
   inject('ecg', () => {return context.store.getters.getCurrentContent.ecg}),
   inject('model', () => {return context.store.getters.getCurrentContent.model})
 }

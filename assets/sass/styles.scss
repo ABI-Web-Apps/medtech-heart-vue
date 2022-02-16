@@ -11,8 +11,8 @@ a{
 
 
 hr{
-  margin-top:0.75rem;
-  margin-bottom:0.75rem;
+  margin-top:0.5rem;
+  margin-bottom:0.2rem;
 }
 
 .flexbox{
@@ -39,7 +39,7 @@ hr{
 }
 
 .sub-heading{
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin:0;
 }
 
@@ -72,10 +72,13 @@ hr{
   @include gradient-bg($secondary-color-light, var(--v-secondary-base));
 }
 
-
+.video-icon{
+  height:80px;
+  width:75px;
+}
 //Custom Scrollbar - For Webkit browsers
 ::-webkit-scrollbar {
-  width: 6px;               /* width of the entire scrollbar */
+  width: 3px;               /* width of the entire scrollbar */
 }
 
 ::-webkit-scrollbar-track {

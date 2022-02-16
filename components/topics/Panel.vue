@@ -1,11 +1,20 @@
 <template>
   <div class="pa-2">
-    <h1 class="main-heading">
-      {{$parentHeading()}} 
-    </h1>
-    <h4 :class="'sub-heading '+$category()+'--text'">
-      {{$heading()}}
-    </h4>
+    <div class="flexbox demo-head">
+      <div>
+        <h1 class="main-heading">
+          {{$parentHeading()}} 
+        </h1>
+        <h4 :class="'sub-heading '+$category()+'--text'">
+          {{$heading()}}
+        </h4>
+      </div>
+      <div class="d-none d-md-block" v-if="$demoIcon()">
+        <v-hover v-slot="{ hover }">
+          <img id="imgDemo" :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIcon"  :class="{ 'on-hover': hover }"/>
+        </v-hover>
+      </div>
+    </div>
     <div v-if="fileFound" ref="markedDiv" class="marked" v-html="markedText"></div>
     <div v-if="!fileFound" class="error-message">
       <span>Data Not Found</span>
@@ -82,8 +91,22 @@ export default {
 <style scoped lang="scss">
 
   .marked{
-    margin-top:1rem;
-    font-size:0.8rem;
+    margin-top:0.5rem;
+    font-size:0.9rem;
+  }
+
+  .demo-head{
+    column-gap:2rem;
+  }
+
+  .demoIcon{
+    width:60px;
+    height:60px;
+    opacity:0.5;
+  }
+
+  #imgDemo.on-hover{
+    opacity:1;
   }
 
 </style>
