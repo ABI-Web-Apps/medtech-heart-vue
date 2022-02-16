@@ -27,8 +27,8 @@
                 </v-col>
                 <v-col class="d-none d-md-block">
                   <div class="item mt-auto">
-                    <div class="logo">
-                      <img src="~assets/images/medtechcore-abi-logo.png"/>
+                    <div class="logo-mdAndUp">
+                      <logo/>
                     </div>
                   </div>
                 </v-col>
@@ -81,12 +81,8 @@ export default {
     width:120px;
   }
 
-  .logo{
+  .logo-mdAndUp{
     width:85%;
     padding:0.2rem;
-    img{
-      width:100%;
-      height:auto;
-    }   
   }
 </style>
