@@ -12,7 +12,7 @@
           :to="{ name: 'slug',params:{'slug':selectedTopic.title+'-'+subTopic.title}}"      
         >
           <span>{{subTopic.title}}</span>
-          <v-icon>mdi-heart</v-icon>
+          <v-icon>{{subTopic.icon}}</v-icon>
         </v-btn>
       </v-bottom-navigation>
     </div>

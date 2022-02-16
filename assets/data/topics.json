@@ -7,7 +7,7 @@
       {
         "title":"Heart",
         "heading":"The Heart",
-        "icon":"",
+        "icon":"mdi-home-heart",
         "dataFile":"heart-main",
         "category":"success",
         "ecg":{"chartName":"Normal","chartDescription":"electrical pulses make the heart muscle contract"},
@@ -24,7 +24,8 @@
       {
         "title":"Healthy",
         "heading":"Coronary Arteries",
-        "icon":"attack_sub_healthy_icon.png",
+        "demo":"attack_sub_healthy_icon.png",
+        "icon":"mdi-heart-pulse",
         "dataFile":"attack-healthy",
         "category":"success",
         "ecg":{"chartName":"NoInfarct","chartDescription":"electrical pulses make the heart muscle contract"},
@@ -34,7 +35,8 @@
       {
         "title":"Minor",
         "heading":"Minor",
-        "icon":"attack_sub_moderate_icon.png",
+        "demo":"attack_sub_moderate_icon.png",
+        "icon":"mdi-heart-half-full",
         "dataFile":"attack-minor",
         "category":"warning",
         "ecg":{"chartName":"SmallInfarct","chartDescription":"minor heart tissue damage can show up as subtle changes to the ECG"},
@@ -44,7 +46,8 @@
       {
         "title":"Severe",
         "heading":"Severe",
-        "icon":"attack_sub_severe_icon.png",
+        "demo":"attack_sub_severe_icon.png",
+        "icon":"mdi-heart-minus",
         "dataFile":"attack-severe",
         "category":"error",
         "ecg":{"chartName":"LargeInfarct","chartDescription":"severe heart tissue damage can show up as large changes to the ECG"},
@@ -61,7 +64,8 @@
       {
         "title":"Healthy",
         "heading":"Electrocardiograms",
-        "icon":"electricity_sub_healthy_icon.png",
+        "demo":"electricity_sub_healthy_icon.png",
+        "icon":"mdi-battery-heart",
         "dataFile":"electricity-healthy",
         "category":"success",
         "ecg":{"chartName":"Normal","chartDescription":"electrical pulses make the heart muscle contract"},
@@ -71,7 +75,8 @@
       {
         "title":"Fibrillation",
         "heading":"Fibrillation",
-        "icon":"electricity_sub_fibrillation_icon.png",
+        "demo":"electricity_sub_fibrillation_icon.png",
+        "icon":"mdi-heart-flash",
         "dataFile":"electricity-fibrillation",
         "category":"error",
         "ecg":{"chartName":"Arrhythmia","chartDescription":"abnormal electricity"},
@@ -88,7 +93,8 @@
       {
         "title":"Healthy",
         "heading":"Chronic Problems",
-        "icon":"failure_sub_healthy_icon.png",      
+        "demo":"failure_sub_healthy_icon.png",      
+        "icon":"mdi-account-heart",
         "dataFile":"failure-healthy",
         "category":"success",
         "ecg":{"chartName":"NoFailure","chartDescription":"electrical pulses make the heart muscle contract"},
@@ -98,7 +104,8 @@
       {
         "title":"Compensated",
         "heading":"Compensated",
-        "icon":"failure_sub_compensated_icon.png",
+        "demo":"failure_sub_compensated_icon.png",
+        "icon":"mdi-heart-cog",
         "dataFile":"failure-compensated",
         "category":"warning",
         "ecg":{"chartName":"CompensatedFailure","chartDescription":"electrical pulses make the heart muscle contract"},
@@ -108,7 +115,8 @@
       {
         "title":"Decompensated",
         "heading":"Decompensated",
-        "icon":"failure_sub_decompensated_icon.png",
+        "icon":"mdi-heart-remove",
+        "demo":"failure_sub_decompensated_icon.png",
         "dataFile":"failure-decompensated",
         "category":"error",
         "ecg":{"chartName":"DecompensatedFailure","chartDescription":"electrical pulses make the heart muscle contract"},
