@@ -15,18 +15,18 @@
             </div>
           </v-col>
           <v-col cols="12" xs="12" sm="3" md="4" lg="3">
-            <v-container class="pa-0 fill-height">
+            <v-container class="pa-0">
               <v-row class="d-flex flex-column" no-gutters>
-                <v-col class="d-none d-sm-flex flex-grow">
-                  <traces/>
-                </v-col>
                 <v-col class="d-none d-sm-flex">
-                  <div class="item" style="width:80%;height:8rem">
+                  <div class="item" style="width:80%;height:6rem">
                     <heart-rate/>
                   </div>
                 </v-col>
+                <v-col class="d-none d-sm-flex flex-grow">
+                  <traces/>
+                </v-col>  
                 <v-col class="d-none d-md-block">
-                  <div class="item mt-auto">
+                  <div class="pt-4 item mt-auto">
                     <div class="logo-mdAndUp">
                       <logo/>
                     </div>

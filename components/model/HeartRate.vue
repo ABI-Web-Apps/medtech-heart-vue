@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-8 slider d-flex flex-column align-center">
+  <div class="slider d-flex flex-column align-center">
     <div class="font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
       Heart Rate
     </div>
