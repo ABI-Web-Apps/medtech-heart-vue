@@ -15,7 +15,7 @@
         <div class="credit-button">
           <div class="annie-liz d-none d-sm-block">
             <span>
-              Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland
+              {{credits}}
             </span>
           </div>
           <div class="button">
@@ -28,7 +28,7 @@
       </div>
       <div class="annie-liz d-sm-none">
         <span>
-          Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland
+          {{credits}}
         </span>
       </div>
     </div>
@@ -40,14 +40,15 @@
 
 
 <script>
-import videosData from '../assets/data/videos.json'
+import videosData from '@/assets/data/videos.json'
 
 export default {  
   data() {
     return {
       videoFound:false,
       videos:videosData,
-      selectedVideo:{}
+      selectedVideo:{},
+      credits:'Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland'
     }
   },
 

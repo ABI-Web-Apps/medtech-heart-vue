@@ -2,12 +2,12 @@
   <div>
     <div v-if="$route.name=='slug'">
       <v-card class="pa-4" :class="currentBg" tile :style="panelHeightStyle">
-        <panel/> 
+        <lazy-panel/> 
       </v-card>
     </div>
     <div v-if="$route.name=='about'">
      <v-card class="pa-4 bg-secondary" :style="panelHeightStyle">
-        <about-us/>
+        <lazy-about-us/>
       </v-card>
     </div>
   </div>

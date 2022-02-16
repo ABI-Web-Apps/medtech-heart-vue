@@ -34,7 +34,7 @@ export default {
     refreshContent:function(){
       const fileName=this.$dataFile()
       try {
-        const panelData = require(`../assets/data/markdown/${fileName}.md`);
+        const panelData = require(`@/assets/data/markdown/${fileName}.md`);
         this.fileFound=true
         this.currentPanel=panelData.default
       }
