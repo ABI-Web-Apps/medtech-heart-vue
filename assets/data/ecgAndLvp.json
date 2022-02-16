@@ -1,1 +1,11 @@
-
+{
+  "Normal":{
+     "link":"ECG/NormalECG.json", 
+     "description":"electrical pulses make the heart muscle contract"
+   },
+ 
+   "Diastolic":{
+     "link":"ECG/DiastolicECG.json", 
+     "description":"electrical pulses make the heart muscle contract"
+   }
+} 

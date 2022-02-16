@@ -7,6 +7,7 @@ export default (context,inject) => {
   inject('heading', () => {return context.store.getters.getCurrentContent.heading}),
   inject('title', () => {return context.store.getters.getCurrentContent.title}),
   inject('category', () => {return context.store.getters.getCurrentContent.category}),
-  inject('dataFile', () => {return context.store.getters.getCurrentContent.dataFile})
-  
+  inject('dataFile', () => {return context.store.getters.getCurrentContent.dataFile}),
+  inject('ecg', () => {return context.store.getters.getCurrentContent.ecg}),
+  inject('model', () => {return context.store.getters.getCurrentContent.model})
 }

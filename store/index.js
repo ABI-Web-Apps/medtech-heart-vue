@@ -1,5 +1,5 @@
 export const state = () => ({
-  currentContent: {'name':'Riffat'},
+  currentContent: {},
 })
 
 export const getters = {

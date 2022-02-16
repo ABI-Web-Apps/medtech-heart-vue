@@ -10,8 +10,9 @@
         "icon":"",
         "dataFile":"heart-main",
         "category":"success",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"Normal","chartDescription":"electrical pulses make the heart muscle contract"},
+        "lvp":{"chartName":"Normal","chartDescription":""},
+        "model":{"name":"NoInfarct"}
       }
     ]
   },
@@ -26,8 +27,9 @@
         "icon":"attack_sub_healthy_icon.png",
         "dataFile":"attack-healthy",
         "category":"success",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"NoInfarct","chartDescription":"electrical pulses make the heart muscle contract"},
+        "lvp":{"chartName":"NoInfarct","chartDescription":"muscle contraction generates pump pressure"},
+        "model":{"name":"NoInfarct"}
       },
       {
         "title":"Minor",
@@ -35,8 +37,9 @@
         "icon":"attack_sub_moderate_icon.png",
         "dataFile":"attack-minor",
         "category":"warning",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"SmallInfarct","chartDescription":"minor heart tissue damage can show up as subtle changes to the ECG"},
+        "lvp":{"chartName":"SmallInfarct","chartDescription":"damaged tissue leads to less contraction force and less pressure"},
+        "model":{"name":"NoInfarct"}
       },
       {
         "title":"Severe",
@@ -44,8 +47,9 @@
         "icon":"attack_sub_severe_icon.png",
         "dataFile":"attack-severe",
         "category":"error",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"LargeInfarct","chartDescription":"severe heart tissue damage can show up as large changes to the ECG"},
+        "lvp":{"chartName":"LargeInfarct","chartDescription":"damaged tissue leads to less contraction force and less pressure"},
+        "model":{"name":"NoInfarct"}
       }
     ]
   },
@@ -60,8 +64,9 @@
         "icon":"electricity_sub_healthy_icon.png",
         "dataFile":"electricity-healthy",
         "category":"success",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"Normal","chartDescription":"electrical pulses make the heart muscle contract"},
+        "lvp":{"chartName":"Normal","chartDescription":"muscle contraction generates pump pressure"},
+        "model":{"name":"NormalElectricity"}
       },
       {
         "title":"Fibrillation",
@@ -69,8 +74,9 @@
         "icon":"electricity_sub_fibrillation_icon.png",
         "dataFile":"electricity-fibrillation",
         "category":"error",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"Arrhythmia","chartDescription":"abnormal electricity"},
+        "lvp":{"chartName":"Arrhythmia","chartDescription":"poor pump pressure"},
+        "model":{"name":"ArrythmiaElectricity"}
       }
     ]
   },
@@ -85,8 +91,9 @@
         "icon":"failure_sub_healthy_icon.png",      
         "dataFile":"failure-healthy",
         "category":"success",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"NoFailure","chartDescription":"electrical pulses make the heart muscle contract"},
+        "lvp":{"chartName":"NoFailure","chartDescription":"muscle contraction generates pump pressure"},
+        "model":{"name":"NoInfarct"}
       },
       {
         "title":"Compensated",
@@ -94,8 +101,9 @@
         "icon":"failure_sub_compensated_icon.png",
         "dataFile":"failure-compensated",
         "category":"warning",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"CompensatedFailure","chartDescription":"electrical pulses make the heart muscle contract"},
+        "lvp":{"chartName":"CompensatedFailure","chartDescription":"muscle contraction generates pump pressure"},
+        "model":{"name":"CompensatedFailure"}
       },
       {
         "title":"Decompensated",
@@ -103,8 +111,9 @@
         "icon":"failure_sub_decompensated_icon.png",
         "dataFile":"failure-decompensated",
         "category":"error",
-        "ecg":"Normal",
-        "lvp":"Normal"
+        "ecg":{"chartName":"DecompensatedFailure","chartDescription":"electrical pulses make the heart muscle contract"},
+        "lvp":{"chartName":"DecompensatedFailure","chartDescription":"thin-walled hearts struggle to maintain pump pressure"},
+        "model":{"name":"NoInfarct"}
       }
     ]
   }
