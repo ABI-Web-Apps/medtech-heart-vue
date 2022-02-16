@@ -33,7 +33,7 @@
                   </div>
                 </v-col>
               </v-row>
-              <v-row class="d-flex d-sm-none" no-gutters>
+              <v-row class="pt-5 d-flex d-sm-none" no-gutters>
                 <v-col>
                   <traces/>
                 </v-col>
@@ -62,8 +62,9 @@ export default {
 <style scoped lang="scss">
 
   .model-container{
-    //width:100vw;
     position:relative;
+    width:100%;
+    text-align: center; 
   }
 
   .item{
@@ -76,9 +77,10 @@ export default {
 
   .rate-2{
     position:absolute;
-    left:0px;
-    top:20px;
+    bottom:20px;
     width:120px;
+    left: 2%;  
+    //transform: translateX(-50%);
   }
 
   .logo-mdAndUp{

@@ -1,7 +1,7 @@
 <template>
   <div class="traces d-flex justify-center" :class="$vuetify.breakpoint.smAndUp || $vuetify.breakpoint.width<=430?'flex-column':''">
-    <div class="item text-center">
-      <div class="font-weight-medium text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
+    <div class="pt-5 item text-center">
+      <div class="font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
         ECG
       </div>
       <div id="rightECG" ref="rightECG" class="chart">
@@ -10,8 +10,8 @@
         electrical waves make the heart muscle contract
       </div>
     </div>
-    <div class="item text-center">
-     <div class="font-weight-medium text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
+    <div class="pt-5 item text-center">
+     <div class="font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
         Pressure (mmHg)
       </div> 
       <div id="rightLVP" ref="rightLVP" class="chart">
