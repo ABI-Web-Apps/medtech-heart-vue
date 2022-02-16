@@ -99,7 +99,7 @@ export default {
 <style scoped lang="scss">
   .video-player{
     flex-direction:column;
-    row-gap:1rem;  
+    row-gap:1rem; 
   }
 
   .display-video{
