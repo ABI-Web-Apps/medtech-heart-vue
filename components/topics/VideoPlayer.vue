@@ -3,34 +3,34 @@
     <div v-if="videoFound" 
       class="container-default video-player flexbox"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
-    >      
-      <iframe 
-        frameborder="0" 
-        :class="getVideoStyle()"
-        :src="selectedVideo.link"
-        allowfullscreen>
-      </iframe>
-      <div class="credits flexbox">
-        <img src="@/assets/images/Annie-Jones.png" class="img-icon"/>
-        <div class="credit-button">
-          <div class="annie-liz d-none d-sm-block">
-            <span>
-              {{credits}}
-            </span>
+    > 
+      <div id="outer-video" class="primary">     
+        <iframe allowfullscreen
+          frameborder="0" 
+          :class="getVideoStyle()"
+          :src="selectedVideo.link"
+        >
+        </iframe>
+      </div>
+      <div id="outer-credits">
+        <div class="credits flexbox">
+          <img src="@/assets/images/Annie-Jones.png" class="img-icon"/>
+          <div class="credit-button flexbox">
+            <div class="annie-liz flexbox d-none d-sm-block">
+              <span>{{credits}}</span>
+            </div>
+            <div class="button">
+              <v-btn class="bg-secondary" elevation="8" small block @click="close">
+                <span> Click to Close</span>
+              </v-btn>
+            </div>
           </div>
-          <div class="button">
-            <v-btn class="bg-secondary" elevation="8" small block @click="close">
-              <span> Click to Close</span>
-            </v-btn>
-          </div>
+          <img src="@/assets/images/Liz-Broadbent.png" class="img-icon"/>     
         </div>
-        <img src="@/assets/images/Liz-Broadbent.png" class="img-icon"/>     
-      </div>
-      <div class="annie-liz d-sm-none">
-        <span>
-          {{credits}}
-        </span>
-      </div>
+        <div class="annie-liz flexbox d-sm-none">
+          <span>{{credits}}</span>
+        </div>
+      </diV>
     </div>
     <div v-if="!videoFound" class="error-message">
       <h3>Specified video was not found</h3>
@@ -73,14 +73,7 @@ export default {
       this.$emit('close-video')
     },
     getVideoStyle(){
-      let css='display-video --mdAndUp'
-      if (this.$vuetify.breakpoint.sm){ 
-        css='display-video --sm'
-      }
-      else if (this.$vuetify.breakpoint.xs){
-        css='display-video --xs'
-      }
-      return css
+      return 'display-video --'+ this.$vuetify.breakpoint.name
     }
   },
 
@@ -102,17 +95,21 @@ export default {
     flex-direction:column;
     row-gap:1rem; 
   }
-
-  .display-video{
-    width:100%;
-    &.--mdAndUp{height:80vh;}
-    &.--sm{height:25rem}  
-    &.--xs{height:15rem}  
+  #outer-video{
+    flex-grow:1
   }
-
-  .img-icon{
-    height:4rem;
-    width:4rem;
+  #outer-credits{
+    padding-bottom:1px;
+  }
+  
+  .display-video{
+    display:block;
+    width:100%;
+    &.--xl{height:85vh;}
+    &.--lg{height:80vh;}
+    &.--md{height:76vh;}
+    &.--sm{height:25rem;}  
+    &.--xs{height:20rem;}  
   }
 
   .credits{
@@ -122,7 +119,6 @@ export default {
   }
 
   .credit-button{
-    display:flex;
     flex-direction:column;
     flex-grow:1;
     row-gap:0.5rem;
@@ -134,8 +130,12 @@ export default {
     max-width:20rem;
   }
 
+ .img-icon{
+    height:4rem;
+    width:4rem;
+  }
+
   .annie-liz{
-    display:flex;
     padding:0px 1px;
     text-align:center;
     justify-content:center;

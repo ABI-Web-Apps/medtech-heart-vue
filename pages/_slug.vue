@@ -1,12 +1,18 @@
 <template>
-  <div class="right-pane">
+  <div  class="right-pane" ref="outerDiv">
     <div class="text-center">
       <right-pane/>
-      <v-overlay :value="showVideo" absolute opacity=1>
-        <div class="overlay-video">
-          <video-player :videoId="currentVideoId" @close-video="showVideo=false"/>
-        </div>
-      </v-overlay>
+      <!--ID of below div(i.e "video-div") should not be changed. 
+          It is used in .md files for creating anchor - 
+          in order to scroll to video in small screens when movie icon is clicked 
+      -->
+      <div id="video-div"> 
+        <v-overlay color="black" :value="showVideo" absolute opacity=1>    
+          <div :style="videoStyle">
+            <video-player :videoId="currentVideoId" @close-video="closeVideo()"/>
+          </div>        
+        </v-overlay>
+      </div>
     </div>
   </div>
 </template>
@@ -28,17 +34,39 @@ export default {
     return {
       currentVideoId:null,
       showVideo:false,
-      overlay:false
+      overlay:false,
+      lastOffset:0,
+      outerWidth:0
     }
+  },
+
+  computed:{
+    videoStyle(){
+      return {
+        'width':this.outerWidth
+      }
+    } 
+  },
+
+  methods:{
+    closeVideo(){
+      this.showVideo=false
+
+      /* Scroll back to the point where user clicked on video icon - for small devices */
+      if(!this.$vuetify.breakpoint.mdAndUp)
+        this.$vuetify.goTo(this.lastOffset, {})
+    }
+  },
+
+  mounted(){
+    this.outerWidth=this.$refs.outerDiv.clientWidth+'px'
   },
 
   created() {
     this.$nuxt.$on('load-video-player', (videoId) => {
       this.currentVideoId=videoId
       this.showVideo=true
-    }),
-    this.$nuxt.$on('close-video',()=>{
-       this.showVideo=false
+      this.lastOffset= process.client? window.pageYOffset : 0
     })
   },
 
@@ -49,15 +77,9 @@ export default {
 }
 </script>
 
-
 <style scoped lang="scss">
   .right-pane{
+    width:100%;
     color:$text-color;
   }
-
-  .overlay-video{
-    //background-color:blue !important;
-    //width:700px;
-  }
-
 </style>

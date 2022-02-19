@@ -1,7 +1,7 @@
 If a minor heart attack is left untreated, or if medication is stopped too early, then the coronary artery blockage can become more severe.
 
 ![severe](/img/coronary-block-severe.png) 
-<a href="#" data-play="video">
+<a href="#video-div" data-play="video">
   <img id="blocked" src="/img/blockage.png" height="90" width="70"/>
 </a>
 

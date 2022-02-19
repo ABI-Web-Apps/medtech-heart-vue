@@ -2,7 +2,7 @@
 This is an interactive model of the heart's two main pumping chambers: the ventricles. Spin, zoom, drag, and open the heart using the gestures shown at the bottom. Vary the heart rate using the slider on the right. 
 
 ![schematic](/img/schematic.png) 
-<a href="#" data-play="video">
+<a href="#video-div" data-play="video">
   <img id="healthy" src="/img/heart-video.png" height="80" width="75"/>
 </a>
 
