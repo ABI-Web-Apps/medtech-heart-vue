@@ -81,7 +81,7 @@
         "category":"error",
         "ecg":{"chartName":"Arrhythmia","chartDescription":"abnormal electricity"},
         "lvp":{"chartName":"Arrhythmia","chartDescription":"poor pump pressure"},
-        "model":{"name":"ArrythmiaElectricity"}
+        "model":{"name":"NoInfarct"}
       }
     ]
   },
@@ -110,7 +110,7 @@
         "category":"warning",
         "ecg":{"chartName":"CompensatedFailure","chartDescription":"electrical pulses make the heart muscle contract"},
         "lvp":{"chartName":"CompensatedFailure","chartDescription":"muscle contraction generates pump pressure"},
-        "model":{"name":"CompensatedFailure"}
+        "model":{"name":"NoInfarct"}
       },
       {
         "title":"Decompensated",
