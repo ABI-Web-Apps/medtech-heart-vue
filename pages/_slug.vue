@@ -20,6 +20,7 @@
 <script>
 
 export default {
+  layout: 'default',
 
   async asyncData({route, $getContentBySlug,error,store}) {
     const slug = route.params.slug   

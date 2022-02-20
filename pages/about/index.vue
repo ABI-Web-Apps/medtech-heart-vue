@@ -41,7 +41,9 @@
 
 <script>
 
+
 export default {
+  layout: 'default',
   name: 'AboutPage',
 
   data() {
