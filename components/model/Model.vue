@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <div class="overlay flex-box">
-      <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'model --big' : 'model --small'">
-      </div>
+  <div class="overlay flexbox">
+    <div class="model">
+      <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'zinc-object --big' : 'zinc-object --small'" />
+    </div>
+    <div class="pa-0">
+      <img src="~/assets/images/gestures-icons.png" class="gestures"/>
     </div>
   </div>
 </template>
@@ -49,13 +51,12 @@ export default {
 
       let that = this;
       zincRenderer.initialiseVisualisation();
-      zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
+      //0x050505
+      zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
 
       loadModel(this.$model().name, 1.0);
       zincRenderer.animate();   	
       that.updateSlider(that.heartRate);
-
-	    zincRenderer.addPreRenderCallbackFunction(updateIndicatorsAndTimer);
 
       function loadModel(model_name, rateScaling) {
         let model_prefix = "_highres";
@@ -79,18 +80,6 @@ export default {
           //console.log("hello");
         };
       }
-
-      function updateIndicatorsAndTimer (){
-        var newTime = new Date();
-        idleTime = idleTime + newTime.getTime() - oldTime.getTime();
-        oldTime = newTime;
-        //if (idleTime > idleTimeLimit) {
-        //	idleTimerReached();
-        //}
-
-        var normaliseTime = zincRenderer.getCurrentTime() / 3000.0;
-        updateIndicator(normaliseTime);
-		  }
     },
     updateSlider(heartRate){
       this.zincRenderer.setPlayRate(heartRate)
@@ -120,12 +109,24 @@ export default {
 
   .overlay{
     //border:1px solid red;
-    //opacity:0.5;
-    //width:800px;
-    //z-index: -1;
+    flex-direction:column;
+    text-align:center;
+    height:100%;
+    justify-content:space-between;
   }
-  .model{
-    &.--big{height:90vh;}
-    &.--small{height:30rem;}  
+
+  .model{   
+    flex-grow:1;
+  }
+
+  .zinc-object{
+    width:100%;
+    &.--big{height:82vh;}
+    &.--small{height:30rem;} 
+  }
+
+  .gestures{
+    width:40%;
+    height:auto;
   }
 </style>
