@@ -7,7 +7,7 @@
           in order to scroll to video in small screens when movie icon is clicked 
       -->
       <div id="video-div"> 
-        <v-overlay color="black" :value="showVideo" absolute opacity=1>    
+        <v-overlay color="black" :value="showVideo" :absolute="$vuetify.breakpoint.mdAndUp?true:false" opacity=1>    
           <div :style="videoStyle">
             <video-player :videoId="currentVideoId" @close-video="closeVideo()"/>
           </div>        

@@ -4,14 +4,12 @@
       class="container-default video-player flexbox"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     > 
-      <div id="outer-video" class="primary">     
-        <iframe allowfullscreen
+      <iframe allowfullscreen
           frameborder="0" 
           :class="getVideoStyle()"
           :src="selectedVideo.link"
-        >
-        </iframe>
-      </div>
+      >
+      </iframe>
       <div id="outer-credits">
         <div class="credits flexbox">
           <img src="@/assets/images/Annie-Jones.png" class="img-icon"/>
@@ -73,7 +71,7 @@ export default {
       this.$emit('close-video')
     },
     getVideoStyle(){
-      return 'display-video --'+ this.$vuetify.breakpoint.name
+      return this.$vuetify.breakpoint.mdAndUp ? 'display-video' : 'display-video --' +  this.$vuetify.breakpoint.name
     }
   },
 
@@ -94,10 +92,9 @@ export default {
   .video-player{
     flex-direction:column;
     row-gap:1rem; 
+    height: 100%;
   }
-  #outer-video{
-    flex-grow:1
-  }
+
   #outer-credits{
     padding-bottom:1px;
   }
@@ -105,10 +102,8 @@ export default {
   .display-video{
     display:block;
     width:100%;
-    &.--xl{height:85vh;}
-    &.--lg{height:80vh;}
-    &.--md{height:76vh;}
-    &.--sm{height:25rem;}  
+    flex-grow:1;
+    &.--sm{height:30rem;}  
     &.--xs{height:20rem;}  
   }
 
@@ -136,7 +131,7 @@ export default {
   }
 
   .annie-liz{
-    padding:0px 1px;
+    padding:2px;
     text-align:center;
     justify-content:center;
     span{
