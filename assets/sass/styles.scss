@@ -1,4 +1,5 @@
 @import './_mixins.scss';
+@import '~vuetify/src/styles/styles.sass';
 
 body{
   background-color:black;
@@ -17,11 +18,11 @@ hr{
 
 .flexbox{
   display: flex;
+  &.--vertical{flex-direction:column;}
 }
 
 .full-height{
-  min-height: 100vh;
-  max-height: 100vh;
+  height: 100vh;
 }
 
 .auto-height{
@@ -30,6 +31,10 @@ hr{
 
 .container-default{
   padding:1.5rem 1rem 0.2rem 1.5rem;
+  @media #{map-get($display-breakpoints, 'sm-and-down')}
+  {
+    padding:0.5rem;
+  } 
 }
 
 .main-heading{

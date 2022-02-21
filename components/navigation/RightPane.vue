@@ -1,40 +1,36 @@
 <template>
   <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':'auto-height'">
-    <v-container class="pa-0">
-      <v-row class="d-flex justify-space-between" no-gutters>
+    <v-container class="pa-0" ref="rightMost">
+      <v-row class="d-flex" no-gutters>
         <v-col cols="12" xs="12" sm="9" md="8" lg="9">
           <div class="model-rate">
-            <model/>
-            <div class="rate-2 d-flex d-sm-none">
-              <heart-rate/>
+            <model :availableHeight="rateAndTracesHeight" :totalHeight="rightMostHeight"/>
+            <div class="rate-smAndDown d-flex d-sm-none">
+              <heart-rate/> <!--Small screens only -->
             </div>
           </div>
         </v-col>
         <v-col cols="12" xs="12" sm="3" md="4" lg="3">
-          <v-container class="pa-0">
-            <v-row class="d-flex flex-column" no-gutters>
-              <v-col class="d-none d-sm-flex">
-                <div class="item" style="width:90%;height:6rem">
+          <div class="pa-0 d-flex flex-column justify-space-between" :style="rightContainerStyle">
+            <div ref="rateAndTraces">
+              <div class="d-none d-sm-flex justify-center">
+                <div class="pb-1 rate-mdAndUp">
                   <heart-rate/>
                 </div>
-              </v-col>
-              <v-col class="d-none d-sm-flex flex-grow">
+              </div>
+              <div class="d-none d-sm-flex justify-center">
                 <traces/>
-              </v-col>  
-              <v-col class="d-none d-md-block">
-                <div class="pt-4 item mt-auto">
-                  <div class="logo-mdAndUp">
-                    <logo/>
-                  </div>
-                </div>
-              </v-col>
-            </v-row>
-            <v-row class="pt-5 d-flex d-sm-none" no-gutters>
-              <v-col>
-                <traces/>
-              </v-col>
-            </v-row>
-          </v-container>
+              </div> 
+            </div>
+            <div class="d-none d-md-flex justify-center">
+              <div class="pt-4 logo-mdAndUp">
+                <logo/>
+              </div>
+            </div>
+          </div> 
+          <div class="pt-5 d-flex d-sm-none"> <!--small screens -->
+            <traces/>
+          </div>
         </v-col>
       </v-row>   
     </v-container>
@@ -43,12 +39,38 @@
 
 <script>
 export default {
-  
+ 
   data() {
     return {
-      //modelOverlay:true
-    };
+      rightMostHeight:0,
+      rateAndTracesHeight:0
+    }
   },
+
+  mounted(){
+    this.getDomHeights()
+  },
+
+  updated(){
+    this.getDomHeights()
+  },
+
+  computed:{
+    rightContainerStyle(){
+      if(this.$vuetify.breakpoint.mdAndUp){
+        return {
+          'height':this.rightMostHeight+'px'
+        }
+      }
+    }
+  },
+
+  methods:{
+    getDomHeights(){
+      this.rightMostHeight=this.$refs.rightMost.clientHeight
+      this.rateAndTracesHeight=this.$refs.rateAndTraces.clientHeight
+    }
+  }
 }
 
 </script>
@@ -62,24 +84,20 @@ export default {
     text-align: center; 
   }
 
-  .item{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    margin:auto;
+  .rate-mdAndUp{
+    width:80%;
   }
 
-  .rate-2{
+  .rate-smAndDown{
     position:absolute;
     bottom:20px;
     width:120px;
     left: 2%;  
-    //transform: translateX(-50%);
   }
 
   .logo-mdAndUp{
     width:85%;
     padding:0.2rem;
+    display:block;
   }
 </style>

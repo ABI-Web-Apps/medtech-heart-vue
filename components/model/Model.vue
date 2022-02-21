@@ -1,21 +1,26 @@
 <template>
-  <div class="overlay flexbox">
-    <div class="model">
-      <div ref="myRenderer" :class="$vuetify.breakpoint.mdAndUp?'zinc-object --big' : 'zinc-object --small'" />
-    </div>
-    <div class="pa-0">
+  <div class="outer-model">
+    <div class="d-flex d-sm-none justify-center"> <!--small screens only -->
       <img src="~/assets/images/gestures-icons.png" class="gestures"/>
+    </div>
+    <div class="d-flex flex-column justify-space-between" :style="modelHeightStyle">
+      <div ref="zincDomObject" class="zinc-object" :style="zincHeightStyle"/>
+      <div ref="modelControls" class="d-none d-sm-flex justify-center">
+        <img src="~/assets/images/gestures-icons.png" class="gestures"/>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script>
+
 export default {
 
   data() {
     return {
       heartRate:2000,
+      modelControlsHeight:0,
       zincRenderer:null,
       modelURLsArray: {
         NoInfarct_highres: [
@@ -38,13 +43,55 @@ export default {
     };
   },
 
+  props: {
+    availableHeight: {
+      type: Number
+    },
+    totalHeight:{
+      type:Number
+    }
+  },
+
+  computed:{
+    modelHeightStyle(){
+      let modelHeight=0
+      if(this.$vuetify.breakpoint.mdAndUp){
+        modelHeight= this.totalHeight
+      }
+      else if(this.$vuetify.breakpoint.sm){
+        modelHeight= this.availableHeight
+      }
+
+      return{
+        'height': modelHeight > 0 ? modelHeight +'px':'auto'
+      }
+    },
+    zincHeightStyle(){
+      let zincObjectHeight="20rem" // default for xs devices
+
+      if(this.$vuetify.breakpoint.mdAndUp){
+        let calculated=this.totalHeight - this.modelControlsHeight
+        zincObjectHeight=calculated> 0 ? calculated+ 'px' : '80vh'  //Set default in case some devices don't provide client height
+      }
+      else if(this.$vuetify.breakpoint.sm){
+        let calculated=this.availableHeight - this.modelControlsHeight 
+        zincObjectHeight=calculated> 0 ? calculated+ 'px' : '30rem'    
+      }
+      return{
+        'height':zincObjectHeight,
+        'width':'100%'
+      }
+    }
+  },
+
   mounted() {
+    this.modelControlsHeight=this.$refs.modelControls.clientHeight
     this.start()
   },
 
   methods: {
     start() {
-      let container = this.$refs.myRenderer;
+      let container = this.$refs.zincDomObject;
       this.zincRenderer = new Zinc.Renderer(container, window);
       Zinc.defaultMaterialColor = 0xffff9c;
       let zincRenderer=this.zincRenderer;
@@ -106,24 +153,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-  .overlay{
-    //border:1px solid red;
-    flex-direction:column;
-    text-align:center;
-    height:100%;
-    justify-content:space-between;
-  }
-
-  .model{   
-    flex-grow:1;
-  }
-
-  .zinc-object{
-    width:100%;
-    &.--big{height:82vh;}
-    &.--small{height:30rem;} 
-  }
 
   .gestures{
     width:40%;
