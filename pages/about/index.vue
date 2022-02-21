@@ -1,15 +1,15 @@
 <template>
   <div>
     <div v-if="section=='research'" 
-      class="container-default research-page flexbox"
-      :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
+      class="container-default research-page flexbox --vertical"
+      :class="$vuetify.breakpoint.smAndUp?'full-height':''"
     >
-      <div class="heading">
+      <div class="pt-4 heading">
         <h3 class="heading__main">Heart Mechanics Research at the Auckland Bioengineering Institute</h3>
-        <span class="heading__sub">
-          Improving diagnosis and management of heart diseases
+        <div class="heading__sub">
+          Improving diagnosis and management of heart diseases<span v-if="$vuetify.breakpoint.mdAndUp"><br/></span>
           using personalised biomechanics and image-driven computer modelling
-        </span>
+        </div>
       </div> 
       <iframe 
         class="researchVideo" 
@@ -19,15 +19,15 @@
       </iframe>
     </div>
     <div v-if="section=='team'" 
-      class="container-default research-page flexbox"
+      class="container-default research-page flexbox  --vertical"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     >
-      <div class="heading">
+      <div class="pt-4 heading">
         <h3 class="heading__main">Our Heart Mechanics Research Team</h3>
-        <span class="heading__sub">
-          An inter-disciplinary collaboration between experts in
+        <div class="heading__sub pt-2">
+          An inter-disciplinary collaboration between experts in <span v-if="$vuetify.breakpoint.smAndUp"><br/></span>
           bioengineering, physiology, software development, and medical imaging
-        </span>
+        </div>
       </div>    
       <div class="detail">
         <img src="~assets/images/headshots.png"/>
@@ -41,14 +41,13 @@
 
 <script>
 
-
 export default {
   layout: 'default',
   name: 'AboutPage',
 
   data() {
     return {
-      section:'research',
+      section:'research'
     }
   },
  
@@ -68,7 +67,6 @@ export default {
 
   .research-page{
     align-items:center; 
-    flex-direction:column;
     row-gap:1rem;  
   }
 
@@ -77,16 +75,23 @@ export default {
     &__main{
       color:$clear;
       font-size:1.5rem;
+      @media #{map-get($display-breakpoints, 'xl-only')}
+      { font-size: 1.8rem;}
+      @media #{map-get($display-breakpoints, 'xs-only')}
+      { font-size: 1.3rem;} 
     }
     &__sub{
       padding-top:1px;
       font-size:1.1rem;
-      color:$text-color;;
+      color:$text-color;
+      @media #{map-get($display-breakpoints, 'xl-only')}
+      { font-size: 1.3rem;} 
+      @media #{map-get($display-breakpoints, 'xs-only')}
+      { font-size: 1rem;} 
     }  
   }
 
   .researchVideo{
-    padding-top:2rem;
     width:100%;
     height:24rem; 
     flex-grow:1;

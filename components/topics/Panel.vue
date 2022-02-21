@@ -1,24 +1,24 @@
 <template>
-  <div class="pa-1">
+  <div class="pa-2">
     <div class="flexbox demo-head">
       <div>
-        <h1 class="main-heading">
+        <h1 class="pt-2 main-heading">
           {{$parentHeading()}} 
         </h1>
         <h4 :class="'sub-heading '+$category()+'--text'">
           {{$heading()}}
         </h4>
       </div>
-      <div class="d-none d-sm-block" v-if="$demoIcon()">
+      <!--<div class="d-none d-sm-block" v-if="$demoIcon()">
         <v-tooltip>
           <template v-slot:activator="{ on, attrs }">
              <img :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIcon" v-bind="attrs"  v-on="on"/>
           </template>
           <img :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIconZoomed">
         </v-tooltip> 
-      </div>
+      </div>-->
     </div>
-    <div v-if="fileFound" ref="markedDiv" class="marked" v-html="markedText"></div>
+    <div v-if="fileFound" ref="markedDiv" class="pt-xl-4 marked" v-html="markedText"></div>
     <div v-if="!fileFound" class="error-message">
       <span>Data Not Found</span>
     </div>
@@ -94,8 +94,8 @@ export default {
 <style scoped lang="scss">
 
   .marked{
-    padding-top:0.3rem;
-    font-size:0.9rem;
+    padding-top:8px;
+    //font-size:0.9rem;
   }
 
   .demo-head{

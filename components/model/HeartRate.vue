@@ -1,6 +1,6 @@
 <template>
   <div class="slider d-flex flex-column align-center">
-    <div class="d-flex align-center font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
+    <div class="d-flex align-center font-weight-bold text-xl-h6 text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
       <div class="pr-2">Heart Rate</div>
       <div>
         <v-tooltip>
@@ -23,7 +23,7 @@
         @change="$nuxt.$emit('beat-change',beat)"     
       >
       </v-slider>
-      <div class="text-caption text-sm-body-2 font-italic">
+      <div class="text-caption text-sm-caption text-md-caption text-lg-body-2 text-xl-body-2 font-italic">
         beats per minute
       </div>
   </div>

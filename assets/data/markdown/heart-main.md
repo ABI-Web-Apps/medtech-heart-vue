@@ -3,7 +3,7 @@ This is an interactive model of the heart's two main pumping chambers: the ventr
 
 ![schematic](/img/schematic.png) 
 <a href="#video-div" data-play="video">
-  <img id="healthy" src="/img/heart-video.png" height="80" width="75"/>
+  <img id="healthy" src="/img/heart-video.png" class="video-icon"/>
 </a>
 
 ---

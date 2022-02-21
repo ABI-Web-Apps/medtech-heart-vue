@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h1 class="main-heading">
+  <div class="pa-2">
+    <h1 class="pt-2 main-heading">
       About Us
     </h1>
-    <div class="navigate flexbox">
+    <div class="navigate flexbox --vertical">
       <div class="button" :class="researchSelected?'button --active':'button --inactive'">
         <v-btn plain @click="toggleNavigation('research')">
           Our Research
@@ -51,7 +51,6 @@ export default {
   .navigate{
     padding-top:4rem; 
     padding-bottom:2rem;
-    flex-direction:column;
     align-items:center;
     row-gap:1.5rem;
 

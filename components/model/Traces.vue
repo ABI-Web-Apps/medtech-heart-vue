@@ -1,22 +1,22 @@
 <template>
   <div class="traces d-flex justify-center" :class="$vuetify.breakpoint.smAndUp || $vuetify.breakpoint.width<=430?'flex-column':''">
     <div class="pt-5 pb-1 item text-center">
-      <div class="font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
+      <div class="font-weight-bold text-subtitle-2 text-xl-h6 text-sm-subtitle-2 text-md-body-1">
         ECG
       </div>
       <div id="rightECG" ref="rightECG" class="chart">
       </div>
-      <div id="ECGDescription" ref="ECGDescription" class="text-caption text-sm-body-2">
+      <div id="ECGDescription" ref="ECGDescription" class="text-caption text-xl-body-2">
         electrical waves make the heart muscle contract
       </div>
     </div>
     <div class="pt-5 pb-1 item text-center">
-     <div class="font-weight-bold text-subtitle-2 text-sm-subtitle-2 text-md-body-1">
+     <div class="font-weight-bold text-subtitle-2 text-xl-h6 text-sm-subtitle-2 text-md-body-1">
         Pressure (mmHg)
       </div> 
       <div id="rightLVP" ref="rightLVP" class="chart">
       </div>
-      <div id="LVPDescription" ref="LVPDescription" class="text-caption text-sm-body-2">
+      <div id="LVPDescription" ref="LVPDescription" class="text-caption text-xl-body-2">
         muscle contraction generates pump pressure
       </div>  
     </div>

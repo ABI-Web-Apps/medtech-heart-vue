@@ -153,7 +153,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+  .zinc-object{
+    //border:1px solid green;
+  }
   .gestures{
     width:40%;
     height:auto;

@@ -1,20 +1,4 @@
 @import './_mixins.scss';
-@import '~vuetify/src/styles/styles.sass';
-
-body{
-  background-color:black;
-}
-
-a{
-  text-decoration: none;
-  color:inherit;
-}
-
-
-hr{
-  margin-top:0.2rem;
-  margin-bottom:0.2rem;
-}
 
 .flexbox{
   display: flex;
@@ -22,7 +6,9 @@ hr{
 }
 
 .full-height{
-  height: 100vh;
+  //height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
 }
 
 .auto-height{
@@ -38,13 +24,25 @@ hr{
 }
 
 .main-heading{
-  font-size: 2.2rem;
   margin:0;
+  font-size: 2.2rem;
+  @media #{map-get($display-breakpoints, 'xs-only')}
+  {
+    font-size: 1.8rem;
+  }
+  @media #{map-get($display-breakpoints, 'xl-only')}
+  {
+    font-size: 2.5rem;
+  }
 }
 
 .sub-heading{
-  font-size: 1.1rem;
   margin:0;
+  font-size: 1.2rem;
+  @media #{map-get($display-breakpoints, 'xl-only')}
+  {
+    font-size: 1.6rem;
+  }
 }
 
 .error-message{
@@ -79,7 +77,23 @@ hr{
 .video-icon{
   height:75px;
   width:70px;
+  @media #{map-get($display-breakpoints, 'xl-only')}
+  {
+    height:85px;
+    width:80px;
+  }
 }
+
+.video-icon-tall{
+  height:80px;
+  width:70px;
+  @media #{map-get($display-breakpoints, 'xl-only')}
+  {
+    height:90px;
+    width:80px;
+  }
+}
+
 //Custom Scrollbar - For Webkit browsers
 ::-webkit-scrollbar {
   width: 3px;               /* width of the entire scrollbar */

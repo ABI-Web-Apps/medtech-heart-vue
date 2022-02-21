@@ -19,7 +19,7 @@
     <v-bottom-navigation grow         
       :fixed="$vuetify.breakpoint.smAndDown ? true : false"
       :color="activeColor"
-      v-model="value"
+      v-model="menuCaption"
     >
       <v-btn v-for="topic in topics" 
         class="button-default"
@@ -48,7 +48,7 @@ export default {
     return {
       selectedTopic: {},
       topics:{},
-      subMenuActive:false,
+      subMenuActive:false
     }
   },
 
@@ -66,7 +66,7 @@ export default {
     activeColor(){
       return this.$route.name==='about'? this.$vuetify.theme.themes.dark.secondary : this.$category()
     },
-    value(){
+    menuCaption(){
       return this.$parentTitle()
     }
   },
