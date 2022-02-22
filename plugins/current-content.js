@@ -10,5 +10,6 @@ export default (context,inject) => {
   inject('dataFile', () => {return context.store.getters.getCurrentContent.dataFile}),
   inject('demoIcon', () => {return context.store.getters.getCurrentContent.demoIcon}),
   inject('ecg', () => {return context.store.getters.getCurrentContent.ecg}),
+  inject('lvp', () => {return context.store.getters.getCurrentContent.lvp}),
   inject('model', () => {return context.store.getters.getCurrentContent.model})
 }

@@ -6,9 +6,8 @@
           <v-container class="pa-0" :class="mdAndUp?'full-height':'auto-height'">
             <v-row class="d-flex flex-column" no-gutters>
               <v-col ref="panel">
-                <v-card 
-                  class="pa-0 overflow-y-auto" 
-                  outlined tile  
+                <v-card outlined tile  
+                  class="pa-0 overflow-y-auto"           
                   :class="mdAndUp?'panel-height'+multiplier:''" 
                 >
                   <left-pane :panel-height="panelHeight"/>          

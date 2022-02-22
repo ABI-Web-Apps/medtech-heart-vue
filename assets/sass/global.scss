@@ -15,7 +15,7 @@
 }
 
 .container-default{
-  padding:1.5rem 1rem 0.2rem 1.5rem;
+  padding:1.5rem 0.5rem 0.2rem 1.5rem;
   @media #{map-get($display-breakpoints, 'sm-and-down')}
   {
     padding:0.5rem;
@@ -24,14 +24,14 @@
 
 .main-heading{
   margin:0;
-  font-size: 2.2rem;
+  font-size: 2rem;
   @media #{map-get($display-breakpoints, 'xs-only')}
   {
     font-size: 1.8rem;
   }
   @media #{map-get($display-breakpoints, 'xl-only')}
   {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
 }
 

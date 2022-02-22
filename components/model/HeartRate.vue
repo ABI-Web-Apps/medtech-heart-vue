@@ -36,7 +36,7 @@
   
     data() {
       return {
-        beat:2000,
+        beat:2500,
       }
     }
   }
@@ -49,7 +49,7 @@
   }
 
   .kiwirous{
-    width:30px;
-    height:30px;
+    width:1.8rem;
+    height:1.8rem;
   }
 </style>

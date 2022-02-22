@@ -19,7 +19,7 @@ export default {
 
   data() {
     return {
-      heartRate:2000,
+      heartRate:2500,
       modelControlsHeight:0,
       zincRenderer:null,
       modelURLsArray: {

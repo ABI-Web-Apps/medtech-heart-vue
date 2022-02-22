@@ -48,7 +48,7 @@ export default {
     return {
       selectedTopic: {},
       topics:{},
-      subMenuActive:false
+      subMenuActive:false,
     }
   },
 

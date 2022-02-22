@@ -11,7 +11,7 @@
         "dataFile":"heart-main",
         "category":"success",
         "ecg":{"chartName":"Normal","chartDescription":"electrical pulses make the heart muscle contract"},
-        "lvp":{"chartName":"Normal","chartDescription":""},
+        "lvp":{"chartName":"Normal","chartDescription":"muscle contraction generates pump pressure"},
         "model":{"name":"NoInfarct"}
       }
     ]
