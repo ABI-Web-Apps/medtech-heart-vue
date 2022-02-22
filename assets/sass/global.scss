@@ -1,4 +1,3 @@
-@import './_mixins.scss';
 
 .flexbox{
   display: flex;
@@ -51,48 +50,6 @@
   padding:3rem;
 }
 
-.panel-height1{
-  height:calc(100vh - 56px);
-}
-.panel-height2{
-  height:calc(100vh - 112px);
-}
-
-.bg-success{
-  @include gradient-bg($success-light,var(--v-success-base));
-}
-
-.bg-warning{
-  @include gradient-bg($warning-light,var(--v-warning-base)); 
-}
-
-.bg-error{
-  @include gradient-bg($error-light, var(--v-error-base));
-}
-
-.bg-secondary{
-  @include gradient-bg($secondary-color-light, var(--v-secondary-base));
-}
-
-.video-icon{
-  height:75px;
-  width:70px;
-  @media #{map-get($display-breakpoints, 'xl-only')}
-  {
-    height:85px;
-    width:80px;
-  }
-}
-
-.video-icon-tall{
-  height:80px;
-  width:70px;
-  @media #{map-get($display-breakpoints, 'xl-only')}
-  {
-    height:90px;
-    width:80px;
-  }
-}
 
 //Custom Scrollbar - For Webkit browsers
 ::-webkit-scrollbar {

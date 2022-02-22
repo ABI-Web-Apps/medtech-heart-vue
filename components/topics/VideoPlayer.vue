@@ -1,21 +1,21 @@
 <template>
   <div>
     <div v-if="videoFound" 
-      class="container-default video-player flexbox"
+      class="container-default video-player flexbox --vertical"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     > 
       <iframe allowfullscreen
-          frameborder="0" 
-          :class="getVideoStyle()"
-          :src="selectedVideo.link"
+        frameborder="0" 
+        :class="getVideoStyle()"
+        :src="selectedVideo.link"
       >
       </iframe>
       <div id="outer-credits">
         <div class="credits flexbox">
           <img src="@/assets/images/Annie-Jones.png" class="img-icon"/>
-          <div class="credit-button flexbox">
+          <div class="credit-button flexbox --vertical">
             <div class="annie-liz flexbox d-none d-sm-block">
-              <span>{{credits}}</span>
+              <span>{{credits1}} {{credits2}}</span>
             </div>
             <div class="button">
               <v-btn class="bg-secondary" elevation="8" small block @click="close">
@@ -25,8 +25,8 @@
           </div>
           <img src="@/assets/images/Liz-Broadbent.png" class="img-icon"/>     
         </div>
-        <div class="annie-liz flexbox d-sm-none">
-          <span>{{credits}}</span>
+        <div class="pt-2 annie-liz flexbox d-sm-none">
+          <span>{{credits1}}<br/>{{credits2}}</span>
         </div>
       </diV>
     </div>
@@ -46,7 +46,8 @@ export default {
       videoFound:false,
       videos:videosData,
       selectedVideo:{},
-      credits:'Movie credits to Annie Jones and Dr. Liz Broadbent, University of Auckland'
+      credits1:'Movie credits to Annie Jones and Dr. Liz Broadbent,',
+      credits2:' University of Auckland'
     }
   },
 
@@ -88,56 +89,4 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-  .video-player{
-    flex-direction:column;
-    row-gap:1rem; 
-    height: 100%;
-  }
-
-  #outer-credits{
-    padding-bottom:1px;
-  }
-  
-  .display-video{
-    display:block;
-    width:100%;
-    flex-grow:1;
-    &.--sm{height:30rem;}  
-    &.--xs{height:20rem;}  
-  }
-
-  .credits{
-    justify-content:space-between;
-    align-items: center;
-    column-gap:1rem;
-  }
-
-  .credit-button{
-    flex-direction:column;
-    flex-grow:1;
-    row-gap:0.5rem;
-    align-items: center;
-  }
-
-  .button{
-    width:90%;
-    max-width:20rem;
-  }
-
- .img-icon{
-    height:4rem;
-    width:4rem;
-  }
-
-  .annie-liz{
-    padding:2px;
-    text-align:center;
-    justify-content:center;
-    span{
-      font-size:0.8rem;
-      font-style:italic;
-      color:$text-color;
-    }
-  }
-</style>
+<style lang="scss" scoped src="@/assets/sass/components/video-player.scss"></style>

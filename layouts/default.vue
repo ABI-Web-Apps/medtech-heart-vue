@@ -83,4 +83,11 @@ export default {
     bottom: 0;
   }
 
+  .panel-height1{
+    height:calc(100vh - 56px);
+  }
+  .panel-height2{
+    height:calc(100vh - 112px);
+  }
+
 </style>

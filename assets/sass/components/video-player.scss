@@ -1,0 +1,50 @@
+
+  .video-player{
+    row-gap:1rem; 
+    height: 100%;
+  }
+
+  #outer-credits{
+    padding-bottom:1px;
+  }
+  
+  .display-video{
+    display:block;
+    width:100%;
+    flex-grow:1;
+    &.--sm{height:30rem;}  
+    &.--xs{height:20rem;}  
+  }
+
+  .credits{
+    justify-content:space-between;
+    align-items: center;
+    column-gap:1rem;
+  }
+
+  .credit-button{
+    flex-grow:1;
+    row-gap:0.5rem;
+    align-items: center;
+  }
+
+  .button{
+    width:90%;
+    max-width:20rem;
+  }
+
+ .img-icon{
+    height:4rem;
+    width:4rem;
+  }
+
+  .annie-liz{
+    padding:2px;
+    text-align:center;
+    justify-content:center;
+    span{
+      font-size:0.8rem;
+      font-style:italic;
+      color:$text-color;
+    }
+  }

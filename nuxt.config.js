@@ -50,7 +50,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/sass/styles.scss',
+    '@/assets/sass/global.scss',
     '@/assets/sass/base.scss',
   ],
 
@@ -94,9 +94,10 @@ export default {
           accent: colors.grey.darken3,
           secondary: "#7d1e7d",
           info: colors.teal.lighten1,
-          warning:"#9E9D24",    
+          warning:"#827717",    
           error: "#DD2C00",
           success: "#558B2F"
+
         }
       }
     }

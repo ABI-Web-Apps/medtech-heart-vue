@@ -41,23 +41,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<!-- Not scoped, will be available at other places. Currently, also used in Panel(.md files) and AboutUs components -->
 
-.left-pane{
-  position:relative;
-}
+<style lang="scss" src="@/assets/sass/components/left-panel.scss"></style>
 
-.sm-logo{
-  position:absolute;
-  width:8rem;   
-  top:2px;
-  right:6px;
-  z-index:999;
-  height: auto;
-  @media #{map-get($display-breakpoints, 'xs-only')}
-  {
-    width:7rem;   
-  }
-}
 
-</style>

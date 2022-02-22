@@ -18,7 +18,7 @@
         </v-tooltip> 
       </div>-->
     </div>
-    <div v-if="fileFound" ref="markedDiv" class="pt-xl-4 marked" v-html="markedText"></div>
+    <div v-if="fileFound" ref="markedDiv" class="pt-2 pt-xl-4 marked" v-html="markedText"></div>
     <div v-if="!fileFound" class="error-message">
       <span>Data Not Found</span>
     </div>
@@ -91,17 +91,10 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
 
-  .marked{
-    padding-top:8px;
-    //font-size:0.9rem;
-  }
 
-  .demo-head{
-    column-gap:2rem;
-  }
 
+  /*
   .demoIcon{
     width:60px;
     height:60px;
@@ -112,7 +105,4 @@ export default {
     width:90px;
     height:90px;
     opacity:1;
-  }
-
-
-</style>
+  }*/
