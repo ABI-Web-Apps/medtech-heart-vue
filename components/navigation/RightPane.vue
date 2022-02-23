@@ -2,7 +2,7 @@
   <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':'auto-height'">
     <v-container class="pa-0" ref="rightMost">
       <v-row class="d-flex" no-gutters>
-        <v-col cols="12" xs="12" sm="9" md="8">
+        <v-col cols="12" xs="12" sm="9" md="8" lg="9">
           <div class="model-rate">
             <model :availableHeight="rateAndTracesHeight" :totalHeight="rightMostHeight"/>
             <div class="rate-smAndDown d-flex d-sm-none">
@@ -10,7 +10,7 @@
             </div>
           </div>
         </v-col>
-        <v-col cols="12" xs="12" sm="3" md="4">
+        <v-col cols="12" xs="12" sm="3" md="4" lg="3">
           <div class="pa-0 d-flex flex-column justify-space-between" :style="rightContainerStyle">
             <div ref="rateAndTraces">
               <div class="d-none d-sm-flex justify-center">
@@ -85,7 +85,7 @@ export default {
   }
 
   .rate-mdAndUp{
-    width:70%;
+    width:80%;
   }
 
   .rate-smAndDown{
@@ -96,7 +96,7 @@ export default {
   }
 
   .logo-mdAndUp{
-    width:65%;
+    width:70%;
     display:block;
   }
 </style>

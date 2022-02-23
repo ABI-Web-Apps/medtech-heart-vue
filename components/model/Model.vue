@@ -86,7 +86,7 @@ export default {
 
   mounted() {
     this.modelControlsHeight=this.$refs.modelControls.clientHeight
-    this.start()
+    //this.start()
   },
 
   methods: {
