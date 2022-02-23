@@ -1,4 +1,4 @@
-var ECGchart=undefined;
+//var ECGchart=undefined;
 var LVPchart;
 
 require(["dijit/Dialog"]);
@@ -14,6 +14,7 @@ function loadChart(ecgName,ecgPath,lvpName,lvpPath,category){
 							tomTheme.chart.fill="transparent";
 							tomTheme.plotarea.fill = "transparent";
 							tomTheme.chart.stroke = "transparent";
+							let ECGchart;
 							ECGchart = new Chart("rightECG"); //html element (dom) the chart will be drawn
 							ECGchart.setTheme(tomTheme);
 							/* add the x-axis */
@@ -78,24 +79,26 @@ function loadChart(ecgName,ecgPath,lvpName,lvpPath,category){
 										values: 0.0});
 							lvpIndicator = LVPchart.getPlot("time");
 
+							//window.ECGchart=ECGchart
+
 							if(category!="success"){
-								showECGChart(ecgName,ecgPath,category)
-								showLVPChart(lvpName,lvpPath,category)
-								/*showECGChart(ecgName,ecgPath,category,ECGchart)
-								showLVPChart(lvpName,lvpPath,category,LVPchart)*/
+								/*showECGChart(ecgName,ecgPath,category)
+								showLVPChart(lvpName,lvpPath,category)*/
+								showECGChart(ecgName,ecgPath,category,ECGchart)
+								showLVPChart(lvpName,lvpPath,category,LVPchart)
 							}
 							
-							showECGChart("Normal","ECG/NormalECG.json","success")
-							showLVPChart("Normal","LVP/NormalLVP.json","success")
-							/*showECGChart("Normal","ECG/NormalECG.json","success",ECGchart)
-							showLVPChart("Normal","LVP/NormalLVP.json","success",LVPchart)*/
+							/*showECGChart("Normal","ECG/NormalECG.json","success")
+							showLVPChart("Normal","LVP/NormalLVP.json","success")*/
+							showECGChart("Normal","ECG/NormalECG.json","success",ECGchart)
+							showLVPChart("Normal","LVP/NormalLVP.json","success",LVPchart)
 						});	
 				});
 		});		
 	});
 }
 
-
+/*
 function showECGChart(axisName,ecgPath,category) {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = onECGLoaded(xmlhttp, category,axisName);
@@ -114,6 +117,7 @@ function onECGLoaded(xmlhttp, category,axisName){
 }
 
 var showECGInternal = function(newViewData,category,axisName) {
+	  ECGchart=window.ECGchart
 		var colourName="rgba(50,205,50,0.6)";
 		var widthvar=2;
 
@@ -165,6 +169,7 @@ var showLVPInternal = function(newViewData,category,axisName) {
 		LVPchart.resize('100%','100%');
 }
 
+*/
 
 var rescaleXAxis = function(viewData) {
 	var len = viewData.length;
@@ -177,7 +182,7 @@ var rescaleXAxis = function(viewData) {
 	return viewData;
 }
 
-/*
+
 function showECGChart(axisName,ecgPath,category,ECGchart) {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = onECGLoaded(xmlhttp, category,axisName,ECGchart);
@@ -209,7 +214,7 @@ var showECGInternal = function(newViewData,category,axisName,ECGchart) {
 
 		ECGchart.addSeries(axisName,newViewData, { stroke: {color: colourName, width: widthvar}});
 		ECGchart.render();
-		//ECGchart.resize('100%','100%');
+		ECGchart.resize('100%','100%');
 }
 
 
@@ -246,5 +251,4 @@ var showLVPInternal = function(newViewData,category,axisName,LVPchart) {
 		LVPchart.render();
 		LVPchart.resize('100%','100%');
 }
-*/
 

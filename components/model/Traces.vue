@@ -31,13 +31,13 @@ export default {
     }
   },
   mounted() {
-    loadChart(this.$ecg().name,this.$ecg().path,this.$lvp().name,this.$lvp().path,this.$category()) 
+    //loadChart(this.$ecg().name,this.$ecg().path,this.$lvp().name,this.$lvp().path,this.$category()) 
     
-   /*if(this.$store.getters.getChartLoaded!=this.$ecg().name)
+   if(this.$store.getters.getChartLoaded!=this.$ecg().name)
     {
       loadChart(this.$ecg().name,this.$ecg().path,this.$lvp().name,this.$lvp().path,this.$category()) 
       this.$store.commit('setChartLoaded',this.$ecg().name) 
-    }*/
+    }
   },
 }
 
