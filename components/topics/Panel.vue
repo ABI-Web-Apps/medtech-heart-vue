@@ -9,14 +9,6 @@
           {{$heading()}}
         </h4>
       </div>
-      <!--<div class="d-none d-sm-block" v-if="$demoIcon()">
-        <v-tooltip>
-          <template v-slot:activator="{ on, attrs }">
-             <img :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIcon" v-bind="attrs"  v-on="on"/>
-          </template>
-          <img :src="require(`@/assets/images/icons/${$demoIcon()}`)"  class="demoIconZoomed">
-        </v-tooltip> 
-      </div>-->
     </div>
     <div v-if="fileFound" ref="markedDiv" class="pt-2 pt-xl-4 marked" v-html="markedText"></div>
     <div v-if="!fileFound" class="error-message">
@@ -90,19 +82,3 @@ export default {
 }
 
 </script>
-
-
-
-
-  /*
-  .demoIcon{
-    width:60px;
-    height:60px;
-    opacity:0.5;
-  }
-
-  .demoIconZoomed{
-    width:90px;
-    height:90px;
-    opacity:1;
-  }*/
