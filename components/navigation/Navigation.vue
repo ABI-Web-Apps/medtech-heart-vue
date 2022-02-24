@@ -3,13 +3,13 @@
     <div v-if="subMenuActive" :class="$vuetify.breakpoint.smAndDown ? 'sub-menu' : '' "> 
       <v-bottom-navigation grow
         :input-value="subMenuActive" 
-        :color="activeColor"       
+        :color="activeColor"   
       >
         <v-btn class="button-default"
           v-for="subTopic in selectedTopic.subTopics" 
-          :key="subTopic.title"   
+          :key="subTopic.slug"   
           :disabled="$isSubTopicDisabled(subTopic)"
-          :to="{ name: 'slug',params:{'slug':selectedTopic.title+'-'+subTopic.title}}"      
+          :to="{ name: 'slug',params:{'slug':menuCaption+'-'+subTopic.slug}}"      
         >
           <span>{{subTopic.title}}</span>
           <v-icon>{{subTopic.icon}}</v-icon>
@@ -18,14 +18,15 @@
     </div>
     <v-bottom-navigation grow         
       :fixed="$vuetify.breakpoint.smAndDown ? true : false"
-      :color="activeColor" 
+      :color="activeColor"  
+      v-model="menuCaption"    
     > 
-      <v-btn v-for="topic in topics" 
+      <v-btn v-for="(topic,index) in topics" 
         class="button-default"
-        :key="topic.title" 
-        :value="topic.title"
+        :key="index" 
+        :value="index"
         :disabled=$isTopicDisabled(topic)  
-        :to="{ name: 'slug',params:{'slug':topic.title+'-'+topic.subTopics[0].title}}"
+        :to="{ name: 'slug',params:{'slug':index+'-'+topic.subTopics[0].slug}}"
         @click="selectedTopic=topic"
       >
         <span>{{topic.title}}</span>
@@ -64,6 +65,9 @@ export default {
   computed:{
     activeColor(){
       return this.$route.name==='about'? this.$vuetify.theme.themes.dark.secondary : this.$category()
+    },
+    menuCaption(){
+      return this.$parentTopic().slug
     }
   },
 
@@ -79,10 +83,8 @@ export default {
   created(){
     this.topics=this.$getTopics()
     if(this.$route.name==='slug'){
-      const parentTitle= this.$parentTitle().toLowerCase()
-      this.selectedTopic=this.topics.filter(function (topic) {
-        return topic.title.toLowerCase()===parentTitle
-      })[0]
+      const parentSlug= this.$parentTopic().slug.toLowerCase()
+      this.selectedTopic=this.topics[parentSlug]
     }
   }
 }

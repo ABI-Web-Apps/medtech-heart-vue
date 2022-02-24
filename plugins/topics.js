@@ -1,3 +1,4 @@
+
 import topics from '~/assets/data/topics.json';
 
 export default (_, inject) => {
@@ -7,29 +8,25 @@ export default (_, inject) => {
   inject('getContentBySlug', (slug) => {return getContentBySlug(slug)})
 }
 
-function getContentBySlug(slug){
-  const [topicKey, ...subTopicKeys]=slug.toLowerCase().split('-')
-  let content=null
-  if(topicKey!=null && subTopicKeys.length>=1){
-    const topic=topics.filter(function (topic) {
-      return topic.title.toLowerCase()===topicKey
-    })[0]
 
-    //const topic=topics.topicKey
+function getContentBySlug(slug){
+  const [topicKey,subTopicKey]=slug.toLowerCase().split('-')
+  let content=null
+  if(topicKey!=null && subTopicKey!=null){
+    const topic=topics[topicKey]
     
     if(topic!=null){
       const subTopic=topic.subTopics.filter(function (subTopic){
-          return subTopic.title.toLowerCase()===subTopicKeys.join('-')
+          return subTopic.slug.toLowerCase()===subTopicKey
       })[0]
 
       if(subTopic!=null)
-        content={...subTopic, parentHeading : topic.heading, parentTitle: topic.title}
+        content={...subTopic, parentTopic: {"slug": topicKey, "heading": topic.heading, "title": topic.title}}
     }
   }
 
   return content
 }
-
 
 function isTopicDisabled(topic){
   let flag=true    

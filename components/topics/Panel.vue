@@ -3,7 +3,7 @@
     <div class="flexbox demo-head">
       <div>
         <h1 class="pt-2 main-heading">
-          {{$parentHeading()}} 
+          {{$parentTopic().heading}} 
         </h1>
         <h4 :class="'sub-heading '+$category()+'--text'">
           {{$heading()}}

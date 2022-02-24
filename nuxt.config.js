@@ -124,14 +124,15 @@ export default {
 
   generate: {
     routes: [
-      '/Attack-Healthy',
-      '/Attack-Minor',
-      '/Attack-Severe',
-      '/Electricity-Healthy',
-      '/Electricity-Fibrillation',
-      '/Failure-Healthy',
-      '/Failure-Compensated',
-      '/Failure-Decompensated'
+      '/model-heart',
+      '/attack-healthy',
+      '/attack-minor',
+      '/attack-severe',
+      '/electricity-healthy',
+      '/electricity-fibrillation',
+      '/failure-healthy',
+      '/failure-compensated',
+      '/failure-decompensated'
     ]
   }
 }

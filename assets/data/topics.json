@@ -1,10 +1,11 @@
-[
-  {
+{
+  "model":{
     "title":"Home",
     "heading":"Te Manawa",
     "icon":"mdi-home",
     "subTopics":[
       {
+        "slug":"heart",
         "title":"Heart",
         "heading":"The Heart",
         "icon":"mdi-home-heart",
@@ -16,12 +17,13 @@
       }
     ]
   },
-  {
+  "attack":{
     "title":"Attack",
     "heading":"Heart Attack",
     "icon":"mdi-heart-broken",
     "subTopics":[
       {
+        "slug":"healthy",
         "title":"Healthy",
         "heading":"Coronary Arteries",
         "demoIcon":"attack-sub-healthy-icon.png",
@@ -33,6 +35,7 @@
         "model":{"name":"NoInfarct"}
       },
       {
+        "slug":"minor",
         "title":"Minor",
         "heading":"Minor",
         "demoIcon":"attack-sub-moderate-icon.png",
@@ -44,6 +47,7 @@
         "model":{"name":"NoInfarct"}
       },
       {
+        "slug":"severe",
         "title":"Severe",
         "heading":"Severe",
         "demoIcon":"attack-sub-severe-icon.png",
@@ -56,12 +60,13 @@
       }
     ]
   },
-  {
+  "electricity":{
     "title":"Electricity",
     "heading":"Heart Electricity",
     "icon":"mdi-lightning-bolt",
     "subTopics":[
       {
+        "slug":"healthy",
         "title":"Healthy",
         "heading":"Electrocardiograms",
         "demoIcon":"electricity-sub-healthy-icon.png",
@@ -73,6 +78,7 @@
         "model":{"name":"NormalElectricity"}
       },
       {
+        "slug":"fibrillation",
         "title":"Fibrillation",
         "heading":"Fibrillation",
         "demoIcon":"electricity-sub-fibrillation-icon.png",
@@ -85,12 +91,13 @@
       }
     ]
   },
-  {
+  "failure":{
     "title":"Failure",
     "heading":"Heart Failure",
     "icon":"mdi-heart-off",
     "subTopics":[
       {
+        "slug":"healthy",
         "title":"Healthy",
         "heading":"Chronic Problems",
         "demoIcon":"failure-sub-healthy-icon.png",      
@@ -102,6 +109,7 @@
         "model":{"name":"NoInfarct"}
       },
       {
+        "slug":"compensated",
         "title":"Compensated",
         "heading":"Compensated",
         "demoIcon":"failure-sub-compensated-icon.png",
@@ -113,6 +121,7 @@
         "model":{"name":"NoInfarct"}
       },
       {
+        "slug":"decompensated",
         "title":"Decompensated",
         "heading":"Decompensated",
         "icon":"mdi-heart-remove",
@@ -125,4 +134,4 @@
       }
     ]
   }
-]
+}

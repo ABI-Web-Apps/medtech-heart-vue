@@ -55,6 +55,7 @@ export default {
     this.$nuxt.$on('about-navigation', (componentName) => {
       this.section=componentName
     })
+    this.$store.commit('setChartLoaded','') 
   },
 
   beforeDestroy(){

@@ -5,7 +5,7 @@
 
 export default {
   middleware({ redirect }) {
-    return redirect('/home-Heart')
+    return redirect('/model-heart')
   }
 }
 
