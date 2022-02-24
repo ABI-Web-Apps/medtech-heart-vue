@@ -47,7 +47,7 @@ export default {
 <style scoped lang="scss">
 
   #ecgDescription, #lvpDescription{
-    width:90%;
+    width:94%;
   }
 
   .chart{
