@@ -1,12 +1,16 @@
 <template>
   <div class="outer-model">
-    <div class="d-flex d-sm-none justify-center"> <!--small screens only -->
-      <img src="~/assets/images/gestures-icons.png" class="gestures"/>
+    <div class="d-flex d-sm-none justify-center gestures"> <!--small screens only -->
+      <div class="gestures">
+        <img src="~/assets/images/gestures-icons.png"/>
+      </div>
     </div>
     <div class="d-flex flex-column justify-space-between" :style="modelHeightStyle">
       <div ref="zincDomObject" class="zinc-object" :style="zincHeightStyle"/>
       <div ref="modelControls" class="d-none d-sm-flex justify-center">
-        <img src="~/assets/images/gestures-icons.png" class="gestures"/>
+        <div class="gestures">
+          <img src="~/assets/images/gestures-icons.png"/>
+        </div>
       </div>
     </div>
   </div>
@@ -153,11 +157,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+  .outer-model{
+    height:100%;
+  }
   .zinc-object{
     //border:1px solid green;
   }
   .gestures{
     width:40%;
-    height:auto;
+    img{
+      width:100%;
+      height:auto;
+    }  
   }
 </style>
