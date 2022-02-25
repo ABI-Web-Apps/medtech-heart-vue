@@ -7,13 +7,13 @@ The heart pumps blood to itself through blood vessels called the coronary arteri
 Good lifestyle choices help to keep the coronary arteries healthy and prevent heart attacks. Learn more about how lifestyle factors can affect the heart in the following movie clips.
 
 <a href="#video-div" data-play="video">
-  <img id="exercise" src="/img/exercise.png" class="video-icon"/>
+  <img id="exercise" src="img/exercise.png" class="video-icon"/>
 </a>
 <a href="#video-div" data-play="video">
-  <img id="diet" src="/img/diet.png" class="video-icon"/>
+  <img id="diet" src="img/diet.png" class="video-icon"/>
 </a>
 <a href="#video-div" data-play="video">
-  <img id="smoking" src="/img/smoking.png" class="video-icon"/>
+  <img id="smoking" src="img/smoking.png" class="video-icon"/>
 </a>
 
 
