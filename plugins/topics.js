@@ -13,42 +13,37 @@ function getContentBySlug(slug){
   const [topicKey,subTopicKey]=slug.toLowerCase().split('-')
   let content=null
   if(topicKey!=null && subTopicKey!=null){
-    const topic=topics[topicKey]
-    
+    const topic=topics[topicKey]   
     if(topic!=null){
-      const subTopic=topic.subTopics.filter(function (subTopic){
-          return subTopic.slug.toLowerCase()===subTopicKey
-      })[0]
-
+      const subTopic=topic.subTopics[subTopicKey]
       if(subTopic!=null)
         content={...subTopic, parentTopic: {"slug": topicKey, "heading": topic.heading, "title": topic.title}}
     }
   }
-
   return content
 }
 
 function isTopicDisabled(topic){
-  let flag=true    
-  if(topic.subTopics){
-    if(topic.subTopics.length>0){
-      if(topic.subTopics[0].dataFile){
-        if(topic.subTopics[0].dataFile!=""){
-          flag=false
-        }
-      }
+  if(topic.title==null || topic.heading==null || topic.icon==null || topic.subTopics==null)
+    {return true}
+  else{
+    if(Object.keys(topic.subTopics).length < 1)
+      {return true}
+    else{
+      const subKey=Object.keys(topic.subTopics)[0]
+      return isSubTopicDisabled(topic.subTopics[subKey])
     }
-  }     
-  return flag
+  }
 }
 
 
 function isSubTopicDisabled(subTopic){
-  let flag=true
-  if(subTopic.dataFile){
-    if(subTopic.dataFile!=""){
-      flag=false
-    }
-  }
-  return flag  
+  return(subTopic.title==null || 
+    subTopic.heading==null || 
+    subTopic.icon==null ||
+    subTopic.dataFile==null ||
+    subTopic.category==null ||
+    subTopic.ecg==null ||
+    subTopic.lvp==null ||
+    subTopic.model==null)
 }

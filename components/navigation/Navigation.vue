@@ -4,13 +4,13 @@
       <v-bottom-navigation grow
         :input-value="subMenuActive" 
         :color="activeColor"   
-      >
+      > 
         <v-btn class="button-default"
-          v-for="subTopic in selectedTopic.subTopics" 
-          :key="subTopic.slug"   
-          :disabled="$isSubTopicDisabled(subTopic)"
-          :to="{ name: 'slug',params:{'slug':menuCaption+'-'+subTopic.slug}}"      
-        >
+          v-for="(subTopic,index) in selectedTopic.subTopics" 
+          :key="index" 
+          :disabled="$isSubTopicDisabled(subTopic)"    
+          :to="{ name: 'slug',params:{'slug':menuCaption+'-'+index}}"      
+        > 
           <span>{{subTopic.title}}</span>
           <v-icon>{{subTopic.icon}}</v-icon>
         </v-btn>
@@ -24,11 +24,11 @@
       <v-btn v-for="(topic,index) in topics" 
         class="button-default"
         :key="index" 
-        :value="index"
-        :disabled=$isTopicDisabled(topic)  
-        :to="{ name: 'slug',params:{'slug':index+'-'+topic.subTopics[0].slug}}"
+        :value="index"   
+        :disabled=$isTopicDisabled(topic)     
+        :to="{ name: 'slug',params:{'slug':index+'-'+ getDefaultSlug(topic)}}"
         @click="selectedTopic=topic"
-      >
+      > 
         <span>{{topic.title}}</span>
         <v-icon>{{topic.icon}}</v-icon>
       </v-btn>
@@ -59,6 +59,9 @@ export default {
     getIconWidth(){
       let menuItemWidth=100 /(topics.length + 1)
       return menuItemWidth.toFixed(2)
+    },
+    getDefaultSlug(topic){
+      return topic.subTopics!=null? Object.keys(topic.subTopics)[0] : ''
     }
   },
   
@@ -67,13 +70,13 @@ export default {
       return this.$route.name==='about'? this.$vuetify.theme.themes.dark.secondary : this.$category()
     },
     menuCaption(){
-      return this.$parentTopic().slug
+      return this.$route.name=== 'slug'? this.$parentTopic().slug : 'about'
     }
   },
 
   watch:{
     selectedTopic:function(currentTopic){
-      this.subMenuActive= currentTopic.subTopics.length>1?  true : false 
+      this.subMenuActive=Object.keys(currentTopic.subTopics).length>1?  true : false
     },
     subMenuActive:function (isActive) {     
       $nuxt.$emit('menu-height-changed',isActive?'2':'1')

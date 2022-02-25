@@ -3,9 +3,8 @@
     "title":"Home",
     "heading":"Te Manawa",
     "icon":"mdi-home",
-    "subTopics":[
-      {
-        "slug":"heart",
+    "subTopics":{
+      "heart":{
         "title":"Heart",
         "heading":"The Heart",
         "icon":"mdi-home-heart",
@@ -15,18 +14,16 @@
         "lvp":{"name":"Normal","path":"LVP/NormalLVP.json","description":"muscle contraction generates pump pressure"},
         "model":{"name":"NoInfarct"}
       }
-    ]
+    }
   },
   "attack":{
     "title":"Attack",
     "heading":"Heart Attack",
     "icon":"mdi-heart-broken",
-    "subTopics":[
-      {
-        "slug":"healthy",
+    "subTopics":{
+      "healthy":{
         "title":"Healthy",
         "heading":"Coronary Arteries",
-        "demoIcon":"attack-sub-healthy-icon.png",
         "icon":"mdi-heart-pulse",
         "dataFile":"attack-healthy",
         "category":"success",
@@ -34,11 +31,10 @@
         "lvp":{"name":"NoInfarct","path":"LVP/NormalLVP.json","description":"muscle contraction generates pump pressure"},
         "model":{"name":"NoInfarct"}
       },
-      {
+      "minor":{
         "slug":"minor",
         "title":"Minor",
         "heading":"Minor",
-        "demoIcon":"attack-sub-moderate-icon.png",
         "icon":"mdi-heart-half-full",
         "dataFile":"attack-minor",
         "category":"warning",
@@ -46,11 +42,10 @@
         "lvp":{"name":"SmallInfarct","path" : "LVP/smallInfarctLVP.json","description":"damaged tissue leads to less contraction force and less pressure"},
         "model":{"name":"NoInfarct"}
       },
-      {
+      "severe":{
         "slug":"severe",
         "title":"Severe",
         "heading":"Severe",
-        "demoIcon":"attack-sub-severe-icon.png",
         "icon":"mdi-heart-minus",
         "dataFile":"attack-severe",
         "category":"error",
@@ -58,18 +53,16 @@
         "lvp":{"name":"LargeInfarct","path" : "LVP/largeInfarctLVP_shifted.json","description":"damaged tissue leads to less contraction force and less pressure"},
         "model":{"name":"NoInfarct"}
       }
-    ]
+    }
   },
   "electricity":{
     "title":"Electricity",
     "heading":"Heart Electricity",
     "icon":"mdi-lightning-bolt",
-    "subTopics":[
-      {
-        "slug":"healthy",
+    "subTopics":{
+      "healthy":{
         "title":"Healthy",
         "heading":"Electrocardiograms",
-        "demoIcon":"electricity-sub-healthy-icon.png",
         "icon":"mdi-battery-heart",
         "dataFile":"electricity-healthy",
         "category":"success",
@@ -77,11 +70,10 @@
         "lvp":{"name":"NormalElectricity","path":"LVP/NormalLVP.json","description":"muscle contraction generates pump pressure"},
         "model":{"name":"NormalElectricity"}
       },
-      {
+      "fibrillation":{
         "slug":"fibrillation",
         "title":"Fibrillation",
         "heading":"Fibrillation",
-        "demoIcon":"electricity-sub-fibrillation-icon.png",
         "icon":"mdi-heart-flash",
         "dataFile":"electricity-fibrillation",
         "category":"error",
@@ -89,18 +81,16 @@
         "lvp":{"name":"Arrhythmia","path" : "LVP/ArrhythmiaLVP.json","description":"poor pump pressure"},
         "model":{"name":"NoInfarct"}
       }
-    ]
+    }
   },
   "failure":{
     "title":"Failure",
     "heading":"Heart Failure",
     "icon":"mdi-heart-off",
-    "subTopics":[
-      {
-        "slug":"healthy",
+    "subTopics":{
+      "healthy":{
         "title":"Healthy",
-        "heading":"Chronic Problems",
-        "demoIcon":"failure-sub-healthy-icon.png",      
+        "heading":"Chronic Problems",     
         "icon":"mdi-account-heart",
         "dataFile":"failure-healthy",
         "category":"success",
@@ -108,11 +98,9 @@
         "lvp":{"name":"NoFailure","path":"LVP/NormalLVP.json","description":"muscle contraction generates pump pressure"},
         "model":{"name":"NoInfarct"}
       },
-      {
-        "slug":"compensated",
+      "compensated":{
         "title":"Compensated",
         "heading":"Compensated",
-        "demoIcon":"failure-sub-compensated-icon.png",
         "icon":"mdi-heart-cog",
         "dataFile":"failure-compensated",
         "category":"warning",
@@ -120,18 +108,16 @@
         "lvp":{"name":"CompensatedFailure","path" : "LVP/DiastolicLVP_shifted.json","description":"muscle contraction generates pump pressure"},
         "model":{"name":"NoInfarct"}
       },
-      {
-        "slug":"decompensated",
+      "decompensated":{
         "title":"Decompensated",
         "heading":"Decompensated",
         "icon":"mdi-heart-remove",
-        "demoIcon":"failure-sub-decompensated-icon.png",
         "dataFile":"failure-decompensated",
         "category":"error",
         "ecg":{"name":"DecompensatedFailure","path" : "ECG/SystolicECG_shifted.json","description":"electrical pulses make the heart muscle contract"},
         "lvp":{"name":"DecompensatedFailure","path" : "LVP/SystolicLVP_shifted.json","description":"thin-walled hearts struggle to maintain pump pressure"},
         "model":{"name":"NoInfarct"}
       }
-    ]
+    }
   }
 }
