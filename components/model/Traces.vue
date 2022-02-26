@@ -1,16 +1,16 @@
 <template>
-  <div class="d-flex justify-center" :class="$vuetify.breakpoint.smAndUp || $vuetify.breakpoint.width<=430?'flex-column':''">
-    <div class="pt-5 pb-1 d-flex flex-column align-center">
+  <div class="d-flex trace-box" :class="$vuetify.breakpoint.smAndUp || $vuetify.breakpoint.width<=430?'flex-column':''">
+    <div class="pt-4 pb-1 d-flex flex-column align-center item">
       <div class="font-weight-bold text-subtitle-2 text-xl-h6 text-sm-subtitle-2 text-md-body-1">
-        ECG 
+        ECG
       </div>
       <div id="rightECG" ref="rightECG" class="chart">
       </div>
       <div id="ecgDescription" class="text-caption text-xl-body-2">
-          {{$ecg().description}}  
+        {{$ecg().description}}  
       </div>
     </div>
-    <div class="pt-5 pb-1  d-flex flex-column align-center">
+    <div class="pt-4 pb-1  d-flex flex-column align-center item">
      <div class="font-weight-bold text-subtitle-2 text-xl-h6 text-sm-subtitle-2 text-md-body-1">
         Pressure (mmHg)
       </div> 
@@ -24,19 +24,23 @@
 </template>
 
 <script>
+import normalEcg from '~/static/ECG/NormalECG.json'
+import normalLvp from '~/static/LVP/NormalLVP.json'
+
 export default {
+ 
   data() {
     return {
-      
+      defaultEcgData:normalEcg,
+      defaultLvpData:normalLvp
     }
   },
+
   mounted() {
-    //loadChart(this.$ecg().name,this.$ecg().path,this.$lvp().name,this.$lvp().path,this.$category()) 
-    
-   if(this.$store.getters.getChartLoaded!=this.$ecg().name)
-    {
-      loadChart(this.$ecg().name,this.$ecg().path,this.$lvp().name,this.$lvp().path,this.$category()) 
-      this.$store.commit('setChartLoaded',this.$ecg().name) 
+    if(process.client){
+      window.ecgDone=false    //to prevent unexpected problem of chart being loaded twice
+      window.lvpDone=false
+      loadChart(this.$ecg(),this.$lvp(),this.$category(),this.defaultEcgData,this.defaultLvpData) 
     }
   },
 }
@@ -59,5 +63,9 @@ export default {
 
     @media #{map-get($display-breakpoints, 'xl-only')}
     { height:120px; }
+  }
+
+  .trace-box,.item{
+    width:100%;
   }
 </style>

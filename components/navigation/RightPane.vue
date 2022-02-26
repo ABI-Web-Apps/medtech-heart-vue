@@ -28,7 +28,7 @@
               </div>
             </div>
           </div> 
-          <div class="pt-5 d-flex d-sm-none"> <!--small screens -->
+          <div class="pt-5 d-flex d-sm-none justify-center"> <!--small screens -->
             <traces/>
           </div>
         </v-col>
