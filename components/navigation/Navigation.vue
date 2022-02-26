@@ -32,7 +32,7 @@
         <span>{{topic.title}}</span>
         <v-icon>{{topic.icon}}</v-icon>
       </v-btn>
-      <v-btn class="button-default" :to="{ name: 'about' }"  @click="updateAbout()">
+      <v-btn class="button-default" :to="{ name: 'about' }"  @click="updateAbout()" :value="'about'">
         <span>About</span>
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
