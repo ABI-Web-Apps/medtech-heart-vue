@@ -1,13 +1,13 @@
 <template>
   <div class="outer-model">
-    <div class="d-flex d-sm-none justify-center gestures"> <!--small screens only -->
+    <div class="d-flex d-sm-none justify-center"> <!--small screens only -->
       <div class="gestures">
         <img src="~/assets/images/gestures-icons.png"/>
       </div>
     </div>
     <div class="d-flex flex-column justify-space-between" :style="modelHeightStyle">
       <div ref="zincDomObject" class="zinc-object" :style="zincHeightStyle"/>
-      <div ref="modelControls" class="d-none d-sm-flex justify-center">
+      <div ref="threeDControls" class="d-none d-sm-flex justify-center">
         <div class="gestures">
           <img src="~/assets/images/gestures-icons.png"/>
         </div>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       heartRate:2500,
-      modelControlsHeight:0,
+      threeDControlsHeight:0,
       zincRenderer:null,
       modelURLsArray: {
         NoInfarct_highres: [
@@ -48,11 +48,11 @@ export default {
   },
 
   props: {
-    availableHeight: {
+    totalHeight:{
       type: Number
     },
-    totalHeight:{
-      type:Number
+    availableHeight: {
+      type: Number
     }
   },
 
@@ -72,13 +72,11 @@ export default {
     },
     zincHeightStyle(){
       let zincObjectHeight="20rem" // default for xs devices
-
       if(this.$vuetify.breakpoint.mdAndUp){
-        let calculated=this.totalHeight - this.modelControlsHeight
-        zincObjectHeight=calculated> 0 ? calculated+ 'px' : '80vh'  //Set default in case some devices don't provide client height
+        zincObjectHeight='80vh'
       }
       else if(this.$vuetify.breakpoint.sm){
-        let calculated=this.availableHeight - this.modelControlsHeight 
+        let calculated=this.availableHeight - this.threeDControlsHeight 
         zincObjectHeight=calculated> 0 ? calculated+ 'px' : '30rem'    
       }
       return{
@@ -89,7 +87,7 @@ export default {
   },
 
   mounted() {
-    this.modelControlsHeight=this.$refs.modelControls.clientHeight
+    this.threeDControlsHeight=this.$refs.threeDControls.clientHeight
     this.start()
   },
 
