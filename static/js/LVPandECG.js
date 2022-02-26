@@ -25,7 +25,7 @@ function loadChart(ecg,lvp,category,defaultEcgData,defaultLvpData){
 								microTicks: false
 							});
 							/* add the y-axis */
-							ECGchart.addAxis("y", {
+							ECGchart.addAxis("y", {type: "Invisible",
 								vertical: true,
 							  majorLabels: true,
 								majorTickStep: 200,
@@ -59,7 +59,7 @@ function loadChart(ecg,lvp,category,defaultEcgData,defaultLvpData){
 								minorLabels: false,
 								microTicks: false});
 							/* add the y-axis */
-							LVPchart.addAxis("y",{
+							LVPchart.addAxis("y",{type: "Invisible",
 								vertical: true,
 								min: -40,
 								max: 160,

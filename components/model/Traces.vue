@@ -51,13 +51,13 @@ export default {
 <style scoped lang="scss">
 
   #ecgDescription, #lvpDescription{
-    width:94%;
+    width:90%;
   }
 
   .chart{
     padding-bottom:2px;
     width:100%;
-    height:100px;
+    height:90px;
    @media #{map-get($display-breakpoints, 'md-only')}
     { height:80px; }
 
