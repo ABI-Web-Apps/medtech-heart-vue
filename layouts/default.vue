@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-container class="pa-0" fluid>
-      <v-row class="d-flex" align="start" no-gutters>
+      <v-row class="d-flex" no-gutters>
         <v-col cols="12" md="5" lg="4" xs="6">
           <v-container class="pa-0" :class="mdAndUp?'full-height':'auto-height'">
             <v-row class="d-flex flex-column" no-gutters>

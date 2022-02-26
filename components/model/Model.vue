@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="d-flex flex-column justify-space-between" :style="modelHeightStyle">
-      <div ref="zincDomObject" class="zinc-object" :style="zincHeightStyle"/>
+      <div ref="zincDomObject" :style="zincHeightStyle"/>
       <div ref="threeDControls" class="d-none d-sm-flex justify-center">
         <div class="gestures">
           <img src="~/assets/images/gestures-icons.png"/>
@@ -159,9 +159,7 @@ export default {
   .outer-model{
     height:100%;
   }
-  .zinc-object{
-    //border:1px solid green;
-  }
+
   .gestures{
     width:40%;
     img{
