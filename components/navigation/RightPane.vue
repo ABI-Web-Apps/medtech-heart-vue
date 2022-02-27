@@ -12,7 +12,7 @@
         </v-col>
         <v-col cols="12" xs="12" sm="3" md="4" lg="3">
           <div class="pa-0 d-flex flex-column justify-space-between" :style="rightContainerStyle">
-            <div ref="rateAndTraces">
+            <div ref="rateAndTraces" class="flex-grow-1 d-flex flex-column justify-center">
               <div class="d-none d-sm-flex justify-center">
                 <div class="pb-1 rate-mdAndUp">
                   <heart-rate/>

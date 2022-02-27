@@ -80,9 +80,10 @@ function loadChart(ecg,lvp,category,defaultEcgData,defaultLvpData){
 								offset: { y: -7, x: -10 },
 								values: 0.0});
 							lvpIndicator = LVPchart.getPlot("time");
-													
-							showECGChart(ecg.name,ecg.path,category,ECGchart,defaultEcgData);
+							
 							showLVPChart(lvp.name,lvp.path,category,LVPchart,defaultLvpData);
+							showECGChart(ecg.name,ecg.path,category,ECGchart,defaultEcgData);
+							
 						});	
 				});
 		});		
@@ -110,8 +111,8 @@ function onECGLoaded(xmlhttp, category,axisName,ECGchart,defaultEcgData){
 }
 
 var showECGInternal = function(newViewData,category,axisName,ECGchart,defaultEcgData) {
-	var colourName;
-	var widthvar;
+	var colourName="rgba(50,205,50,0.6)";
+	var widthvar=2;
 
 	if (category=="warning"){
 		colourName = "rgba(255,255,0,1)";
@@ -122,10 +123,10 @@ var showECGInternal = function(newViewData,category,axisName,ECGchart,defaultEcg
 	}
 
 	if(window.ecgDone!=true){
+		ECGchart.addSeries(axisName,newViewData, { stroke: {color: colourName, width: widthvar}});
 		if(category!='success'){
-			ECGchart.addSeries(axisName,newViewData, { stroke: {color: colourName, width: widthvar}});
+			ECGchart.addSeries("Normal",defaultEcgData, { stroke: {color: "rgba(50,205,50,0.6)", width: 2}});
 		}
-		ECGchart.addSeries("Normal",defaultEcgData, { stroke: {color: "rgba(50,205,50,0.6)", width: 2}});
 
 		ECGchart.render();
 		ECGchart.resize('100%','100%');
@@ -153,8 +154,8 @@ function onLVPLoaded(xmlhttp, category,axisName,LVPchart,defaultLvpData){
 }
 
 var showLVPInternal = function(newViewData,category,axisName,LVPchart,defaultLvpData) {
-	var colourName;
-	var widthvar;
+	var colourName="rgba(50,205,50,0.6)";
+	var widthvar=2;
 
 	if (category=="warning"){
 		colourName = "rgba(255,255,0,1)";
@@ -164,12 +165,11 @@ var showLVPInternal = function(newViewData,category,axisName,LVPchart,defaultLvp
 		widthvar = 3;
 	}
 
-	if(window.lvpDone!=true){
+	if(window.lvpDone!=true){	
+		LVPchart.addSeries(axisName,newViewData, { stroke: {color: colourName, width: widthvar}});
 		if(category!='success'){
-			LVPchart.addSeries(axisName,newViewData, { stroke: {color: colourName, width: widthvar}});
+			LVPchart.addSeries("Normal",defaultLvpData, { stroke: {color: "rgba(50,205,50,0.6)", width: 2}});
 		}
-		LVPchart.addSeries("Normal",defaultLvpData, { stroke: {color: "rgba(50,205,50,0.6)", width: 2}});
-
 		LVPchart.render();
 		LVPchart.resize('100%','100%');
 	}

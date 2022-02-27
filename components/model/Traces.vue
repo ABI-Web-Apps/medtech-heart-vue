@@ -39,9 +39,9 @@ export default {
   mounted() {
     if(process.client){
       window.ecgDone=false    //to prevent unexpected problem of chart being loaded twice
-      window.lvpDone=false
-      loadChart(this.$ecg(),this.$lvp(),this.$category(),this.defaultEcgData,this.defaultLvpData) 
+      window.lvpDone=false     
     }
+    loadChart(this.$ecg(),this.$lvp(),this.$category(),this.defaultEcgData,this.defaultLvpData) 
   },
 }
 

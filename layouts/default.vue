@@ -10,7 +10,7 @@
                   class="pa-0 overflow-y-auto"           
                   :class="mdAndUp?'panel-height'+multiplier:''" 
                 >
-                  <left-pane :panel-height="panelHeight"/>          
+                  <left-pane :panel-height="panelHeight"/>
                 </v-card>
               </v-col>
               <v-col class="d-none d-md-block fix-it">
@@ -22,7 +22,7 @@
         <v-col cols="12" md="7" lg="8" xs="6">
           <v-main>
             <v-container class="pa-0 black overflow-y-auto" :class="mdAndUp?'full-height':'auto-height'">
-              <Nuxt stay-alive/>
+              <Nuxt/>
             </v-container>
           </v-main>
         </v-col>
