@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <right-pane/>
-  </div>
 </template>
 
 <script>
+
 export default {
-  name: 'IndexPage'
+  middleware({ redirect }) {
+    return redirect('/model-heart')
+  }
 }
+
 </script>
-
-
-<style scoped lang="scss">
-
-</style>

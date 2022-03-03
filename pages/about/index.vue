@@ -1,15 +1,15 @@
 <template>
   <div>
     <div v-if="section=='research'" 
-      class="research-page flexbox"
-      :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
+      class="container-default research-page flexbox --vertical"
+      :class="$vuetify.breakpoint.smAndUp?'full-height':''"
     >
-      <div class="title">
-        <h3 class="title__main">Heart Mechanics Research at the Auckland Bioengineering Institute</h3>
-        <span class="title__sub">
-          Improving diagnosis and management of heart diseases
+      <div class="pt-4 heading">
+        <h3 class="heading__main">Heart Mechanics Research at the Auckland Bioengineering Institute</h3>
+        <div class="heading__sub">
+          Improving diagnosis and management of heart diseases<span v-if="$vuetify.breakpoint.mdAndUp"><br/></span>
           using personalised biomechanics and image-driven computer modelling
-        </span>
+        </div>
       </div> 
       <iframe 
         class="researchVideo" 
@@ -19,15 +19,15 @@
       </iframe>
     </div>
     <div v-if="section=='team'" 
-      class="research-page flexbox"
+      class="container-default research-page flexbox  --vertical"
       :class="$vuetify.breakpoint.mdAndUp?'full-height':''"
     >
-      <div class="title">
-        <h3 class="title__main">Our Heart Mechanics Research Team</h3>
-        <span class="title__sub">
-          An inter-disciplinary collaboration between experts in
+      <div class="pt-4 heading">
+        <h3 class="heading__main">Our Heart Mechanics Research Team</h3>
+        <div class="heading__sub pt-2">
+          An inter-disciplinary collaboration between experts in <span v-if="$vuetify.breakpoint.smAndUp"><br/></span>
           bioengineering, physiology, software development, and medical imaging
-        </span>
+        </div>
       </div>    
       <div class="detail">
         <img src="~assets/images/headshots.png"/>
@@ -42,19 +42,20 @@
 <script>
 
 export default {
+  layout: 'default',
   name: 'AboutPage',
 
   data() {
     return {
-      section:'research',
+      section:'research'
     }
   },
-
  
   created() {
     this.$nuxt.$on('about-navigation', (componentName) => {
       this.section=componentName
     })
+    this.$store.commit('setChartLoaded','') 
   },
 
   beforeDestroy(){
@@ -63,41 +64,6 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped src="@/assets/sass/pages/about.scss"></style>
 
-  .research-page{
-    align-items:center; 
-    padding:2rem 4rem;
-    flex-direction:column;
-    row-gap:1rem;  
-  }
-
-  .title{
-    text-align:center;
-    &__main{
-      color:$clear;
-      font-size:1.5rem;
-    }
-    &__sub{
-      padding-top:2px;
-      font-size:1.2rem;
-      color:$text-color;
-    }  
-  }
-
-  .researchVideo{
-    padding-top:2rem;
-    width:100%;
-    height:24rem; 
-    flex-grow:1;
-  }
   
-  .detail{
-    width:100%;
-    padding-bottom:2px;
-    img{
-      width:90%;
-      height:auto;
-    }   
-  }
-</style>

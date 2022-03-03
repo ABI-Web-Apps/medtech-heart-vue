@@ -1,17 +1,16 @@
 <template>
   <v-app dark>
     <v-container class="pa-0" fluid>
-      <v-row class="d-flex" align="start" no-gutters>
+      <v-row class="d-flex" no-gutters>
         <v-col cols="12" md="5" lg="4" xs="6">
-          <v-container class="pa-0" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
+          <v-container class="pa-0" :class="mdAndUp?'full-height':'auto-height'">
             <v-row class="d-flex flex-column" no-gutters>
               <v-col ref="panel">
-                <v-card 
-                  class="pa-0 overflow-y-auto" 
-                  outlined tile  
-                  :class="$vuetify.breakpoint.mdAndUp?'panel-height'+multiplier:''" 
+                <v-card outlined tile  
+                  class="pa-0 overflow-y-auto"           
+                  :class="mdAndUp?'panel-height'+multiplier:''" 
                 >
-                  <left-pane :panel-height="panelHeight"/>          
+                  <left-pane :panel-height="panelHeight"/>
                 </v-card>
               </v-col>
               <v-col class="d-none d-md-block fix-it">
@@ -22,12 +21,12 @@
         </v-col>
         <v-col cols="12" md="7" lg="8" xs="6">
           <v-main>
-            <v-container class="pa-0 black overflow-y-auto" :class="$vuetify.breakpoint.mdAndUp?'full-height':''">
+            <v-container class="pa-0 black overflow-y-auto" :class="mdAndUp?'full-height':'auto-height'">
               <Nuxt/>
             </v-container>
           </v-main>
         </v-col>
-      </v-row>
+      </v-row>  
       <v-row class="d-md-none" no-gutters>
         <v-col>
           <navigation/>
@@ -46,6 +45,12 @@ export default {
     return {
       multiplier:1,
       panelHeight:0
+    }
+  },
+
+  computed:{
+    mdAndUp(){
+      return this.$vuetify.breakpoint.mdAndUp
     }
   },
 
@@ -75,6 +80,13 @@ export default {
     position: -webkit-sticky; /* Safari */
     position: sticky;
     bottom: 0;
+  }
+
+  .panel-height1{
+    height:calc(100vh - 56px);
+  }
+  .panel-height2{
+    height:calc(100vh - 112px);
   }
 
 </style>
