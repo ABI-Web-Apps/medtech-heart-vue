@@ -8,9 +8,9 @@ The following section provides a higher level overview of the application struct
     :numbered: 2
 
     01_intro
-    01_assets
-    02_layout
-    03_store
-    04_static
-    05_pages
-    06_components
+    02_assets
+    03_layout
+    04_store
+    05_static
+    06_pages
+    07_components
