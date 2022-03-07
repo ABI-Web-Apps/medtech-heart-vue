@@ -1,4 +1,4 @@
-medtech-heart-vue overview
+Medtech-Heart-Vue Overview
 ==========================
 
 Build Setup
