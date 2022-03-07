@@ -27,8 +27,16 @@ This document provides a brief overview of the new heart vue.js app. The app wil
             "icon":"mdi-account-heart",
             "dataFile":"failure-healthy",
             "category":"success",
-            "ecg":{"name":"NoFailure","path":"ECG/NormalECG.json","description":"electrical pulses make the heart muscle contract"},
-            "lvp":{"name":"NoFailure","path":"LVP/NormalLVP.json","description":"muscle contraction generates pump pressure"},
+            "ecg":{
+                "name":"NoFailure",
+                "path":"ECG/NormalECG.json"
+                "description":"electrical pulses make the heart muscle contract"
+                },
+            "lvp":{
+                "name":"NoFailure",
+                "path":"LVP/NormalLVP.json"
+                "description":"muscle contraction generates pump pressure"
+                },
             "model":{"name":"NoInfarct"}
             },
             "compensated":{
@@ -37,8 +45,16 @@ This document provides a brief overview of the new heart vue.js app. The app wil
             "icon":"mdi-heart-cog",
             "dataFile":"failure-compensated",
             "category":"warning",
-            "ecg":{"name":"CompensatedFailure","path" : "ECG/DiastolicECG_shifted.json","description":"electrical pulses make the heart muscle contract"},
-            "lvp":{"name":"CompensatedFailure","path" : "LVP/DiastolicLVP_shifted.json","description":"muscle contraction generates pump pressure"},
+            "ecg":{
+                "name":"CompensatedFailure",
+                "path" : "ECG/DiastolicECG_shifted.json",
+                "description":"electrical pulses make the heart muscle contract"
+                },
+            "lvp":{
+                "name":"CompensatedFailure",
+                "path" : "LVP DiastolicLVP_shifted.json",
+                "description":"muscle contraction generates pump pressure"
+                },
             "model":{"name":"NoInfarct"}
             },
             "decompensated":{
@@ -47,8 +63,16 @@ This document provides a brief overview of the new heart vue.js app. The app wil
             "icon":"mdi-heart-remove",
             "dataFile":"failure-decompensated",
             "category":"error",
-            "ecg":{"name":"DecompensatedFailure","path" : "ECG/SystolicECG_shifted.json","description":"electrical pulses make the heart muscle contract"},
-            "lvp":{"name":"DecompensatedFailure","path" : "LVP/SystolicLVP_shifted.json","description":"thin-walled hearts struggle to maintain pump pressure"},
+            "ecg":{
+                "name":"DecompensatedFailure",
+                "path" : "ECG SystolicECG_shifted.json",
+                "description":"electrical pulses make the heart muscle contract"
+                },
+            "lvp":{
+                "name":"DecompensatedFailure",
+                "path" : "LVP SystolicLVP_shifted.json",
+                "description":"thin-walled hearts struggle to maintain pump pressure"
+                },
             "model":{"name":"NoInfarct"}
             }
         }
@@ -58,19 +82,22 @@ This document provides a brief overview of the new heart vue.js app. The app wil
     - :blue:`Panels.xml:` contents of each subtopic will be saved via xml tags. The application will read these tags and display contents accordingly. The format in which various elements are displayed will be controlled by code so, full potential of CSS styling can be used to design or to make things responsive. This means less control exercised by users, if they want to change things like design or want to add a new type of element that is not defined in existing xml etc. But still, it can be extended easily by a developer.
 
     .. code-block:: bash
-
+        :linenos:
+        
         <?xml version="1.0" encoding="UTF-8"?>
         <panels>
             <heart-main>
                 <section type="text">
-                    The heart pumps blood to itself through blood vessels called the conronary arteries.
+                    The heart pumps blood to itself through blood vessels
+                    called the conronary arteries.
                 </section>
                 <inline>
                     <section type="image" name="conronary.png">
                     <section type="video" code="blocked">
                 </inline>
                 <section type="text">
-                    Good lifestyle choices help to keep the conronary arteries healthy and prevent heart attacks.
+                    Good lifestyle choices help to keep the conronary arteries
+                    healthy and prevent heart attacks.
                 </section>
                 <inline>
                     <section type="video" code="exercise">
@@ -84,7 +111,9 @@ This document provides a brief overview of the new heart vue.js app. The app wil
 
     .. code-block::
 
-        This is an interactive model of the heart's two main pumping chambers: the ventricles. Spin, zoom, drag, and open the heart using the gestures shown at the bottom. Vary the heart rate using the slider on the right. 
+        This is an interactive model of the heart's two main pumping chambers:
+        the ventricles. Spin, zoom, drag, and open the heart using the gestures
+        shown at the bottom. Vary the heart rate using the slider on the right. 
 
         ![schematic](img/schematic.png) 
         <a href="#video-div" data-play="video">
@@ -93,16 +122,20 @@ This document provides a brief overview of the new heart vue.js app. The app wil
 
         ---
 
-        The heart pumps blood around the body to provide all the organ systems with oxygen and nutrients.
+        The heart pumps blood around the body to provide all the organ systems
+        with oxygen and nutrients.
 
-        The ECG trace (top right) represents the electrical waves in the heart that stimulate contraction and generate pressure (middle right) to pump blood.
+        The ECG trace (top right) represents the electrical waves in the heart
+        that stimulate contraction and generate pressure (middle right) to pump
+        blood.
         - - -
         Click through the tabs below to learn about various heart diseases.
 
 - :red:`Videos.json`, containing information relevant to each video
 
     .. code-block:: bash
-    
+        :linenos:
+
         {
             "healthy":{
                 "heading":"View of a Healthy Heart", 
