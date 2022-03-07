@@ -68,11 +68,10 @@ html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
 html_logo = '_static/abi-vrw-rgb.png'
 
-html_context = {
-    'css_files': [
-        '_static/theme_overrides.css',  # override wide tables in RTD theme
-        ],
-     }
+# override wide tables in RTD theme
+html_css_files = [
+    'css/theme_overrides.css',
+]
 
 autosectionlabel_prefix_document = True
 
