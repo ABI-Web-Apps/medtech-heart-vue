@@ -3,14 +3,19 @@
     <div class="flexbox demo-head">
       <div>
         <h1 class="pt-2 main-heading">
-          {{$parentTopic().heading}} 
+          {{ $parentTopic().heading }}
         </h1>
-        <h4 :class="'sub-heading '+$category()+'--text'">
-          {{$heading()}}
+        <h4 :class="'sub-heading ' + $category() + '--text'">
+          {{ $heading() }}
         </h4>
       </div>
     </div>
-    <div v-if="fileFound" ref="markedDiv" class="pt-2 pt-xl-4 marked" v-html="markedText"></div>
+    <div
+      v-if="fileFound"
+      ref="markedDiv"
+      class="pt-2 pt-xl-4 marked"
+      v-html="markedText"
+    ></div>
     <div v-if="!fileFound" class="error-message">
       <span>Data Not Found</span>
     </div>
@@ -18,67 +23,65 @@
 </template>
 
 <script>
+import { marked } from "marked";
 
-import { marked } from 'marked'
-
-export default { 
+export default {
   name: "Panel",
 
   data() {
     return {
-      currentPanel:'',
-      fileFound:false
-    }
+      currentPanel: "",
+      fileFound: false,
+    };
   },
 
-  methods:{
-    play: function(event) {
-      $nuxt.$emit('load-video-player',event.target.id)
+  methods: {
+    play: function (event) {
+      $nuxt.$emit("load-video-player", event.target.id);
     },
-    refreshContent:function(){
-      const fileName=this.$dataFile()
+    refreshContent: function () {
+      const fileName = this.$dataFile();
       try {
         const panelData = require(`@/assets/data/markdown/${fileName}.md`);
-        this.fileFound=true
-        this.currentPanel=panelData.default
-      }
-      catch (e) {
-        this.fileFound=false
+        this.fileFound = true;
+        this.currentPanel = panelData.default;
+        console.log(panelData);
+      } catch (e) {
+        this.fileFound = false;
       }
     },
-    addVideoLinks:function(){ 
-      if(this.fileFound){      
-        const markedDiv=this.$refs.markedDiv
-        const links = markedDiv.getElementsByTagName('a')
+    addVideoLinks: function () {
+      if (this.fileFound) {
+        const markedDiv = this.$refs.markedDiv;
+        const links = markedDiv.getElementsByTagName("a");
         let i;
         for (i = 0; i < links.length; i++) {
-          let element=links[i]
-          if(element.getAttribute("data-play")=="video"){
-            element.addEventListener('click',this.play)
+          let element = links[i];
+          if (element.getAttribute("data-play") == "video") {
+            element.addEventListener("click", this.play);
           }
         }
       }
-    }
+    },
   },
 
-  computed:{
-    markedText(){
-      return marked(this.currentPanel)
-    }
+  computed: {
+    markedText() {
+      return marked(this.currentPanel);
+    },
   },
 
   mounted() {
-    this.addVideoLinks()
+    this.addVideoLinks();
   },
 
   created() {
-    this.refreshContent()
+    this.refreshContent();
   },
 
   updated() {
-    this.refreshContent()
-    this.addVideoLinks()
-  }
-}
-
+    this.refreshContent();
+    this.addVideoLinks();
+  },
+};
 </script>
