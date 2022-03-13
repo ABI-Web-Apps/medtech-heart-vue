@@ -127,7 +127,7 @@
           "path": "LVP/ArrhythmiaLVP.json",
           "description": "poor pump pressure"
         },
-        "model": { "name": "NoInfarct" }
+        "model": { "name": "ArrythmiaElectricity" }
       }
     }
   },

@@ -52,6 +52,10 @@ export default {
           "heartInfarct/largeInfarct_highres_metadata.json",
           "heartInfarct/largeInfarct_view.json",
         ],
+        ArrythmiaElectricity_highres: [
+          "heartElectricity/arrythmiaActivity_highres_metadata.json",
+          "heartElectricity/arrythmiaActivity_view.json",
+        ],
       },
     };
   },
