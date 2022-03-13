@@ -27,6 +27,8 @@ We defined some global objects in this file, and setter/getter methods.
 
 Thus, we can thougth these methods to get objects in any files by using ** context.store.getters ** in nuxt.
 
+##### Getter
+
 ```bash
     // to define the objects that we want to use and store
     export const state = () => ({
@@ -70,3 +72,40 @@ Also, for easily to manage the getters methods, we create a current-content.js f
 
     // any unclear here, see nuxt.js documentation
 ```
+
+##### Setter
+
+```bash
+    export const mutations = {
+            setCurrentContent(state,newContent){
+            state.currentContent=newContent
+        },
+            setChartLoaded(state,currentChart){
+            state.chartLoaded=currentChart
+        }
+    }
+```
+
+We defined the setter functions in vuex mutations method, so in the whole project we can use **store.commit** under nuxt **asyncData** method.
+
+```bash
+    // {route, $getContentBySlug, error, store}
+    => const {route, $getContentBySlug, error, store} = context
+    async asyncData({route, $getContentBySlug, error, store}) {
+    const slug = route.params.slug
+    let content=$getContentBySlug(slug)
+    if(content===null){
+      error({ statusCode: 404, message: 'Unexpected Error, Page not found' })
+    }
+    store.commit('setCurrentContent',content)
+  },
+```
+
+More info see here:
+Nuxt-vuex-store: https://nuxtjs.org/docs/directory-structure/store
+Nuxt-context: https://nuxtjs.org/docs/concepts/context-helpers, this will give you more ideas on how to use context and asyncData in nuxt.js.
+
+Notice: when we define the inject function in plugins folder, the inject
+function name will as a keyword stored in nuxt context. Then we can use $name to call it or as a parameter for nuxt asyncData function.
+
+nuxt start -> nuxt.config.js -> layouts -> pages -> index.vue(redirect('/model-heart')) -> \_slug(model-heart)-> LeftPanel.vue -> Panel -> Navigation.vue ->

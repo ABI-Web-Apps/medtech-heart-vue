@@ -1,31 +1,32 @@
 <template>
   <div class="outer-model">
-    <div class="d-flex d-sm-none justify-center"> <!--small screens only -->
+    <div class="d-flex d-sm-none justify-center">
+      <!--small screens only -->
       <div class="gestures">
-        <img src="~/assets/images/gestures-icons.png"/>
+        <img src="~/assets/images/gestures-icons.png" />
       </div>
     </div>
-    <div class="d-flex flex-column justify-space-between" :style="modelHeightStyle">
-      <div ref="zincDomObject" :style="zincHeightStyle"/>
+    <div
+      class="d-flex flex-column justify-space-between"
+      :style="modelHeightStyle"
+    >
+      <div ref="zincDomObject" :style="zincHeightStyle" />
       <div ref="threeDControls" class="d-none d-sm-flex justify-center">
         <div class="gestures">
-          <img src="~/assets/images/gestures-icons.png"/>
+          <img src="~/assets/images/gestures-icons.png" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-
 <script>
-
 export default {
-
   data() {
     return {
-      heartRate:2500,
-      threeDControlsHeight:0,
-      zincRenderer:null,
+      heartRate: 2500,
+      threeDControlsHeight: 0,
+      zincRenderer: null,
       modelURLsArray: {
         NoInfarct_highres: [
           "heartInfarct/noInfarct_highres_metadata.json",
@@ -35,60 +36,66 @@ export default {
           "heartElectricity/normalActivity_highres_metadata.json",
           "heartElectricity/normalActivity_view.json",
         ],
-        ArrythmiaElectricity:[
+        ArrythmiaElectricity: [
           "heartElectricity/arrythmiaActivity_highres_metadata.json",
           "heartElectricity/arrythmiaActivity_view.json",
         ],
         CompensatedFailure_highres: [
           "heartFailure/compensated_highres_metadata.json",
           "heartFailure/compensated_view.json",
-        ]
-      }
+        ],
+        SmallInfarct_highres: [
+          "heartInfarct/smallInfarct_highres_metadata.json",
+          "heartInfarct/smallInfarct_view.json",
+        ],
+        LargeInfarct_highres: [
+          "heartInfarct/largeInfarct_highres_metadata.json",
+          "heartInfarct/largeInfarct_view.json",
+        ],
+      },
     };
   },
 
   props: {
-    totalHeight:{
-      type: Number
+    totalHeight: {
+      type: Number,
     },
     availableHeight: {
-      type: Number
-    }
+      type: Number,
+    },
   },
 
-  computed:{
-    modelHeightStyle(){
-      let modelHeight=0
-      if(this.$vuetify.breakpoint.mdAndUp){
-        modelHeight= this.totalHeight
-      }
-      else if(this.$vuetify.breakpoint.sm){
-        modelHeight= this.availableHeight
+  computed: {
+    modelHeightStyle() {
+      let modelHeight = 0;
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        modelHeight = this.totalHeight;
+      } else if (this.$vuetify.breakpoint.sm) {
+        modelHeight = this.availableHeight;
       }
 
-      return{
-        'height': modelHeight > 0 ? modelHeight +'px':'auto'
-      }
+      return {
+        height: modelHeight > 0 ? modelHeight + "px" : "auto",
+      };
     },
-    zincHeightStyle(){
-      let zincObjectHeight="20rem" // default for xs devices
-      if(this.$vuetify.breakpoint.mdAndUp){
-        zincObjectHeight='80vh'
+    zincHeightStyle() {
+      let zincObjectHeight = "20rem"; // default for xs devices
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        zincObjectHeight = "80vh";
+      } else if (this.$vuetify.breakpoint.sm) {
+        let calculated = this.availableHeight - this.threeDControlsHeight;
+        zincObjectHeight = calculated > 0 ? calculated + "px" : "30rem";
       }
-      else if(this.$vuetify.breakpoint.sm){
-        let calculated=this.availableHeight - this.threeDControlsHeight 
-        zincObjectHeight=calculated> 0 ? calculated+ 'px' : '30rem'    
-      }
-      return{
-        'height':zincObjectHeight,
-        'width':'100%'
-      }
-    }
+      return {
+        height: zincObjectHeight,
+        width: "100%",
+      };
+    },
   },
 
   mounted() {
-    this.threeDControlsHeight=this.$refs.threeDControls.clientHeight
-    this.start()
+    this.threeDControlsHeight = this.$refs.threeDControls.clientHeight;
+    this.start();
   },
 
   methods: {
@@ -96,15 +103,18 @@ export default {
       let container = this.$refs.zincDomObject;
       this.zincRenderer = new Zinc.Renderer(container, window);
       Zinc.defaultMaterialColor = 0xffff9c;
-      let zincRenderer=this.zincRenderer;
+      let zincRenderer = this.zincRenderer;
 
       let that = this;
       zincRenderer.initialiseVisualisation();
       //0x050505
       zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
 
+      // console.log(this.$model().name);
+
       loadModel(this.$model().name, 1.0);
-      zincRenderer.animate();   	
+      zincRenderer.animate();
+
       that.updateSlider(that.heartRate);
 
       function loadModel(model_name, rateScaling) {
@@ -118,8 +128,7 @@ export default {
           scene.loadViewURL(viewURL);
           scene.loadMetadataURL(metaURL, meshReady());
           zincRenderer.setCurrentScene(scene);
-        } 
-        else {
+        } else {
           zincRenderer.setCurrentScene(scene);
         }
       }
@@ -130,41 +139,39 @@ export default {
         };
       }
     },
-    updateSlider(heartRate){
-      this.zincRenderer.setPlayRate(heartRate)
-    }
+    updateSlider(heartRate) {
+      this.zincRenderer.setPlayRate(heartRate);
+    },
   },
 
-  watch:{
-    heartRate:function(currentRate){
-      this.updateSlider(currentRate)
-    }
+  watch: {
+    heartRate: function (currentRate) {
+      this.updateSlider(currentRate);
+    },
   },
 
   created() {
-    this.$nuxt.$on('beat-change', (currentBeat) => {
-      this.heartRate=currentBeat
-    })
+    this.$nuxt.$on("beat-change", (currentBeat) => {
+      this.heartRate = currentBeat;
+    });
   },
 
-  beforeDestroy(){
-    this.$nuxt.$off('beat-change')
-  }
-}
-
+  beforeDestroy() {
+    this.$nuxt.$off("beat-change");
+  },
+};
 </script>
 
 <style scoped lang="scss">
+.outer-model {
+  height: 100%;
+}
 
-  .outer-model{
-    height:100%;
+.gestures {
+  width: 40%;
+  img {
+    width: 100%;
+    height: auto;
   }
-
-  .gestures{
-    width:40%;
-    img{
-      width:100%;
-      height:auto;
-    }  
-  }
+}
 </style>
