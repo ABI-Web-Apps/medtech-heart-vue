@@ -16,8 +16,6 @@
 
 # -- Project information -----------------------------------------------------
 
-from turtle import clear
-
 
 project = 'Medtech-Heart-Vue'
 copyright = '2022, Auckland Bioengineering Institute'
