@@ -30,7 +30,6 @@ export default {
   layout: "default",
 
   async asyncData({ route, $getContentBySlug, error, store }) {
-    console.log("routes:", route.params);
     const slug = route.params.slug;
     let content = $getContentBySlug(slug);
     if (content === null) {

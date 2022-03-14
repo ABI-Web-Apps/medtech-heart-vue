@@ -101,7 +101,6 @@ export default {
 
   created() {
     this.topics = this.$getTopics();
-    console.log("slag", this.$route.name);
     if (this.$route.name === "slug") {
       const parentSlug = this.$parentTopic().slug.toLowerCase();
       this.selectedTopic = this.topics[parentSlug];

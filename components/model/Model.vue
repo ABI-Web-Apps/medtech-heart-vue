@@ -117,6 +117,11 @@ export default {
       // console.log(this.$model().name);
 
       loadModel(this.$model().name, 1.0);
+
+      if (this.$model().name === "NoInfarct") {
+        // this.addLabel(this.$model().name);
+      }
+
       zincRenderer.animate();
 
       that.updateSlider(that.heartRate);
@@ -145,6 +150,25 @@ export default {
     },
     updateSlider(heartRate) {
       this.zincRenderer.setPlayRate(heartRate);
+    },
+    addLabel(model_name) {
+      var scene = this.zincRenderer.getSceneByName(model_name);
+      addLabelToScene(
+        scene,
+        "right ventricle",
+        -38.056679,
+        35.639515,
+        10.421283,
+        60.0
+      );
+      addLabelToScene(
+        scene,
+        "left ventricle",
+        -48.056679,
+        -5.639515,
+        5.421283,
+        60.0
+      );
     },
   },
 

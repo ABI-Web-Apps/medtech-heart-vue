@@ -45,7 +45,6 @@ export default {
         const panelData = require(`@/assets/data/markdown/${fileName}.md`);
         this.fileFound = true;
         this.currentPanel = panelData.default;
-        console.log(panelData);
       } catch (e) {
         this.fileFound = false;
       }
