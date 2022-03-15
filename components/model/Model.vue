@@ -56,6 +56,10 @@ export default {
           "heartElectricity/arrythmiaActivity_highres_metadata.json",
           "heartElectricity/arrythmiaActivity_view.json",
         ],
+        DecompensatedFailure_highres: [
+          "heartFailure/decompensated_highres_metadata.json",
+          "heartFailure/decompensated_view.json",
+        ],
       },
     };
   },
@@ -118,8 +122,12 @@ export default {
 
       loadModel(this.$model().name, 1.0);
 
-      if (this.$model().name === "NoInfarct") {
-        // this.addLabel(this.$model().name);
+      if (
+        this.$model().name === "NoInfarct" ||
+        "SmallInfarct" ||
+        "LargeInfarct"
+      ) {
+        this.addLabel(this.$model().name);
       }
 
       zincRenderer.animate();
@@ -153,22 +161,28 @@ export default {
     },
     addLabel(model_name) {
       var scene = this.zincRenderer.getSceneByName(model_name);
-      addLabelToScene(
-        scene,
-        "right ventricle",
-        -38.056679,
-        35.639515,
-        10.421283,
-        60.0
-      );
-      addLabelToScene(
-        scene,
-        "left ventricle",
-        -48.056679,
-        -5.639515,
-        5.421283,
-        60.0
-      );
+      if (model_name === "NoInfarct") {
+        addLabelToScene(
+          scene,
+          "right ventricle",
+          -38.056679,
+          35.639515,
+          10.421283,
+          60.0
+        );
+        addLabelToScene(
+          scene,
+          "left ventricle",
+          -48.056679,
+          -5.639515,
+          5.421283,
+          60.0
+        );
+      } else if (model_name === "SmallInfarct") {
+        addLabelToScene(scene, "damaged tissue", 30, -50, 0, 60.0);
+      } else if (model_name === "LargeInfarct") {
+        addLabelToScene(scene, "damaged tissue", 15, -55, 0, 60.0);
+      }
     },
   },
 
