@@ -13,6 +13,7 @@ Medtech-Heart-Vue's documentation
    introduction/index
    technology/index
    implementation_structure/index
+   Build&Deploy/index
    important_note/index
    FAQs/index
    contributors
