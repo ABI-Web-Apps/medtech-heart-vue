@@ -56,6 +56,10 @@ export default {
           "heartElectricity/arrythmiaActivity_highres_metadata.json",
           "heartElectricity/arrythmiaActivity_view.json",
         ],
+        DecompensatedFailure_highres: [
+          "heartFailure/decompensated_highres_metadata.json",
+          "heartFailure/decompensated_view.json",
+        ],
       },
     };
   },

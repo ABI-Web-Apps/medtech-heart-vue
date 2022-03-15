@@ -170,7 +170,7 @@
           "path": "LVP/DiastolicLVP_shifted.json",
           "description": "muscle contraction generates pump pressure"
         },
-        "model": { "name": "NoInfarct" }
+        "model": { "name": "CompensatedFailure" }
       },
       "decompensated": {
         "title": "Decompensated",
@@ -188,7 +188,7 @@
           "path": "LVP/SystolicLVP_shifted.json",
           "description": "thin-walled hearts struggle to maintain pump pressure"
         },
-        "model": { "name": "NoInfarct" }
+        "model": { "name": "DecompensatedFailure" }
       }
     }
   }
