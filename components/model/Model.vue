@@ -15,7 +15,7 @@
         :style="zincHeightStyle"
         @dblclick="halfHeartPressed"
       />
-      <br />
+      <input class="hidden-input" />
 
       <div ref="threeDControls" class="d-none d-sm-flex justify-center">
         <div class="gestures">
@@ -233,6 +233,10 @@ export default {
 <style scoped lang="scss">
 .outer-model {
   height: 100%;
+}
+.hidden-input {
+  width: 1px;
+  height: 1px;
 }
 
 .gestures {
