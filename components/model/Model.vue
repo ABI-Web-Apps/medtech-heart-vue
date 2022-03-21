@@ -1,19 +1,26 @@
 <template>
-  <div class="outer-model" @dblclick="halfHeartPressed">
+  <div class="outer-model">
     <div class="d-flex d-sm-none justify-center">
-      <!--small screens only -->
       <div class="gestures">
         <img src="~/assets/images/gestures-icons.png" />
+        <span></span>
       </div>
     </div>
     <div
       class="d-flex flex-column justify-space-between"
       :style="modelHeightStyle"
     >
-      <div ref="zincDomObject" :style="zincHeightStyle" />
+      <div
+        ref="zincDomObject"
+        :style="zincHeightStyle"
+        @dblclick="halfHeartPressed"
+      />
+      <input class="hidden-input" />
+
       <div ref="threeDControls" class="d-none d-sm-flex justify-center">
         <div class="gestures">
           <img src="~/assets/images/gestures-icons.png" />
+          <div @click="halfHeartPressed"></div>
         </div>
       </div>
     </div>
@@ -227,12 +234,25 @@ export default {
 .outer-model {
   height: 100%;
 }
+.hidden-input {
+  width: 1px;
+  height: 1px;
+}
 
 .gestures {
   width: 40%;
+  position: relative;
   img {
     width: 100%;
     height: auto;
+  }
+  div {
+    width: 22%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    position: absolute;
+    opacity: 0.1;
   }
 }
 </style>
