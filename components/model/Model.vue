@@ -1,5 +1,5 @@
 <template>
-  <div class="outer-model">
+  <div class="outer-model" @dblclick="halfHeartPressed">
     <div class="d-flex d-sm-none justify-center">
       <!--small screens only -->
       <div class="gestures">
@@ -27,6 +27,7 @@ export default {
       heartRate: 2500,
       threeDControlsHeight: 0,
       zincRenderer: null,
+      halfHeartFlag: false,
       modelURLsArray: {
         NoInfarct_highres: [
           "heartInfarct/noInfarct_highres_metadata.json",
@@ -118,8 +119,6 @@ export default {
       //0x050505
       zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
 
-      // console.log(this.$model().name);
-
       loadModel(this.$model().name, 1.0);
 
       if (
@@ -183,6 +182,26 @@ export default {
       } else if (model_name === "LargeInfarct") {
         addLabelToScene(scene, "damaged tissue", 15, -55, 0, 60.0);
       }
+    },
+    halfHeartPressed() {
+      if (this.halfHeartFlag) {
+        this.halfHeartFlag = false;
+      } else {
+        this.halfHeartFlag = true;
+      }
+      this.showHalf();
+    },
+    showHalf() {
+      var currentScene = this.zincRenderer.getCurrentScene();
+      currentScene.forEachGeometry(this.geometryShowHalf());
+    },
+    geometryShowHalf() {
+      const that = this;
+      return function (zincGeometry) {
+        if (zincGeometry.groupName && zincGeometry.groupName.includes("Post")) {
+          zincGeometry.setVisibility(!that.halfHeartFlag);
+        }
+      };
     },
   },
 
