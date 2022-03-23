@@ -36,6 +36,7 @@ export default {
       threeDControlsHeight: 0,
       zincRenderer: null,
       halfHeartFlag: false,
+      oldCam: null,
       modelToSceneArray: [],
       modelURLsArray: {
         NoInfarct_highres: [
@@ -45,10 +46,6 @@ export default {
         NormalElectricity_highres: [
           "heartElectricity/normalActivity_highres_metadata.json",
           "heartElectricity/normalActivity_view.json",
-        ],
-        ArrythmiaElectricity: [
-          "heartElectricity/arrythmiaActivity_highres_metadata.json",
-          "heartElectricity/arrythmiaActivity_view.json",
         ],
         CompensatedFailure_highres: [
           "heartFailure/compensated_highres_metadata.json",
@@ -121,21 +118,23 @@ export default {
       let container = this.$refs.zincDomObject;
       this.zincRenderer = new Zinc.Renderer(container, window);
       Zinc.defaultMaterialColor = 0xffff9c;
-      // let zincRenderer = this.zincRenderer;
 
       this.zincRenderer.initialiseVisualisation();
       //0x050505
       this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
 
-      this.loadModel(this.$model().name, 1.0);
-
       if (
         this.$model().name === "NoInfarct" ||
-        "SmallInfarct" ||
-        "LargeInfarct"
+        this.$model().name === "SmallInfarct" ||
+        this.$model().name === "LargeInfarct" ||
+        this.$model().name === "CompensatedFailure" ||
+        this.$model().name === "DecompensatedFailure"
       ) {
-        this.addLabel(this.$model().name);
+        this.oldCam = this.$perviousCamera();
       }
+
+      this.loadModel(this.$model().name, 1.0);
+      this.addLabel(this.$model().name);
 
       this.zincRenderer.animate();
 
@@ -145,22 +144,51 @@ export default {
       let model_prefix = "_highres";
       const metaURL = this.modelURLsArray[model_name + model_prefix][0];
       const viewURL = this.modelURLsArray[model_name + model_prefix][1];
+
       let scene = this.zincRenderer.getSceneByName(model_name);
       if (scene == undefined) {
         scene = this.zincRenderer.createScene(model_name);
         scene.setDuration(scene.getDuration() / rateScaling);
         scene.loadViewURL(viewURL);
-        scene.loadMetadataURL(metaURL, this.meshReady());
+        scene.loadMetadataURL(metaURL, this.meshReady(this.oldCam));
         this.zincRenderer.setCurrentScene(scene);
         this.modelToSceneArray[model_name] = scene;
       } else {
         this.zincRenderer.setCurrentScene(scene);
+        this.shareCameraSettings(this.oldCam);
       }
     },
-    meshReady() {
-      return function () {
-        //console.log("hello");
+    meshReady(oldCam) {
+      const that = this;
+      return function (mygeometry) {
+        if (mygeometry.groupName && mygeometry.groupName.includes("Post")) {
+          mygeometry.setVisibility(!that.halfHeartFlag);
+        }
+        if (mygeometry.groupName && mygeometry.groupName.includes("Fibres")) {
+          mygeometry.setVisibility(false);
+        }
+        that.shareCameraSettings(oldCam);
+        that.zincRenderer
+          .getCurrentScene()
+          .getZincCameraControls()
+          .updateAutoTumble();
       };
+    },
+
+    shareCameraSettings(oldCam) {
+      if (oldCam) {
+        var newCam = this.zincRenderer.getCurrentScene().camera;
+        newCam.near = oldCam.near;
+        newCam.far = oldCam.far;
+        newCam.position.copy(oldCam.position);
+        newCam.target = new THREE.Vector3(
+          oldCam.target.x,
+          oldCam.target.y,
+          oldCam.target.z
+        );
+        newCam.up.copy(oldCam.up);
+        this.zincRenderer.getCurrentScene().updateDirectionalLight();
+      }
     },
 
     onResetAllModelsView() {
@@ -233,6 +261,25 @@ export default {
   },
 
   beforeDestroy() {
+    if (this.oldCam) {
+      const currentCamera = this.zincRenderer.getCurrentScene().camera;
+      const position = new THREE.Vector3();
+      const up = new THREE.Vector3();
+      const target = new THREE.Vector3();
+      target.copy(currentCamera.target);
+      position.copy(currentCamera.position);
+      up.copy(currentCamera.up);
+      const currentCameraInfo = {
+        position: position,
+        target: target,
+        up: up,
+        near: currentCamera.near,
+        far: currentCamera.far,
+      };
+
+      this.$store.commit("setPreviousCamera", currentCameraInfo);
+    }
+
     this.$nuxt.$off("beat-change");
   },
 };
