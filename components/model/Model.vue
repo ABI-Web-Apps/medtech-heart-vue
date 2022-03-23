@@ -3,7 +3,7 @@
     <div class="d-flex d-sm-none justify-center">
       <div class="gestures">
         <img src="~/assets/images/gestures-icons.png" />
-        <span></span>
+        <div @click="onHalfHeartPressed"></div>
       </div>
     </div>
     <div
@@ -13,14 +13,15 @@
       <div
         ref="zincDomObject"
         :style="zincHeightStyle"
-        @dblclick="halfHeartPressed"
+        @dblclick="onHalfHeartPressed"
       />
       <input class="hidden-input" />
 
       <div ref="threeDControls" class="d-none d-sm-flex justify-center">
         <div class="gestures">
+          <div class="reset-control" @click="onResetAllModelsView" />
           <img src="~/assets/images/gestures-icons.png" />
-          <div @click="halfHeartPressed"></div>
+          <div class="half-control" @click="onHalfHeartPressed" />
         </div>
       </div>
     </div>
@@ -35,6 +36,8 @@ export default {
       threeDControlsHeight: 0,
       zincRenderer: null,
       halfHeartFlag: false,
+      oldCam: null,
+      modelToSceneArray: [],
       modelURLsArray: {
         NoInfarct_highres: [
           "heartInfarct/noInfarct_highres_metadata.json",
@@ -43,10 +46,6 @@ export default {
         NormalElectricity_highres: [
           "heartElectricity/normalActivity_highres_metadata.json",
           "heartElectricity/normalActivity_view.json",
-        ],
-        ArrythmiaElectricity: [
-          "heartElectricity/arrythmiaActivity_highres_metadata.json",
-          "heartElectricity/arrythmiaActivity_view.json",
         ],
         CompensatedFailure_highres: [
           "heartFailure/compensated_highres_metadata.json",
@@ -119,47 +118,84 @@ export default {
       let container = this.$refs.zincDomObject;
       this.zincRenderer = new Zinc.Renderer(container, window);
       Zinc.defaultMaterialColor = 0xffff9c;
-      let zincRenderer = this.zincRenderer;
 
-      let that = this;
-      zincRenderer.initialiseVisualisation();
+      this.zincRenderer.initialiseVisualisation();
       //0x050505
-      zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
-
-      loadModel(this.$model().name, 1.0);
+      this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
 
       if (
         this.$model().name === "NoInfarct" ||
-        "SmallInfarct" ||
-        "LargeInfarct"
+        this.$model().name === "SmallInfarct" ||
+        this.$model().name === "LargeInfarct" ||
+        this.$model().name === "CompensatedFailure" ||
+        this.$model().name === "DecompensatedFailure"
       ) {
-        this.addLabel(this.$model().name);
+        this.oldCam = this.$perviousCamera();
       }
 
-      zincRenderer.animate();
+      this.loadModel(this.$model().name, 1.0);
+      this.addLabel(this.$model().name);
 
-      that.updateSlider(that.heartRate);
+      this.zincRenderer.animate();
 
-      function loadModel(model_name, rateScaling) {
-        let model_prefix = "_highres";
-        const metaURL = that.modelURLsArray[model_name + model_prefix][0];
-        const viewURL = that.modelURLsArray[model_name + model_prefix][1];
-        let scene = zincRenderer.getSceneByName(model_name);
-        if (scene == undefined) {
-          scene = zincRenderer.createScene(model_name);
-          scene.setDuration(scene.getDuration() / rateScaling);
-          scene.loadViewURL(viewURL);
-          scene.loadMetadataURL(metaURL, meshReady());
-          zincRenderer.setCurrentScene(scene);
-        } else {
-          zincRenderer.setCurrentScene(scene);
+      this.updateSlider(this.heartRate);
+    },
+    loadModel(model_name, rateScaling) {
+      let model_prefix = "_highres";
+      const metaURL = this.modelURLsArray[model_name + model_prefix][0];
+      const viewURL = this.modelURLsArray[model_name + model_prefix][1];
+
+      let scene = this.zincRenderer.getSceneByName(model_name);
+      if (scene == undefined) {
+        scene = this.zincRenderer.createScene(model_name);
+        scene.setDuration(scene.getDuration() / rateScaling);
+        scene.loadViewURL(viewURL);
+        scene.loadMetadataURL(metaURL, this.meshReady(this.oldCam));
+        this.zincRenderer.setCurrentScene(scene);
+        this.modelToSceneArray[model_name] = scene;
+      } else {
+        this.zincRenderer.setCurrentScene(scene);
+        this.shareCameraSettings(this.oldCam);
+      }
+    },
+    meshReady(oldCam) {
+      const that = this;
+      return function (mygeometry) {
+        if (mygeometry.groupName && mygeometry.groupName.includes("Post")) {
+          mygeometry.setVisibility(!that.halfHeartFlag);
         }
-      }
+        if (mygeometry.groupName && mygeometry.groupName.includes("Fibres")) {
+          mygeometry.setVisibility(false);
+        }
+        that.shareCameraSettings(oldCam);
+        that.zincRenderer
+          .getCurrentScene()
+          .getZincCameraControls()
+          .updateAutoTumble();
+      };
+    },
 
-      function meshReady() {
-        return function () {
-          //console.log("hello");
-        };
+    shareCameraSettings(oldCam) {
+      if (oldCam) {
+        var newCam = this.zincRenderer.getCurrentScene().camera;
+        newCam.near = oldCam.near;
+        newCam.far = oldCam.far;
+        newCam.position.copy(oldCam.position);
+        newCam.target = new THREE.Vector3(
+          oldCam.target.x,
+          oldCam.target.y,
+          oldCam.target.z
+        );
+        newCam.up.copy(oldCam.up);
+        this.zincRenderer.getCurrentScene().updateDirectionalLight();
+      }
+    },
+
+    onResetAllModelsView() {
+      for (var k in this.modelToSceneArray) {
+        if (this.modelToSceneArray.hasOwnProperty(k)) {
+          this.modelToSceneArray[k].resetView();
+        }
       }
     },
     updateSlider(heartRate) {
@@ -190,7 +226,7 @@ export default {
         addLabelToScene(scene, "damaged tissue", 15, -55, 0, 60.0);
       }
     },
-    halfHeartPressed() {
+    onHalfHeartPressed() {
       if (this.halfHeartFlag) {
         this.halfHeartFlag = false;
       } else {
@@ -225,6 +261,25 @@ export default {
   },
 
   beforeDestroy() {
+    if (this.oldCam) {
+      const currentCamera = this.zincRenderer.getCurrentScene().camera;
+      const position = new THREE.Vector3();
+      const up = new THREE.Vector3();
+      const target = new THREE.Vector3();
+      target.copy(currentCamera.target);
+      position.copy(currentCamera.position);
+      up.copy(currentCamera.up);
+      const currentCameraInfo = {
+        position: position,
+        target: target,
+        up: up,
+        near: currentCamera.near,
+        far: currentCamera.far,
+      };
+
+      this.$store.commit("setPreviousCamera", currentCameraInfo);
+    }
+
     this.$nuxt.$off("beat-change");
   },
 };
@@ -246,7 +301,15 @@ export default {
     width: 100%;
     height: auto;
   }
-  div {
+  .reset-control {
+    width: 22%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    opacity: 0.1;
+  }
+  .half-control {
     width: 22%;
     height: 100%;
     right: 0;
