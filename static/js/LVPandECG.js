@@ -85,6 +85,16 @@ function loadChart(ecg, lvp, category, defaultEcgData, defaultLvpData) {
             title: "",
             titleFontColor: [120, 120, 120],
           });
+          /* optional add the grid */
+          LVPchart.addPlot("grid", {
+            type: Grid,
+            hMajorLines: false,
+            hMinorLines: false,
+            vMajorLines: false,
+            vMinorLines: false,
+            majorHLine: { color: "green", width: 0.2 },
+            majorVLine: { color: "red", width: 0.2 },
+          });
           LVPchart.addPlot("time", {
             type: plot2dIndicator,
             vertical: true,
@@ -98,9 +108,6 @@ function loadChart(ecg, lvp, category, defaultEcgData, defaultLvpData) {
           });
           lvpIndicator = LVPchart.getPlot("time");
 
-          console.log("????????? --------------?");
-          //   console.log(lvp.name, lvp.path, category, LVPchart, defaultLvpData);
-
           showLVPChart(lvp.name, lvp.path, category, LVPchart, defaultLvpData);
           showECGChart(ecg.name, ecg.path, category, ECGchart, defaultEcgData);
         });
@@ -110,6 +117,7 @@ function loadChart(ecg, lvp, category, defaultEcgData, defaultLvpData) {
 }
 
 function showECGChart(axisName, ecgPath, category, ECGchart, defaultEcgData) {
+  // ?????? where the msg comes from??!!
   msg = ECGchart.parentElement == null;
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = onECGLoaded(
