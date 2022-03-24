@@ -49,12 +49,13 @@ export default {
       window.ecgDone = false; //to prevent unexpected problem of chart being loaded twice
       window.lvpDone = false;
     }
+    const that = this;
     loadChart(
-      this.$ecg(),
-      this.$lvp(),
-      this.$category(),
-      this.defaultEcgData,
-      this.defaultLvpData
+      that.$ecg(),
+      that.$lvp(),
+      that.$category(),
+      that.defaultEcgData,
+      that.defaultLvpData
     );
     // showECGAndLVP(this.$model().name, 0.0);
   },
