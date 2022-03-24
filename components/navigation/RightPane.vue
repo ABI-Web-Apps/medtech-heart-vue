@@ -41,11 +41,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="pt-5 traces d-flex d-sm-none justify-center"> -->
-          <!-- <div class="pt-5 traces d-flex d-sm-none">
-
-            <traces />
-          </div> -->
         </v-col>
       </v-row>
     </v-container>
