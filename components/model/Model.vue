@@ -176,7 +176,11 @@ export default {
     },
 
     shareCameraSettings(oldCam) {
-      if (oldCam) {
+      if (
+        oldCam !== null &&
+        oldCam.near !== null &&
+        oldCam.near !== undefined
+      ) {
         var newCam = this.zincRenderer.getCurrentScene().camera;
         newCam.near = oldCam.near;
         newCam.far = oldCam.far;
@@ -266,9 +270,11 @@ export default {
       const position = new THREE.Vector3();
       const up = new THREE.Vector3();
       const target = new THREE.Vector3();
+
       target.copy(currentCamera.target);
       position.copy(currentCamera.position);
       up.copy(currentCamera.up);
+
       const currentCameraInfo = {
         position: position,
         target: target,
