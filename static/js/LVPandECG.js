@@ -1,9 +1,24 @@
-//var ECGchart=undefined;
-//var LVPchart=undefined;
+var ECGchart = undefined;
+var LVPchart = undefined;
+var ECGurls = [];
+var LVPurls = [];
+var ECGs = [];
+var LVPs = [];
+var ECGTexts = [];
+var LVPTexts = [];
+var ecgIndicator = undefined;
+var lvpIndicator = undefined;
+var maxECGTime = 0.0,
+  maxLVPTime = 0.0;
+var minECGTime = 0.0,
+  minLVPTime = 0.0;
+var currentECGName = "None";
+var currentLVPName = "None";
+var timeLineOffset = 0.0;
 
 require(["dijit/Dialog"]);
 
-function loadChart(ecg, lvp, category, defaultEcgData, defaultLvpData) {
+function loadChart(ecg, lvp, category, defaultLvpData, timeOffset) {
   require(["dojo/ready"], function (ready) {
     ready(function () {
       require([
@@ -18,7 +33,7 @@ function loadChart(ecg, lvp, category, defaultEcgData, defaultLvpData) {
         "dojox/charting/themes/Tom",
       ], function (declare, domConstruct, Chart, StackedLines, Grid, Claro, axis2dDefault, plot2dIndicator, tomTheme) {
         ready(function () {
-          var ECGchart;
+          //   var ECGchart;
           tomTheme.chart.fill = "transparent";
           tomTheme.plotarea.fill = "transparent";
           tomTheme.chart.stroke = "transparent";
@@ -59,7 +74,7 @@ function loadChart(ecg, lvp, category, defaultEcgData, defaultLvpData) {
           });
           ecgIndicator = ECGchart.getPlot("time");
 
-          var LVPchart;
+          //   var LVPchart;
           var lvpDom = document.getElementById("rightLVP");
           /* create the chart on the dom */
           LVPchart = new Chart(lvpDom);
@@ -108,141 +123,132 @@ function loadChart(ecg, lvp, category, defaultEcgData, defaultLvpData) {
           });
           lvpIndicator = LVPchart.getPlot("time");
 
-          showLVPChart(lvp.name, lvp.path, category, LVPchart, defaultLvpData);
-          showECGChart(ecg.name, ecg.path, category, ECGchart, defaultEcgData);
+          timeLineOffset = timeOffset;
+
+          if (!ECGurls[ecg.name]) {
+            ECGurls[ecg.name] = ecg.path;
+          }
+          if (!LVPurls[lvp.name]) {
+            LVPurls[lvp.name] = lvp.path;
+          }
+
+          showLVPChart(lvp.name, lvp.path, category);
+          showECGChart(ecg.name, ecg.path, category);
         });
       });
     });
   });
 }
 
-function showECGChart(axisName, ecgPath, category, ECGchart, defaultEcgData) {
-  // ?????? where the msg comes from??!!
-  msg = ECGchart.parentElement == null;
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = onECGLoaded(
-    xmlhttp,
-    category,
-    axisName,
-    ECGchart,
-    defaultEcgData
-  );
-  xmlhttp.open("GET", ecgPath, true);
-  xmlhttp.send();
+function showECGChart(axisName, ecgPath, category) {
+  if (ECGs[axisName]) {
+    showECGInternal(category, axisName);
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = onECGLoaded(xmlhttp, category, axisName);
+    xmlhttp.open("GET", ecgPath, true);
+    xmlhttp.send();
+  }
 }
 
-function onECGLoaded(xmlhttp, category, axisName, ECGchart, defaultEcgData) {
+function onECGLoaded(xmlhttp, category, axisName) {
   return function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var viewData = JSON.parse(xmlhttp.responseText);
       var newViewData = rescaleXAxis(viewData);
-      defaultEcgData = rescaleXAxis(defaultEcgData);
-      showECGInternal(
-        newViewData,
-        category,
-        axisName,
-        ECGchart,
-        defaultEcgData
-      );
+      //   defaultEcgData = rescaleXAxis(defaultEcgData);
+      ECGs[axisName] = newViewData;
+      showECGInternal(category, axisName);
     }
   };
 }
 
-var showECGInternal = function (
-  newViewData,
-  category,
-  axisName,
-  ECGchart,
-  defaultEcgData
-) {
-  var colourName = "rgba(50,205,50,0.6)";
-  var widthvar = 2;
+var showECGInternal = function (category, axisName) {
+  if (axisName != currentECGName) {
+    var currentECG = ECGs[axisName];
+    maxECGTime = currentECG[currentECG.length - 1]["x"];
+    minECGTime = currentECG[0]["x"];
+    ECGchart.removeSeries(currentECGName);
+    ECGchart.removeSeries("Normal");
+    currentECGName = axisName;
+    var colourName = "rgba(50,205,50,0.6)";
+    var widthvar = 2;
 
-  if (category == "warning") {
-    colourName = "rgba(255,255,0,1)";
-    widthvar = 3;
-  } else if (category == "error") {
-    colourName = "rgba(255,50,0,1)";
-    widthvar = 3;
-  }
-
-  if (window.ecgDone != true) {
-    ECGchart.addSeries(axisName, newViewData, {
-      stroke: { color: colourName, width: widthvar },
-    });
-    if (category != "success") {
-      ECGchart.addSeries("Normal", defaultEcgData, {
-        stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
-      });
+    if (category == "warning") {
+      colourName = "rgba(255,255,0,1)";
+      widthvar = 3;
+    } else if (category == "error") {
+      colourName = "rgba(255,50,0,1)";
+      widthvar = 3;
     }
 
-    ECGchart.render();
-    ECGchart.resize("100%", "100%");
+    if (window.ecgDone != true) {
+      ECGchart.addSeries(axisName, currentECG, {
+        stroke: { color: colourName, width: widthvar },
+      });
+
+      ECGchart.render();
+      ECGchart.resize("100%", "100%");
+    }
+    ecgDone = true;
   }
-  ecgDone = true;
 };
 
-function showLVPChart(axisName, lvpPath, category, LVPchart, defaultLvpData) {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = onLVPLoaded(
-    xmlhttp,
-    category,
-    axisName,
-    LVPchart,
-    defaultLvpData
-  );
-  xmlhttp.open("GET", lvpPath, true);
-  xmlhttp.send();
+function showLVPChart(axisName, lvpPath, category) {
+  if (LVPs[axisName]) {
+    showLVPInternal(category, axisName);
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = onLVPLoaded(xmlhttp, category, axisName);
+    xmlhttp.open("GET", lvpPath, true);
+    xmlhttp.send();
+  }
 }
 
-function onLVPLoaded(xmlhttp, category, axisName, LVPchart, defaultLvpData) {
+function onLVPLoaded(xmlhttp, category, axisName) {
   return function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
       var viewData = JSON.parse(xmlhttp.responseText);
       var newViewData = rescaleXAxis(viewData);
-      defaultLvpData = rescaleXAxis(defaultLvpData);
-      showLVPInternal(
-        newViewData,
-        category,
-        axisName,
-        LVPchart,
-        defaultLvpData
-      );
+      LVPs[axisName] = newViewData;
+      showLVPInternal(category, axisName);
     }
   };
 }
 
-var showLVPInternal = function (
-  newViewData,
-  category,
-  axisName,
-  LVPchart,
-  defaultLvpData
-) {
-  var colourName = "rgba(50,205,50,0.6)";
-  var widthvar = 2;
+var showLVPInternal = function (category, axisName) {
+  if (axisName != currentLVPName) {
+    var currentLVP = LVPs[axisName];
+    maxLVPTime = currentLVP[currentLVP.length - 1]["x"];
+    minLVPTime = currentLVP[0]["x"];
+    LVPchart.removeSeries(currentLVPName);
+    LVPchart.removeSeries("Normal");
+    currentLVPName = axisName;
+    var colourName = "rgba(50,205,50,0.6)";
+    var widthvar = 2;
 
-  if (category == "warning") {
-    colourName = "rgba(255,255,0,1)";
-    widthvar = 3;
-  } else if (category == "error") {
-    colourName = "rgba(255,50,0,1)";
-    widthvar = 3;
-  }
-
-  if (window.lvpDone != true) {
-    LVPchart.addSeries(axisName, newViewData, {
-      stroke: { color: colourName, width: widthvar },
-    });
-    if (category != "success") {
-      LVPchart.addSeries("Normal", defaultLvpData, {
-        stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
-      });
+    if (category == "warning") {
+      colourName = "rgba(255,255,0,1)";
+      widthvar = 3;
+    } else if (category == "error") {
+      colourName = "rgba(255,50,0,1)";
+      widthvar = 3;
     }
-    LVPchart.render();
-    LVPchart.resize("100%", "100%");
+
+    if (window.lvpDone != true) {
+      LVPchart.addSeries(axisName, currentLVP, {
+        stroke: { color: colourName, width: widthvar },
+      });
+      // if (category != "success") {
+      //   LVPchart.addSeries("Normal", defaultLvpData, {
+      //     stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
+      //   });
+      // }
+      LVPchart.render();
+      LVPchart.resize("100%", "100%");
+    }
+    lvpDone = true;
   }
-  lvpDone = true;
 };
 
 var rescaleXAxis = function (viewData) {
