@@ -18,7 +18,7 @@ var timeLineOffset = 0.0;
 
 require(["dijit/Dialog"]);
 
-function loadChart(ecg, lvp, category, defaultLvpData, timeOffset) {
+function loadChart(ecg, lvp, category, timeOffset) {
   require(["dojo/ready"], function (ready) {
     ready(function () {
       require([
@@ -122,6 +122,7 @@ function loadChart(ecg, lvp, category, defaultLvpData, timeOffset) {
             values: 0.0,
           });
           lvpIndicator = LVPchart.getPlot("time");
+          console.log(timeOffset);
 
           timeLineOffset = timeOffset;
 
@@ -239,11 +240,6 @@ var showLVPInternal = function (category, axisName) {
       LVPchart.addSeries(axisName, currentLVP, {
         stroke: { color: colourName, width: widthvar },
       });
-      // if (category != "success") {
-      //   LVPchart.addSeries("Normal", defaultLvpData, {
-      //     stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
-      //   });
-      // }
       LVPchart.render();
       LVPchart.resize("100%", "100%");
     }
@@ -261,3 +257,37 @@ var rescaleXAxis = function (viewData) {
 
   return viewData;
 };
+
+function updateIndicator(normaliseTime) {
+  if (
+    lvpIndicator &&
+    currentLVPName != " None" &&
+    ecgIndicator &&
+    currentECGName != " None"
+  ) {
+    var lvpTime = normaliseTime * (maxLVPTime - minLVPTime) + minLVPTime;
+    var ecgTime = normaliseTime * (maxECGTime - minECGTime) + minECGTime;
+    if (timeLineOffset != 0.0 && timeLineOffset) {
+      lvpTime = lvpTime + timeLineOffset;
+      ecgTime = ecgTime + timeLineOffset;
+
+      if (lvpTime > maxLVPTime) {
+        lvpTime = lvpTime - maxLVPTime + minLVPTime;
+      } else if (lvpTime < minLVPTime) {
+        lvpTime = maxLVPTime - (minLVPTime - lvpTime);
+      }
+      if (ecgTime > maxECGTime) {
+        ecgTime = ecgTime - maxECGTime + minECGTime;
+      } else if (ecgTime < minECGTime) {
+        ecgTime = maxECGTime - (minECGTime - ecgTime);
+      }
+    }
+
+    lvpIndicator.opt.values = [lvpTime];
+    ecgIndicator.opt.values = [ecgTime];
+    lvpIndicator.dirty = true;
+    lvpIndicator.render();
+    ecgIndicator.dirty = true;
+    ecgIndicator.render();
+  }
+}

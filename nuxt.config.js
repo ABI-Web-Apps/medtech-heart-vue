@@ -47,6 +47,10 @@ export default {
         type: "text/javascript",
         src: "zincJS/zinc_threejs_control.js",
       },
+      {
+        type: "text/javascript",
+        src: "initZinc/index.js",
+      },
     ],
   },
 

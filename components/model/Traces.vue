@@ -33,14 +33,12 @@
 </template>
 
 <script>
-import normalEcg from "~/static/ECG/NormalECG.json";
-import normalLvp from "~/static/LVP/NormalLVP.json";
-
 export default {
   data() {
     return {
-      defaultEcgData: normalEcg,
-      defaultLvpData: normalLvp,
+      idleTime: 0,
+      idleTimeLimit: 300000,
+      oldTime: new Date(),
     };
   },
 
@@ -51,6 +49,22 @@ export default {
     }
     loadChart(this.$ecg(), this.$lvp(), this.$category(), 1.0);
     // showECGAndLVP(this.$model().name, 0.0);
+    const that = this;
+    setTimeout(that.updateEcg(), 5000);
+  },
+  methods: {
+    updateEcg() {
+      var updateIndicatorsAndTimer = () => {
+        var newTime = new Date();
+        this.idleTime =
+          this.idleTime + newTime.getTime() - this.oldTime.getTime();
+        this.oldTime = newTime;
+        var normaliseTime = render.getCurrentTime() / 3000.0;
+        updateIndicator(normaliseTime);
+      };
+
+      render.addPreRenderCallbackFunction(updateIndicatorsAndTimer);
+    },
   },
 };
 </script>
