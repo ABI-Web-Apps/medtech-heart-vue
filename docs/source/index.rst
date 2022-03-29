@@ -16,4 +16,5 @@ Medtech-Heart-Vue's documentation
    Build&Deploy/index
    important_note/index
    FAQs/index
+   issues/index
    contributors

@@ -11,6 +11,7 @@
       :style="modelHeightStyle"
     >
       <div
+        id="zincDom"
         ref="zincDomObject"
         :style="zincHeightStyle"
         @dblclick="onHalfHeartPressed"
@@ -115,14 +116,15 @@ export default {
 
   methods: {
     start() {
-      let container = this.$refs.zincDomObject;
-      this.zincRenderer = new Zinc.Renderer(container, window);
-      Zinc.defaultMaterialColor = 0xffff9c;
-
-      this.zincRenderer.initialiseVisualisation();
-      //0x050505
-      this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
-
+      const container = document.getElementById("zincDom");
+      if (container) {
+        if (render === undefined) {
+          initZinc();
+        }
+        initZinc();
+        console.log(container);
+        this.zincRenderer = render;
+      }
       if (
         this.$model().name === "NoInfarct" ||
         this.$model().name === "SmallInfarct" ||
@@ -132,20 +134,38 @@ export default {
       ) {
         this.oldCam = this.$perviousCamera();
       }
+      if (this.$model().name === "ArrythmiaElectricity") {
+        this.loadModel(this.$model().name, 0.25);
+      } else {
+        this.loadModel(this.$model().name, 1.0);
+      }
 
-      this.loadModel(this.$model().name, 1.0);
       this.addLabel(this.$model().name);
-
-      this.zincRenderer.animate();
 
       this.updateSlider(this.heartRate);
     },
+    // initialZinc() {
+    //   let container = this.$refs.zincDomObject;
+    //   this.zincRenderer = new Zinc.Renderer(container, window);
+    //   Zinc.defaultMaterialColor = 0xffff9c;
+    //   const canvas = this.zincRenderer.initialiseVisualisation();
+    //   this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
+
+    //   // zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
+    //   var defaultScene = this.zincRenderer.getSceneByName("default");
+    //   this.zincRenderer.setCurrentScene(defaultScene);
+    //   let render = this.zincRenderer;
+    //   this.$store.commit("setZincContainer", canvas);
+    //   this.$store.commit("setZincRender", render);
+    //   this.zincRenderer.animate();
+    // },
     loadModel(model_name, rateScaling) {
       let model_prefix = "_highres";
       const metaURL = this.modelURLsArray[model_name + model_prefix][0];
       const viewURL = this.modelURLsArray[model_name + model_prefix][1];
 
       let scene = this.zincRenderer.getSceneByName(model_name);
+
       if (scene == undefined) {
         scene = this.zincRenderer.createScene(model_name);
         scene.setDuration(scene.getDuration() / rateScaling);
@@ -322,6 +342,12 @@ export default {
     top: 0;
     position: absolute;
     opacity: 0.1;
+  }
+}
+#zincDom {
+  canvas {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
