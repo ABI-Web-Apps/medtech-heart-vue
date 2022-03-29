@@ -119,7 +119,7 @@ export default {
       const container = document.getElementById("zincDom");
       if (container) {
         if (render === undefined) {
-          initZinc();
+          // initZinc();
         }
         initZinc();
         console.log(container);
