@@ -39,6 +39,7 @@ export default {
       idleTime: 0,
       idleTimeLimit: 300000,
       oldTime: new Date(),
+      render: undefined,
     };
   },
 
@@ -49,21 +50,25 @@ export default {
     }
     loadChart(this.$ecg(), this.$lvp(), this.$category(), 1.0);
     // showECGAndLVP(this.$model().name, 0.0);
-    const that = this;
-    setTimeout(that.updateEcg(), 5000);
+    this.updateEcg();
   },
   methods: {
     updateEcg() {
-      var updateIndicatorsAndTimer = () => {
-        var newTime = new Date();
-        this.idleTime =
-          this.idleTime + newTime.getTime() - this.oldTime.getTime();
-        this.oldTime = newTime;
-        var normaliseTime = render.getCurrentTime() / 3000.0;
-        updateIndicator(normaliseTime);
-      };
+      setTimeout(() => {
+        this.render = this.$currentRender();
+        if (this.render) {
+          var updateIndicatorsAndTimer = () => {
+            var newTime = new Date();
+            this.idleTime =
+              this.idleTime + newTime.getTime() - this.oldTime.getTime();
+            this.oldTime = newTime;
+            var normaliseTime = this.render.getCurrentTime() / 3000.0;
+            updateIndicator(normaliseTime);
+          };
 
-      render.addPreRenderCallbackFunction(updateIndicatorsAndTimer);
+          this.render.addPreRenderCallbackFunction(updateIndicatorsAndTimer);
+        }
+      }, 1000);
     },
   },
 };

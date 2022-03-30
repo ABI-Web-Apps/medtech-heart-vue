@@ -747,6 +747,7 @@ Zinc.defaultOpacity = 1.0;
 
 Zinc.Scene = function (containerIn, rendererIn) {
   var container = containerIn;
+  // this.cc = containerIn;
   //zincGeometries contains a tuple of the threejs mesh, timeEnabled, morphColour flag, unique id and morph
   var zincGeometries = [];
   var zincGlyphsets = [];
@@ -766,6 +767,10 @@ Zinc.Scene = function (containerIn, rendererIn) {
   var stereoEffect = undefined;
   var _this = this;
   this.autoClearFlag = true;
+
+  this.switchContainer = function (new_container) {
+    container = new_container;
+  };
 
   this.getDownloadProgress = function () {
     var totalSize = 0;
@@ -1558,6 +1563,11 @@ Zinc.Renderer = function (containerIn, window) {
     var scene = _this.createScene("default");
     _this.setCurrentScene(scene);
     return renderer.domElement;
+  };
+
+  this.switchContainer = function (new_container) {
+    container = new_container;
+    container.appendChild(renderer.domElement);
   };
 
   this.getCurrentScene = function () {

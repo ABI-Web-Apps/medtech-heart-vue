@@ -16,4 +16,6 @@ function initZinc() {
   var defaultScene = render.getSceneByName("default");
   render.setCurrentScene(defaultScene);
   render.animate();
+
+  return canvas;
 }

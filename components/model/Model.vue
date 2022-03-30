@@ -39,6 +39,7 @@ export default {
       halfHeartFlag: false,
       oldCam: null,
       modelToSceneArray: [],
+      container: null,
       modelURLsArray: {
         NoInfarct_highres: [
           "heartInfarct/noInfarct_highres_metadata.json",
@@ -116,15 +117,25 @@ export default {
 
   methods: {
     start() {
-      const container = document.getElementById("zincDom");
-      if (container) {
-        if (render === undefined) {
-          // initZinc();
+      this.container = this.$refs.zincDomObject;
+      // this.container = document.getElementById("zincDom");
+      this.zincRenderer = this.$currentRender();
+      if (this.container) {
+        if (this.zincRenderer === undefined) {
+          this.initialZinc();
         }
-        initZinc();
-        console.log(container);
-        this.zincRenderer = render;
+        this.zincRenderer.switchContainer(this.container);
+        this.halfHeartFlag = this.$isHalfModel();
       }
+      // if (this.container) {
+      //   if (render === undefined) {
+      //     initZinc();
+      //   }
+      //   render.switchContainer(this.container);
+      //   this.zincRenderer = render;
+      //   this.halfHeartFlag = this.$isHalfModel();
+      // }
+
       if (
         this.$model().name === "NoInfarct" ||
         this.$model().name === "SmallInfarct" ||
@@ -140,25 +151,30 @@ export default {
         this.loadModel(this.$model().name, 1.0);
       }
 
-      this.addLabel(this.$model().name);
+      // when home click
+      if (this.$route.params.slug === "model-heart") {
+        // const that = this
+        setTimeout(() => {
+          this.oldCam = null;
+          this.onResetAllModelsView();
+        }, 100);
+      }
 
       this.updateSlider(this.heartRate);
     },
-    // initialZinc() {
-    //   let container = this.$refs.zincDomObject;
-    //   this.zincRenderer = new Zinc.Renderer(container, window);
-    //   Zinc.defaultMaterialColor = 0xffff9c;
-    //   const canvas = this.zincRenderer.initialiseVisualisation();
-    //   this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
+    initialZinc() {
+      this.zincRenderer = new Zinc.Renderer(this.container, window);
+      Zinc.defaultMaterialColor = 0xffff9c;
+      this.zincRenderer.initialiseVisualisation();
+      this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
 
-    //   // zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
-    //   var defaultScene = this.zincRenderer.getSceneByName("default");
-    //   this.zincRenderer.setCurrentScene(defaultScene);
-    //   let render = this.zincRenderer;
-    //   this.$store.commit("setZincContainer", canvas);
-    //   this.$store.commit("setZincRender", render);
-    //   this.zincRenderer.animate();
-    // },
+      // zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
+      var defaultScene = this.zincRenderer.getSceneByName("default");
+      this.zincRenderer.setCurrentScene(defaultScene);
+      let render = this.zincRenderer;
+      this.$store.commit("setZincRender", render);
+      this.zincRenderer.animate();
+    },
     loadModel(model_name, rateScaling) {
       let model_prefix = "_highres";
       const metaURL = this.modelURLsArray[model_name + model_prefix][0];
@@ -172,8 +188,15 @@ export default {
         scene.loadViewURL(viewURL);
         scene.loadMetadataURL(metaURL, this.meshReady(this.oldCam));
         this.zincRenderer.setCurrentScene(scene);
-        this.modelToSceneArray[model_name] = scene;
+
+        const old_scene = {
+          name: model_name,
+          sceneObj: scene,
+        };
+        this.$store.commit("setModelToSceneArray", old_scene);
+        this.addLabel(this.$model().name);
       } else {
+        scene.switchContainer(this.container);
         this.zincRenderer.setCurrentScene(scene);
         this.shareCameraSettings(this.oldCam);
       }
@@ -216,9 +239,13 @@ export default {
     },
 
     onResetAllModelsView() {
+      this.modelToSceneArray = this.$modelToSceneArray();
+      this.halfHeartFlag = false;
+      this.$store.commit("setIsHalfModel", false);
       for (var k in this.modelToSceneArray) {
         if (this.modelToSceneArray.hasOwnProperty(k)) {
           this.modelToSceneArray[k].resetView();
+          this.modelToSceneArray[k].forEachGeometry(this.geometryShowHalf());
         }
       }
     },
@@ -253,12 +280,15 @@ export default {
     onHalfHeartPressed() {
       if (this.halfHeartFlag) {
         this.halfHeartFlag = false;
+        this.$store.commit("setIsHalfModel", false);
       } else {
         this.halfHeartFlag = true;
+        this.$store.commit("setIsHalfModel", true);
       }
       this.showHalf();
     },
     showHalf() {
+      // this.isHalfModel ? (this.isHalfModel = false) : (this.isHalfModel = true);
       var currentScene = this.zincRenderer.getCurrentScene();
       currentScene.forEachGeometry(this.geometryShowHalf());
     },
@@ -342,12 +372,6 @@ export default {
     top: 0;
     position: absolute;
     opacity: 0.1;
-  }
-}
-#zincDom {
-  canvas {
-    width: 100%;
-    height: 100%;
   }
 }
 </style>

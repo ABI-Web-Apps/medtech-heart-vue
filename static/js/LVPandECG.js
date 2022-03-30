@@ -122,7 +122,6 @@ function loadChart(ecg, lvp, category, timeOffset) {
             values: 0.0,
           });
           lvpIndicator = LVPchart.getPlot("time");
-          console.log(timeOffset);
 
           timeLineOffset = timeOffset;
 

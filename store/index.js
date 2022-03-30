@@ -2,16 +2,18 @@ export const state = () => ({
   currentContent: {},
   chartLoaded: "",
   previousCamera: {},
-  zincRenderer: null,
-  zincContainer: null,
+  zincRenderer: undefined,
+  modelToSceneArray: [],
+  isHalfmodel: false,
 });
 
 export const getters = {
   getCurrentContent: (state) => state.currentContent,
   getChartLoaded: (state) => state.chartLoaded,
   getZincRender: (state) => state.zincRenderer,
-  getZincContainer: (state) => state.zincContainer,
+  getModelToSceneArray: (state) => state.modelToSceneArray,
   getPreviousCamera: (state) => state.previousCamera,
+  getIsHalfModel: (state) => state.isHalfmodel,
 };
 
 export const mutations = {
@@ -24,10 +26,13 @@ export const mutations = {
   setZincRender(state, currentRender) {
     state.zincRenderer = currentRender;
   },
-  setZincContainer(state, currentContainer) {
-    state.zincContainer = currentContainer;
+  setModelToSceneArray(state, old_scene) {
+    state.modelToSceneArray[old_scene.name] = old_scene.sceneObj;
   },
   setPreviousCamera(state, preCamera) {
     state.previousCamera = preCamera;
+  },
+  setIsHalfModel(state, flag) {
+    state.isHalfmodel = flag;
   },
 };
