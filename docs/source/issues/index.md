@@ -38,3 +38,42 @@ When the user switch the model multiple times (around 20 times, depends on his c
 ![](./images/issue_4.jpg)
 
 The key reason for these issues is the url data be designed send through the nuxt route, and there is no stable container for WebGL render, because every time we switch the topics the page will be refreshed and everything will be recreated.
+
+## Solution for Refresh Issue
+
+During above issue's description, we can identify the main issue is that every time we switch the model page, everything will be recreated. but the webGL render we only can have 8 in browser (maximum ). Ideally one webGL render is enough to support a 3D app. the more webGL render will cost a lot of GPU. Then that will lead page crashed. And when the model page be refreshed the container htmlelement will be destroyed. so the webGL render cannot find the htmlelement, even the nuxt create a same htmlelement with same id.
+
+However, after multiple tests, I finally pinpointed the problem to the onWindowResize function in Zinc.js.
+
+- Firstly, we know the issue is the htmlelement will be recreated when the user switch the model.
+
+- Secondly, through multiple test, I noticed the ZincJS need the container attributes, such as clientHeight and clientWidth, to resize the window. But, when the nuxt recreated the htmlelement, the old container will be destroyed.Thus, the container in Zincjs will disappear, and the onWindowResize function will get the clientWidth=0 and clientHeight=0 to resize the canvas. That is the main reason cause the model cannot be shown in browser.
+
+- So, one solution is every time when the container htmlelement be recreated we can recreated a webGL render or replace the old container inside the Zincjs.
+
+- Obviously, recreated a webGL render is impossible, because the render contains the scene objects and animations, so we cannot recreate a webGLRender. Therefore, we can try the replace the container.
+
+```
+// So every time when the htmlelement be recreated, we can get the new element
+//  when the htmlelement be recreated, all attributes will not be changed.
+
+   this.container = document.getElementById("zincDom");
+```
+
+- Then, we need to modify the Zincjs to allow us replace the container in the model component.
+
+```
+// In the zinc_3js_render.js file
+
+   this.switchContainer = function (new_container) {
+    container = new_container;
+    container.appendChild(renderer.domElement);
+  };
+
+// Under model component
+   this.container = document.getElementById("zincDom");
+
+   this.zincRenderer.switchContainer(this.container);
+```
+
+- Finally, We also need do the same thing for zinc.Scene.
