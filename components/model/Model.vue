@@ -117,7 +117,8 @@ export default {
 
   methods: {
     start() {
-      this.container = document.getElementById("zincDom");
+      this.container = this.$refs.zincDomObject;
+      // this.container = document.getElementById("zincDom");
       this.zincRenderer = this.$currentRender();
       if (this.container) {
         if (this.zincRenderer === undefined) {
