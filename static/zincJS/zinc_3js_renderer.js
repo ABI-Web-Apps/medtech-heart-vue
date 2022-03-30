@@ -1577,7 +1577,6 @@ Zinc.Renderer = function (containerIn, window) {
   this.setCurrentScene = function (sceneIn) {
     if (sceneIn) {
       _this.removeActiveScene(sceneIn);
-      console.log(sceneIn);
       var oldScene = currentScene;
       currentScene = sceneIn;
       if (oldScene) {

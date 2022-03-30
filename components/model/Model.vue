@@ -120,14 +120,9 @@ export default {
       this.container = document.getElementById("zincDom");
       if (this.container) {
         if (render === undefined) {
-          this.canvas = initZinc();
-        }
-        if (this.canvas === null) {
+          initZinc();
         }
         render.switchContainer(this.container);
-        // initZinc();
-        // console.log(container);
-        console.log(render);
         this.zincRenderer = render;
       }
       if (
@@ -175,7 +170,14 @@ export default {
         scene.loadViewURL(viewURL);
         scene.loadMetadataURL(metaURL, this.meshReady(this.oldCam));
         this.zincRenderer.setCurrentScene(scene);
-        this.modelToSceneArray[model_name] = scene;
+
+        const old_scene = {
+          name: model_name,
+          sceneObj: scene,
+        };
+        this.$store.commit("setModelToSceneArray", old_scene);
+
+        // this.modelToSceneArray[model_name] = scene;
         this.addLabel(this.$model().name);
       } else {
         // const c = this.modelToSceneArray[model_name];
@@ -223,6 +225,7 @@ export default {
     },
 
     onResetAllModelsView() {
+      this.modelToSceneArray = this.$modelToSceneArray();
       for (var k in this.modelToSceneArray) {
         if (this.modelToSceneArray.hasOwnProperty(k)) {
           this.modelToSceneArray[k].resetView();
