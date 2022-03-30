@@ -2,7 +2,7 @@ export const state = () => ({
   currentContent: {},
   chartLoaded: "",
   previousCamera: {},
-  zincRenderer: null,
+  zincRenderer: undefined,
   modelToSceneArray: [],
   isHalfmodel: false,
 });

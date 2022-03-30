@@ -118,14 +118,22 @@ export default {
   methods: {
     start() {
       this.container = document.getElementById("zincDom");
+      this.zincRenderer = this.$currentRender();
       if (this.container) {
-        if (render === undefined) {
-          initZinc();
+        if (this.zincRenderer === undefined) {
+          this.initialZinc();
         }
-        render.switchContainer(this.container);
-        this.zincRenderer = render;
+        this.zincRenderer.switchContainer(this.container);
         this.halfHeartFlag = this.$isHalfModel();
       }
+      // if (this.container) {
+      //   if (render === undefined) {
+      //     initZinc();
+      //   }
+      //   render.switchContainer(this.container);
+      //   this.zincRenderer = render;
+      //   this.halfHeartFlag = this.$isHalfModel();
+      // }
 
       if (
         this.$model().name === "NoInfarct" ||
@@ -153,21 +161,19 @@ export default {
 
       this.updateSlider(this.heartRate);
     },
-    // initialZinc() {
-    //   let container = this.$refs.zincDomObject;
-    //   this.zincRenderer = new Zinc.Renderer(container, window);
-    //   Zinc.defaultMaterialColor = 0xffff9c;
-    //   const canvas = this.zincRenderer.initialiseVisualisation();
-    //   this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
+    initialZinc() {
+      this.zincRenderer = new Zinc.Renderer(this.container, window);
+      Zinc.defaultMaterialColor = 0xffff9c;
+      this.zincRenderer.initialiseVisualisation();
+      this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
 
-    //   // zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
-    //   var defaultScene = this.zincRenderer.getSceneByName("default");
-    //   this.zincRenderer.setCurrentScene(defaultScene);
-    //   let render = this.zincRenderer;
-    //   this.$store.commit("setZincContainer", canvas);
-    //   this.$store.commit("setZincRender", render);
-    //   this.zincRenderer.animate();
-    // },
+      // zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
+      var defaultScene = this.zincRenderer.getSceneByName("default");
+      this.zincRenderer.setCurrentScene(defaultScene);
+      let render = this.zincRenderer;
+      this.$store.commit("setZincRender", render);
+      this.zincRenderer.animate();
+    },
     loadModel(model_name, rateScaling) {
       let model_prefix = "_highres";
       const metaURL = this.modelURLsArray[model_name + model_prefix][0];
@@ -187,12 +193,8 @@ export default {
           sceneObj: scene,
         };
         this.$store.commit("setModelToSceneArray", old_scene);
-
-        // this.modelToSceneArray[model_name] = scene;
         this.addLabel(this.$model().name);
       } else {
-        // const c = this.modelToSceneArray[model_name];
-        // console.log("scene", c);
         scene.switchContainer(this.container);
         this.zincRenderer.setCurrentScene(scene);
         this.shareCameraSettings(this.oldCam);
@@ -370,11 +372,5 @@ export default {
     position: absolute;
     opacity: 0.1;
   }
-}
-#zincDom {
-  // canvas {
-  //   width: 500px;
-  //   height: 500px;
-  // }
 }
 </style>
