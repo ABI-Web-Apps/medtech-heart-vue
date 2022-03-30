@@ -39,6 +39,7 @@ export default {
       halfHeartFlag: false,
       oldCam: null,
       modelToSceneArray: [],
+      container: null,
       modelURLsArray: {
         NoInfarct_highres: [
           "heartInfarct/noInfarct_highres_metadata.json",
@@ -116,13 +117,17 @@ export default {
 
   methods: {
     start() {
-      const container = document.getElementById("zincDom");
-      if (container) {
+      this.container = document.getElementById("zincDom");
+      if (this.container) {
         if (render === undefined) {
-          // initZinc();
+          this.canvas = initZinc();
         }
-        initZinc();
-        console.log(container);
+        if (this.canvas === null) {
+        }
+        render.switchContainer(this.container);
+        // initZinc();
+        // console.log(container);
+        console.log(render);
         this.zincRenderer = render;
       }
       if (
@@ -139,8 +144,6 @@ export default {
       } else {
         this.loadModel(this.$model().name, 1.0);
       }
-
-      this.addLabel(this.$model().name);
 
       this.updateSlider(this.heartRate);
     },
@@ -173,7 +176,11 @@ export default {
         scene.loadMetadataURL(metaURL, this.meshReady(this.oldCam));
         this.zincRenderer.setCurrentScene(scene);
         this.modelToSceneArray[model_name] = scene;
+        this.addLabel(this.$model().name);
       } else {
+        // const c = this.modelToSceneArray[model_name];
+        // console.log("scene", c);
+        scene.switchContainer(this.container);
         this.zincRenderer.setCurrentScene(scene);
         this.shareCameraSettings(this.oldCam);
       }
@@ -345,9 +352,9 @@ export default {
   }
 }
 #zincDom {
-  canvas {
-    width: 100%;
-    height: 100%;
-  }
+  // canvas {
+  //   width: 500px;
+  //   height: 500px;
+  // }
 }
 </style>
