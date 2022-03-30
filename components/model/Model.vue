@@ -124,7 +124,9 @@ export default {
         }
         render.switchContainer(this.container);
         this.zincRenderer = render;
+        this.halfHeartFlag = this.$isHalfModel();
       }
+
       if (
         this.$model().name === "NoInfarct" ||
         this.$model().name === "SmallInfarct" ||
@@ -138,6 +140,15 @@ export default {
         this.loadModel(this.$model().name, 0.25);
       } else {
         this.loadModel(this.$model().name, 1.0);
+      }
+
+      // when home click
+      if (this.$route.params.slug === "model-heart") {
+        // const that = this
+        setTimeout(() => {
+          this.oldCam = null;
+          this.onResetAllModelsView();
+        }, 100);
       }
 
       this.updateSlider(this.heartRate);
@@ -226,9 +237,12 @@ export default {
 
     onResetAllModelsView() {
       this.modelToSceneArray = this.$modelToSceneArray();
+      this.halfHeartFlag = false;
+      this.$store.commit("setIsHalfModel", false);
       for (var k in this.modelToSceneArray) {
         if (this.modelToSceneArray.hasOwnProperty(k)) {
           this.modelToSceneArray[k].resetView();
+          this.modelToSceneArray[k].forEachGeometry(this.geometryShowHalf());
         }
       }
     },
@@ -263,12 +277,15 @@ export default {
     onHalfHeartPressed() {
       if (this.halfHeartFlag) {
         this.halfHeartFlag = false;
+        this.$store.commit("setIsHalfModel", false);
       } else {
         this.halfHeartFlag = true;
+        this.$store.commit("setIsHalfModel", true);
       }
       this.showHalf();
     },
     showHalf() {
+      // this.isHalfModel ? (this.isHalfModel = false) : (this.isHalfModel = true);
       var currentScene = this.zincRenderer.getCurrentScene();
       currentScene.forEachGeometry(this.geometryShowHalf());
     },

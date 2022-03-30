@@ -8,4 +8,7 @@ export default (context, inject) => {
     inject("perviousCamera", () => {
       return context.store.getters.getPreviousCamera;
     });
+  inject("isHalfModel", () => {
+    return context.store.getters.getIsHalfModel;
+  });
 };

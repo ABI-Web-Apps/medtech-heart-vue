@@ -4,6 +4,7 @@ export const state = () => ({
   previousCamera: {},
   zincRenderer: null,
   modelToSceneArray: [],
+  isHalfmodel: false,
 });
 
 export const getters = {
@@ -12,6 +13,7 @@ export const getters = {
   getZincRender: (state) => state.zincRenderer,
   getModelToSceneArray: (state) => state.modelToSceneArray,
   getPreviousCamera: (state) => state.previousCamera,
+  getIsHalfModel: (state) => state.isHalfmodel,
 };
 
 export const mutations = {
@@ -29,5 +31,8 @@ export const mutations = {
   },
   setPreviousCamera(state, preCamera) {
     state.previousCamera = preCamera;
+  },
+  setIsHalfModel(state, flag) {
+    state.isHalfmodel = flag;
   },
 };
