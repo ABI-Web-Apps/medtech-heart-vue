@@ -2,8 +2,9 @@
   <div class="outer-model">
     <div class="d-flex d-sm-none justify-center">
       <div class="gestures">
+        <div class="reset-control" @click="onResetAllModelsView" />
         <img src="~/assets/images/gestures-icons.png" />
-        <div @click="onHalfHeartPressed"></div>
+        <div class="half-control" @click="onHalfHeartPressed" />
       </div>
     </div>
     <div
