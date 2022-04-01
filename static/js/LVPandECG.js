@@ -34,10 +34,12 @@ function loadChart(ecg, lvp, category, timeOffset) {
       ], function (declare, domConstruct, Chart, StackedLines, Grid, Claro, axis2dDefault, plot2dIndicator, tomTheme) {
         ready(function () {
           //   var ECGchart;
+
           tomTheme.chart.fill = "transparent";
           tomTheme.plotarea.fill = "transparent";
           tomTheme.chart.stroke = "transparent";
           var ecgDom = document.getElementById("rightECG");
+          console.log(ecgDom);
           ECGchart = new Chart(ecgDom); //html element (dom) the chart will be drawn
           ECGchart.setTheme(tomTheme);
           /* add the x-axis */
@@ -131,7 +133,7 @@ function loadChart(ecg, lvp, category, timeOffset) {
           if (!LVPurls[lvp.name]) {
             LVPurls[lvp.name] = lvp.path;
           }
-
+          console.log(ECGs);
           showLVPChart(lvp.name, lvp.path, category);
           showECGChart(ecg.name, ecg.path, category);
         });
@@ -164,34 +166,34 @@ function onECGLoaded(xmlhttp, category, axisName) {
 }
 
 var showECGInternal = function (category, axisName) {
-  if (axisName != currentECGName) {
-    var currentECG = ECGs[axisName];
-    maxECGTime = currentECG[currentECG.length - 1]["x"];
-    minECGTime = currentECG[0]["x"];
-    ECGchart.removeSeries(currentECGName);
-    ECGchart.removeSeries("Normal");
-    currentECGName = axisName;
-    var colourName = "rgba(50,205,50,0.6)";
-    var widthvar = 2;
+  // if (axisName != currentECGName) {
+  var currentECG = ECGs[axisName];
+  maxECGTime = currentECG[currentECG.length - 1]["x"];
+  minECGTime = currentECG[0]["x"];
+  ECGchart.removeSeries(currentECGName);
+  ECGchart.removeSeries("Normal");
+  currentECGName = axisName;
+  var colourName = "rgba(50,205,50,0.6)";
+  var widthvar = 2;
 
-    if (category == "warning") {
-      colourName = "rgba(255,255,0,1)";
-      widthvar = 3;
-    } else if (category == "error") {
-      colourName = "rgba(255,50,0,1)";
-      widthvar = 3;
-    }
-
-    if (window.ecgDone != true) {
-      ECGchart.addSeries(axisName, currentECG, {
-        stroke: { color: colourName, width: widthvar },
-      });
-
-      ECGchart.render();
-      ECGchart.resize("100%", "100%");
-    }
-    ecgDone = true;
+  if (category == "warning") {
+    colourName = "rgba(255,255,0,1)";
+    widthvar = 3;
+  } else if (category == "error") {
+    colourName = "rgba(255,50,0,1)";
+    widthvar = 3;
   }
+
+  if (window.ecgDone != true) {
+    ECGchart.addSeries(axisName, currentECG, {
+      stroke: { color: colourName, width: widthvar },
+    });
+
+    ECGchart.render();
+    ECGchart.resize("100%", "100%");
+  }
+  ecgDone = true;
+  // }
 };
 
 function showLVPChart(axisName, lvpPath, category) {
@@ -217,33 +219,33 @@ function onLVPLoaded(xmlhttp, category, axisName) {
 }
 
 var showLVPInternal = function (category, axisName) {
-  if (axisName != currentLVPName) {
-    var currentLVP = LVPs[axisName];
-    maxLVPTime = currentLVP[currentLVP.length - 1]["x"];
-    minLVPTime = currentLVP[0]["x"];
-    LVPchart.removeSeries(currentLVPName);
-    LVPchart.removeSeries("Normal");
-    currentLVPName = axisName;
-    var colourName = "rgba(50,205,50,0.6)";
-    var widthvar = 2;
+  // if (axisName != currentLVPName) {
+  var currentLVP = LVPs[axisName];
+  maxLVPTime = currentLVP[currentLVP.length - 1]["x"];
+  minLVPTime = currentLVP[0]["x"];
+  LVPchart.removeSeries(currentLVPName);
+  LVPchart.removeSeries("Normal");
+  currentLVPName = axisName;
+  var colourName = "rgba(50,205,50,0.6)";
+  var widthvar = 2;
 
-    if (category == "warning") {
-      colourName = "rgba(255,255,0,1)";
-      widthvar = 3;
-    } else if (category == "error") {
-      colourName = "rgba(255,50,0,1)";
-      widthvar = 3;
-    }
-
-    if (window.lvpDone != true) {
-      LVPchart.addSeries(axisName, currentLVP, {
-        stroke: { color: colourName, width: widthvar },
-      });
-      LVPchart.render();
-      LVPchart.resize("100%", "100%");
-    }
-    lvpDone = true;
+  if (category == "warning") {
+    colourName = "rgba(255,255,0,1)";
+    widthvar = 3;
+  } else if (category == "error") {
+    colourName = "rgba(255,50,0,1)";
+    widthvar = 3;
   }
+
+  if (window.lvpDone != true) {
+    LVPchart.addSeries(axisName, currentLVP, {
+      stroke: { color: colourName, width: widthvar },
+    });
+    LVPchart.render();
+    LVPchart.resize("100%", "100%");
+  }
+  lvpDone = true;
+  // }
 };
 
 var rescaleXAxis = function (viewData) {

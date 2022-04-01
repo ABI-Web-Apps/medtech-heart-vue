@@ -182,7 +182,6 @@ export default {
       const viewURL = this.modelURLsArray[model_name + model_prefix][1];
 
       let scene = this.zincRenderer.getSceneByName(model_name);
-
       if (scene == undefined) {
         scene = this.zincRenderer.createScene(model_name);
         scene.setDuration(scene.getDuration() / rateScaling);
