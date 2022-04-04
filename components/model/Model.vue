@@ -1,29 +1,30 @@
 <template>
-  <div class="outer-model">
-    <div class="d-flex d-sm-none justify-center">
-      <div class="gestures">
-        <div class="reset-control" @click="onResetAllModelsView" />
-        <img src="~/assets/images/gestures-icons.png" />
-        <div class="half-control" @click="onHalfHeartPressed" />
-      </div>
-    </div>
-    <div
-      class="d-flex flex-column justify-space-between"
-      :style="modelHeightStyle"
-    >
+  <div class="w-full h-full lg:h-screen">
+    <div class="w-full h-full flex flex-col justify-center items-center">
       <div
         id="zincDom"
         ref="zincDomObject"
-        :style="zincHeightStyle"
+        class="w-full h-[400px] -mt-12 lg:h-full"
         @dblclick="onHalfHeartPressed"
       />
-      <input class="hidden-input" />
 
-      <div ref="threeDControls" class="d-none d-sm-flex justify-center">
-        <div class="gestures">
-          <div class="reset-control" @click="onResetAllModelsView" />
-          <img src="~/assets/images/gestures-icons.png" />
-          <div class="half-control" @click="onHalfHeartPressed" />
+      <div
+        ref="threeDControls"
+        class="lg:fixed lg:bottom-0 lg:h-24 lg:pl-24 w-full h-full flex flex-row justify-center lg:mt-0 order-first lg:order-last"
+      >
+        <div class="ml-0 h-full w-2/5 lg:w-auto relative">
+          <button
+            class="absolute top-0 left-0 w-1/5 h-full hover:bg-gray-50/10"
+            @click="onResetAllModelsView"
+          />
+          <img
+            src="~/assets/images/gestures-icons.png"
+            class="h-full w-full lg:object-contain"
+          />
+          <button
+            class="absolute top-0 right-0 w-1/5 h-full hover:bg-gray-50/10"
+            @click="onHalfHeartPressed"
+          />
         </div>
       </div>
     </div>
@@ -348,30 +349,5 @@ export default {
 .hidden-input {
   width: 1px;
   height: 1px;
-}
-
-.gestures {
-  width: 40%;
-  position: relative;
-  img {
-    width: 100%;
-    height: auto;
-  }
-  .reset-control {
-    width: 22%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    position: absolute;
-    opacity: 0.1;
-  }
-  .half-control {
-    width: 22%;
-    height: 100%;
-    right: 0;
-    top: 0;
-    position: absolute;
-    opacity: 0.1;
-  }
 }
 </style>
