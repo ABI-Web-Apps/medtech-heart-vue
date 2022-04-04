@@ -37,7 +37,7 @@
           name: 'slug',
           params: { slug: index + '-' + getDefaultSlug(topic) },
         }"
-        @click="selectedTopic = topic"
+        @click="handTopicClick(topic)"
       >
         <span>{{ topic.title }}</span>
         <v-icon>{{ topic.icon }}</v-icon>
@@ -64,7 +64,6 @@ export default {
       subMenuActive: false,
     };
   },
-
   methods: {
     updateAbout: function () {
       this.subMenuActive = false;
@@ -75,6 +74,12 @@ export default {
     },
     getDefaultSlug(topic) {
       return topic.subTopics != null ? Object.keys(topic.subTopics)[0] : "";
+    },
+    handTopicClick(topic) {
+      this.selectedTopic = topic;
+      if (topic.title !== "Home") {
+        this.subMenuActive = true;
+      }
     },
   },
 
