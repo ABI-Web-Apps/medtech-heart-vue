@@ -39,7 +39,7 @@ function loadChart(ecg, lvp, category, timeOffset) {
           tomTheme.plotarea.fill = "transparent";
           tomTheme.chart.stroke = "transparent";
           var ecgDom = document.getElementById("rightECG");
-          console.log(ecgDom);
+
           ECGchart = new Chart(ecgDom); //html element (dom) the chart will be drawn
           ECGchart.setTheme(tomTheme);
           /* add the x-axis */
@@ -133,7 +133,7 @@ function loadChart(ecg, lvp, category, timeOffset) {
           if (!LVPurls[lvp.name]) {
             LVPurls[lvp.name] = lvp.path;
           }
-          console.log(ECGs);
+
           showLVPChart(lvp.name, lvp.path, category);
           showECGChart(ecg.name, ecg.path, category);
         });

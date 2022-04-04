@@ -77,7 +77,9 @@ export default {
     },
     handTopicClick(topic) {
       this.selectedTopic = topic;
-      this.subMenuActive = true;
+      if (topic.title !== "Home") {
+        this.subMenuActive = true;
+      }
     },
   },
 
