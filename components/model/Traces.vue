@@ -7,13 +7,16 @@
         : ''
     "
   >
-    <div class="pt-4 pb-1 d-flex flex-column align-center item">
+    <!-- pt-4 pb-1 d-flex flex-column align-center item -->
+    <div
+      class="mt-4 lg:mt-0 flex flex-col items-center space-y-10 lg:space-y-4"
+    >
       <div
         class="font-weight-bold text-subtitle-2 text-xl-h6 text-sm-subtitle-2 text-md-body-1"
       >
         ECG
       </div>
-      <div id="rightECG" ref="rightECG" class="chart"></div>
+      <div id="rightECG" ref="rightECG" class="w-full h-24 lg:h-20"></div>
       <div id="ecgDescription" class="text-caption text-xl-body-2">
         {{ $ecg().description }}
       </div>
@@ -24,7 +27,7 @@
       >
         Pressure (mmHg)
       </div>
-      <div id="rightLVP" ref="rightLVP" class="chart"></div>
+      <div id="rightLVP" ref="rightLVP" class="w-full h-24 lg:h-20"></div>
       <div id="lvpDescription" class="text-caption text-xl-body-2">
         {{ $lvp().description }}
       </div>
@@ -80,19 +83,6 @@ export default {
 #ecgDescription,
 #lvpDescription {
   width: 90%;
-}
-
-.chart {
-  padding-bottom: 2px;
-  width: 100%;
-  height: 90px;
-  @media #{map-get($display-breakpoints, 'md-only')} {
-    height: 80px;
-  }
-
-  @media #{map-get($display-breakpoints, 'xl-only')} {
-    height: 120px;
-  }
 }
 
 .trace-box,

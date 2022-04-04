@@ -22,10 +22,10 @@
       about this app.
     </div>
 
-    <v-card class="mx-auto mt-1 contributor" max-width="344">
+    <div class="mx-auto mt-1 contributor" max-width="344">
       <v-card-text>
-        <div class="text-h6 text--darken-10">Website Design</div>
-        <div class="text--darken-6 pl-6">
+        <div class="text-h6 text--darken-6">Website Design</div>
+        <div class="text--darken-4 pl-6">
           Dr Thiranja Prasad Babarenda Gamage <br />
           Prof Martyn Nash <br />
           Richard Christie <br />
@@ -36,7 +36,7 @@
           Riffat<br />
         </div>
       </v-card-text>
-    </v-card>
+    </div>
   </div>
 </template>
 

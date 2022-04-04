@@ -4,9 +4,10 @@
       <logo />
     </div>
     <div v-if="$route.name == 'slug'">
-      <v-card class="pa-4" :class="currentBg" tile :style="panelHeightStyle">
+      <!-- currentBg  -->
+      <div class="pa-4" :class="currentBg" tile :style="panelHeightStyle">
         <lazy-panel />
-      </v-card>
+      </div>
     </div>
     <div v-if="$route.name == 'about'">
       <v-card class="pa-4 bg-secondary" :style="panelHeightStyle">

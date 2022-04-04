@@ -1,49 +1,36 @@
 <template>
-  <div
-    class="container-default flexbox"
-    :class="$vuetify.breakpoint.mdAndUp ? 'full-height' : 'auto-height'"
-  >
-    <v-container class="pa-0" ref="rightMost">
-      <v-row class="d-flex" no-gutters>
-        <v-col cols="12" xs="12" sm="9" md="8" lg="9">
-          <div class="model-rate">
-            <model
-              :availableHeight="rateAndTracesHeight"
-              :totalHeight="rightMostHeight"
-            />
-            <div class="rate-smAndDown d-flex d-sm-none">
+  <div>
+    <div class="pa-0" ref="rightMost">
+      <div class="w-full h-auto">
+        <model />
+        <div class="md:hidden mr-24 ml-4">
+          <heart-rate />
+          <!--Small screens only -->
+        </div>
+      </div>
+      <div
+        class="w-full lg:fixed top-0 right-0 lg:w-64 lg:h-screen flex flex-col justify-between"
+      >
+        <div
+          ref="rateAndTraces"
+          class="flex-grow-1 d-flex flex-column justify-center"
+        >
+          <div class="d-none d-sm-flex justify-center">
+            <div class="pb-1 rate-mdAndUp">
               <heart-rate />
-              <!--Small screens only -->
             </div>
           </div>
-        </v-col>
-        <v-col cols="12" xs="12" sm="3" md="4" lg="3">
-          <div
-            class="pa-0 d-flex flex-column justify-space-between"
-            :style="rightContainerStyle"
-          >
-            <div
-              ref="rateAndTraces"
-              class="flex-grow-1 d-flex flex-column justify-center"
-            >
-              <div class="d-none d-sm-flex justify-center">
-                <div class="pb-1 rate-mdAndUp">
-                  <heart-rate />
-                </div>
-              </div>
-              <div class="pt-5 justify-center" :style="traceMarginBottom">
-                <traces />
-              </div>
-            </div>
-            <div class="d-none d-md-flex justify-center">
-              <div class="pt-4 pa-1 logo-mdAndUp">
-                <logo />
-              </div>
-            </div>
+          <div class="pt-5 justify-center" :style="traceMarginBottom">
+            <traces />
           </div>
-        </v-col>
-      </v-row>
-    </v-container>
+        </div>
+        <div class="d-none d-md-flex justify-center">
+          <div class="pt-4 pa-1 logo-mdAndUp">
+            <logo />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

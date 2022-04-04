@@ -1,46 +1,37 @@
 <template>
-  <v-app dark>
-    <v-container class="pa-0" fluid>
-      <v-row class="d-flex" no-gutters>
-        <v-col cols="12" md="5" lg="4" xs="6">
-          <v-container
-            class="pa-0"
+  <v-app>
+    <div class="order-2">
+      <div class="w-full h-screen">
+        <v-main>
+          <div
+            class="pa-0 black overflow-y-auto"
             :class="mdAndUp ? 'full-height' : 'auto-height'"
           >
-            <v-row class="d-flex flex-column" no-gutters>
-              <v-col ref="panel">
-                <v-card
-                  outlined
-                  tile
-                  class="pa-0 overflow-y-auto"
-                  :class="mdAndUp ? 'panel-height' + multiplier : ''"
-                >
-                  <left-pane :panel-height="panelHeight" />
-                </v-card>
-              </v-col>
-              <v-col class="d-none d-md-block fix-it">
-                <navigation />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-col>
-        <v-col cols="12" md="7" lg="8" xs="6">
-          <v-main>
-            <v-container
-              class="pa-0 black overflow-y-auto"
-              :class="mdAndUp ? 'full-height' : 'auto-height'"
+            <Nuxt />
+          </div>
+        </v-main>
+      </div>
+    </div>
+    <div class="w-full lg:w-[400px] lg:h-screen lg:fixed top-0 left-0">
+      <v-container
+        class="pa-0"
+        :class="mdAndUp ? 'full-height' : 'auto-height'"
+      >
+        <v-row class="d-flex flex-row" no-gutters>
+          <v-col ref="panel">
+            <div
+              class="pa-0 overflow-y-auto"
+              :class="mdAndUp ? 'panel-height' + multiplier : ''"
             >
-              <Nuxt />
-            </v-container>
-          </v-main>
-        </v-col>
-      </v-row>
-      <v-row class="d-md-none" no-gutters>
-        <v-col>
-          <navigation />
-        </v-col>
-      </v-row>
-    </v-container>
+              <left-pane :panel-height="panelHeight" />
+            </div>
+          </v-col>
+          <v-col class="fixed bottom-0 lg:static left-0">
+            <navigation />
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </v-app>
 </template>
 

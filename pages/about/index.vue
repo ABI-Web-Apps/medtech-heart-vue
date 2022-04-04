@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ml-[400px]">
     <div
       v-if="section == 'research'"
       class="container-default research-page flexbox --vertical"
