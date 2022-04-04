@@ -27,6 +27,9 @@ export default {
         src: "//ajax.googleapis.com/ajax/libs/dojo/1.11.2/dojo/dojo.js",
       },
       {
+        src: "https://cdn.tailwindcss.com",
+      },
+      {
         hid: "chartMaker",
         type: "text/javascript",
         src: "js/LVPandECG.js",
