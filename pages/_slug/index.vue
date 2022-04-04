@@ -1,5 +1,5 @@
 <template>
-  <div class="right-pane" ref="outerDiv">
+  <div ref="outerDiv">
     <div class="text-center">
       <right-pane />
       <!--ID of below div(i.e "video-div") should not be changed. 
