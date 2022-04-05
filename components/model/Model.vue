@@ -4,7 +4,7 @@
       <div
         id="zincDom"
         ref="zincDomObject"
-        class="w-full h-[400px] -mt-12 lg:h-full"
+        class="w-full h-[400px] -mt-12 lg:h-screen lg:mt-0"
         @dblclick="onHalfHeartPressed"
       />
 
@@ -84,33 +84,33 @@ export default {
     },
   },
 
-  computed: {
-    modelHeightStyle() {
-      let modelHeight = 0;
-      if (this.$vuetify.breakpoint.mdAndUp) {
-        modelHeight = this.totalHeight;
-      } else if (this.$vuetify.breakpoint.sm) {
-        modelHeight = this.availableHeight;
-      }
+  // computed: {
+  //   modelHeightStyle() {
+  //     let modelHeight = 0;
+  //     if (this.$vuetify.breakpoint.mdAndUp) {
+  //       modelHeight = this.totalHeight;
+  //     } else if (this.$vuetify.breakpoint.sm) {
+  //       modelHeight = this.availableHeight;
+  //     }
 
-      return {
-        height: modelHeight > 0 ? modelHeight + "px" : "auto",
-      };
-    },
-    zincHeightStyle() {
-      let zincObjectHeight = "20rem"; // default for xs devices
-      if (this.$vuetify.breakpoint.mdAndUp) {
-        zincObjectHeight = "80vh";
-      } else if (this.$vuetify.breakpoint.sm) {
-        let calculated = this.availableHeight - this.threeDControlsHeight;
-        zincObjectHeight = calculated > 0 ? calculated + "px" : "30rem";
-      }
-      return {
-        height: zincObjectHeight,
-        width: "100%",
-      };
-    },
-  },
+  //     return {
+  //       height: modelHeight > 0 ? modelHeight + "px" : "auto",
+  //     };
+  //   },
+  //   zincHeightStyle() {
+  //     let zincObjectHeight = "20rem"; // default for xs devices
+  //     if (this.$vuetify.breakpoint.mdAndUp) {
+  //       zincObjectHeight = "80vh";
+  //     } else if (this.$vuetify.breakpoint.sm) {
+  //       let calculated = this.availableHeight - this.threeDControlsHeight;
+  //       zincObjectHeight = calculated > 0 ? calculated + "px" : "30rem";
+  //     }
+  //     return {
+  //       height: zincObjectHeight,
+  //       width: "100%",
+  //     };
+  //   },
+  // },
 
   mounted() {
     this.threeDControlsHeight = this.$refs.threeDControls.clientHeight;
@@ -120,7 +120,6 @@ export default {
   methods: {
     start() {
       this.container = this.$refs.zincDomObject;
-      // this.container = document.getElementById("zincDom");
       this.zincRenderer = this.$currentRender();
       if (this.container) {
         if (this.zincRenderer === undefined) {
@@ -129,14 +128,6 @@ export default {
         this.zincRenderer.switchContainer(this.container);
         this.halfHeartFlag = this.$isHalfModel();
       }
-      // if (this.container) {
-      //   if (render === undefined) {
-      //     initZinc();
-      //   }
-      //   render.switchContainer(this.container);
-      //   this.zincRenderer = render;
-      //   this.halfHeartFlag = this.$isHalfModel();
-      // }
 
       if (
         this.$model().name === "NoInfarct" ||
