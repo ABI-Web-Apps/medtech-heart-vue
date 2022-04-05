@@ -1,4 +1,12 @@
 import colors from "vuetify/es5/util/colors";
+const routerBase =
+  process.env.DEPLOY_ENV === "GH_PAGES"
+    ? {
+        router: {
+          base: "/medtech-heart-vue/",
+        },
+      }
+    : {};
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -126,21 +134,20 @@ export default {
   },
 
   target: "static",
-  router: {
-    base: "/medtech-heart-vue/",
-  },
+
+  ...routerBase,
   generate: {
     dir: "build",
-    // routes: [
-    //   "/model-heart",
-    //   "/attack-healthy",
-    //   "/attack-minor",
-    //   "/attack-severe",
-    //   "/electricity-healthy",
-    //   "/electricity-fibrillation",
-    //   "/failure-healthy",
-    //   "/failure-compensated",
-    //   "/failure-decompensated",
-    // ],
+    routes: [
+      "/model-heart",
+      "/attack-healthy",
+      "/attack-minor",
+      "/attack-severe",
+      "/electricity-healthy",
+      "/electricity-fibrillation",
+      "/failure-healthy",
+      "/failure-compensated",
+      "/failure-decompensated",
+    ],
   },
 };
