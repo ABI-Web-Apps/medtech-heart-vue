@@ -126,18 +126,21 @@ export default {
   },
 
   target: "static",
-
+  router: {
+    base: "/medtech-heart-vue/",
+  },
   generate: {
-    routes: [
-      "/model-heart",
-      "/attack-healthy",
-      "/attack-minor",
-      "/attack-severe",
-      "/electricity-healthy",
-      "/electricity-fibrillation",
-      "/failure-healthy",
-      "/failure-compensated",
-      "/failure-decompensated",
-    ],
+    dir: "build",
+    // routes: [
+    //   "/model-heart",
+    //   "/attack-healthy",
+    //   "/attack-minor",
+    //   "/attack-severe",
+    //   "/electricity-healthy",
+    //   "/electricity-fibrillation",
+    //   "/failure-healthy",
+    //   "/failure-compensated",
+    //   "/failure-decompensated",
+    // ],
   },
 };
