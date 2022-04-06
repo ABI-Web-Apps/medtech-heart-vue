@@ -5,6 +5,7 @@ export const state = () => ({
   zincRenderer: undefined,
   modelToSceneArray: [],
   isHalfmodel: false,
+  heartBeat: 2500,
 });
 
 export const getters = {
@@ -14,6 +15,7 @@ export const getters = {
   getModelToSceneArray: (state) => state.modelToSceneArray,
   getPreviousCamera: (state) => state.previousCamera,
   getIsHalfModel: (state) => state.isHalfmodel,
+  getHeartBeat: (state) => state.heartBeat,
 };
 
 export const mutations = {
@@ -34,5 +36,8 @@ export const mutations = {
   },
   setIsHalfModel(state, flag) {
     state.isHalfmodel = flag;
+  },
+  setHeartBeat(state, beat) {
+    state.heartBeat = beat;
   },
 };

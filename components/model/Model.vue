@@ -84,36 +84,7 @@ export default {
     },
   },
 
-  // computed: {
-  //   modelHeightStyle() {
-  //     let modelHeight = 0;
-  //     if (this.$vuetify.breakpoint.mdAndUp) {
-  //       modelHeight = this.totalHeight;
-  //     } else if (this.$vuetify.breakpoint.sm) {
-  //       modelHeight = this.availableHeight;
-  //     }
-
-  //     return {
-  //       height: modelHeight > 0 ? modelHeight + "px" : "auto",
-  //     };
-  //   },
-  //   zincHeightStyle() {
-  //     let zincObjectHeight = "20rem"; // default for xs devices
-  //     if (this.$vuetify.breakpoint.mdAndUp) {
-  //       zincObjectHeight = "80vh";
-  //     } else if (this.$vuetify.breakpoint.sm) {
-  //       let calculated = this.availableHeight - this.threeDControlsHeight;
-  //       zincObjectHeight = calculated > 0 ? calculated + "px" : "30rem";
-  //     }
-  //     return {
-  //       height: zincObjectHeight,
-  //       width: "100%",
-  //     };
-  //   },
-  // },
-
   mounted() {
-    this.threeDControlsHeight = this.$refs.threeDControls.clientHeight;
     this.start();
   },
 
@@ -121,6 +92,7 @@ export default {
     start() {
       this.container = this.$refs.zincDomObject;
       this.zincRenderer = this.$currentRender();
+      this.modelToSceneArray = this.$modelToSceneArray();
       if (this.container) {
         if (this.zincRenderer === undefined) {
           this.initialZinc();
@@ -134,7 +106,8 @@ export default {
         this.$model().name === "SmallInfarct" ||
         this.$model().name === "LargeInfarct" ||
         this.$model().name === "CompensatedFailure" ||
-        this.$model().name === "DecompensatedFailure"
+        this.$model().name === "DecompensatedFailure" ||
+        this.$model().name === "NormalElectricity"
       ) {
         this.oldCam = this.$perviousCamera();
       }
@@ -144,15 +117,17 @@ export default {
         this.loadModel(this.$model().name, 1.0);
       }
 
-      // when home click
-      if (this.$route.params.slug === "model-heart") {
-        // const that = this
-        setTimeout(() => {
-          this.oldCam = null;
-          this.onResetAllModelsView();
-        }, 100);
-      }
+      this.trackHalfModel();
 
+      // when home click
+      // if (this.$route.params.slug === "model-heart") {
+      //   // const that = this
+      //   setTimeout(() => {
+      //     this.oldCam = null;
+      //     this.onResetAllModelsView();
+      //   }, 100);
+      // }
+      this.heartRate = this.$heartBeat();
       this.updateSlider(this.heartRate);
     },
     initialZinc() {
@@ -231,12 +206,22 @@ export default {
     },
 
     onResetAllModelsView() {
-      this.modelToSceneArray = this.$modelToSceneArray();
       this.halfHeartFlag = false;
+      this.heartRate = 2500;
+
+      $nuxt.$emit("beat-reset", 2500);
+      this.$store.commit("setHeartBeat", 2500);
       this.$store.commit("setIsHalfModel", false);
       for (var k in this.modelToSceneArray) {
         if (this.modelToSceneArray.hasOwnProperty(k)) {
           this.modelToSceneArray[k].resetView();
+          this.modelToSceneArray[k].forEachGeometry(this.geometryShowHalf());
+        }
+      }
+    },
+    trackHalfModel() {
+      for (var k in this.modelToSceneArray) {
+        if (this.modelToSceneArray.hasOwnProperty(k)) {
           this.modelToSceneArray[k].forEachGeometry(this.geometryShowHalf());
         }
       }
@@ -303,6 +288,7 @@ export default {
   created() {
     this.$nuxt.$on("beat-change", (currentBeat) => {
       this.heartRate = currentBeat;
+      this.$store.commit("setHeartBeat", currentBeat);
     });
   },
 

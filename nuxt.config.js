@@ -7,36 +7,6 @@ const routerBase =
         },
       }
     : {};
-const generateBase =
-  process.env.DEPLOY_ENV === "GH_PAGES"
-    ? {
-        dir: "build",
-        routes: [
-          "/model-heart",
-          "/attack-healthy",
-          "/attack-minor",
-          "/attack-severe",
-          "/electricity-healthy",
-          "/electricity-fibrillation",
-          "/failure-healthy",
-          "/failure-compensated",
-          "/failure-decompensated",
-        ],
-      }
-    : {
-        routes: [
-          "/model-heart",
-          "/attack-healthy",
-          "/attack-minor",
-          "/attack-severe",
-          "/electricity-healthy",
-          "/electricity-fibrillation",
-          "/failure-healthy",
-          "/failure-compensated",
-          "/failure-decompensated",
-        ],
-      };
-
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
