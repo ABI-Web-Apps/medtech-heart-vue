@@ -11,4 +11,7 @@ export default (context, inject) => {
   inject("isHalfModel", () => {
     return context.store.getters.getIsHalfModel;
   });
+  inject("heartBeat", () => {
+    return context.store.getters.getHeartBeat;
+  });
 };
