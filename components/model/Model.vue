@@ -231,7 +231,7 @@ export default {
     },
     addLabel(model_name) {
       var scene = this.zincRenderer.getSceneByName(model_name);
-      if (model_name === "NoInfarct") {
+      if (model_name === "NoInfarct" || model_name === "NormalElectricity") {
         addLabelToScene(
           scene,
           "right ventricle",
