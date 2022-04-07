@@ -120,13 +120,12 @@ export default {
       this.trackHalfModel();
 
       // when home click
-      // if (this.$route.params.slug === "model-heart") {
-      //   // const that = this
-      //   setTimeout(() => {
-      //     this.oldCam = null;
-      //     this.onResetAllModelsView();
-      //   }, 100);
-      // }
+      if (this.$route.params.slug === "model-heart") {
+        // const that = this
+        setTimeout(() => {
+          this.onResetAllModelsView();
+        }, 100);
+      }
       this.heartRate = this.$heartBeat();
       this.updateSlider(this.heartRate);
     },
@@ -208,10 +207,10 @@ export default {
     onResetAllModelsView() {
       this.halfHeartFlag = false;
       this.heartRate = 2500;
-
       $nuxt.$emit("beat-reset", 2500);
       this.$store.commit("setHeartBeat", 2500);
       this.$store.commit("setIsHalfModel", false);
+      this.$store.commit("setPreviousCamera", null);
       for (var k in this.modelToSceneArray) {
         if (this.modelToSceneArray.hasOwnProperty(k)) {
           this.modelToSceneArray[k].resetView();
