@@ -3,7 +3,7 @@
     <div class="pa-0" ref="rightMost">
       <div class="w-full h-auto">
         <model />
-        <div class="md:hidden mr-24 ml-4">
+        <div class="md:hidden mr-24 ml-4 sm:hidden">
           <heart-rate />
           <!--Small screens only -->
         </div>
