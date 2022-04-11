@@ -52,28 +52,28 @@ export default {
       window.lvpDone = false;
     }
 
+    // These ecgName and lvpName are global variables come from LVPandECG.js to prevent the name undefined issue.
+    ecgName = null;
+    lvpName = null;
     loadChart(this.$ecg(), this.$lvp(), this.$category(), 1.0);
-
     // showECGAndLVP(this.$model().name, 0.0);
     this.updateEcg();
   },
   methods: {
     updateEcg() {
-      setTimeout(() => {
-        this.render = this.$currentRender();
-        if (this.render) {
-          var updateIndicatorsAndTimer = () => {
-            var newTime = new Date();
-            this.idleTime =
-              this.idleTime + newTime.getTime() - this.oldTime.getTime();
-            this.oldTime = newTime;
-            var normaliseTime = this.render.getCurrentTime() / 3000.0;
-            updateIndicator(normaliseTime);
-          };
+      this.render = this.$currentRender();
+      if (this.render) {
+        var updateIndicatorsAndTimer = () => {
+          var newTime = new Date();
+          this.idleTime =
+            this.idleTime + newTime.getTime() - this.oldTime.getTime();
+          this.oldTime = newTime;
+          var normaliseTime = this.render.getCurrentTime() / 3000.0;
+          updateIndicator(normaliseTime);
+        };
 
-          this.render.addPreRenderCallbackFunction(updateIndicatorsAndTimer);
-        }
-      }, 1000);
+        this.render.addPreRenderCallbackFunction(updateIndicatorsAndTimer);
+      }
     },
   },
 };
