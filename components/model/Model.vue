@@ -120,12 +120,12 @@ export default {
       this.trackHalfModel();
 
       // when home click
-      if (this.$route.params.slug === "model-heart") {
-        // const that = this
-        setTimeout(() => {
-          this.onResetAllModelsView();
-        }, 100);
-      }
+      // if (this.$route.params.slug === "model-heart") {
+      //   // const that = this
+      //   setTimeout(() => {
+      //     this.onResetAllModelsView();
+      //   }, 100);
+      // }
       this.heartRate = this.$heartBeat();
       this.updateSlider(this.heartRate);
     },
