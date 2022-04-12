@@ -285,6 +285,9 @@ export default {
   },
 
   created() {
+    this.$nuxt.$on("beat-update-onTime", (immediateBeat) => {
+      this.updateSlider(immediateBeat);
+    });
     this.$nuxt.$on("beat-change", (currentBeat) => {
       this.heartRate = currentBeat;
       this.$store.commit("setHeartBeat", currentBeat);

@@ -136,7 +136,7 @@ export default {
 
   ...routerBase,
   generate: {
-    // dir: "build",
+    dir: "build",
     routes: [
       "/model-heart",
       "/attack-healthy",

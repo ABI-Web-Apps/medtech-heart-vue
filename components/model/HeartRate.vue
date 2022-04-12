@@ -28,7 +28,7 @@
       track-fill-color="secondary"
       hide-details
       class="slider"
-      @change="$nuxt.$emit('beat-change', beat)"
+      @change="sliderOnChange(beat)"
     >
     </v-slider>
     <div
@@ -50,6 +50,19 @@ export default {
   },
   mounted() {
     this.beat = this.$heartBeat();
+  },
+  methods: {
+    sliderOnChange(beat) {
+      // console.log(beat);
+      $nuxt.$emit("beat-change", beat);
+    },
+  },
+  watch: {
+    beat: (immediateBeat) => {
+      if (immediateBeat) {
+        $nuxt.$emit("beat-update-onTime", immediateBeat);
+      }
+    },
   },
   created() {
     this.$nuxt.$on("beat-reset", (currentBeat) => {

@@ -15,6 +15,9 @@ var minECGTime = 0.0,
 var currentECGName = "None";
 var currentLVPName = "None";
 var timeLineOffset = 0.0;
+//  These ecgName and lvpName are global variables used in Traces.vue to reset the value to null
+var ecgName = null;
+var lvpName = null;
 
 require(["dijit/Dialog"]);
 
@@ -143,6 +146,7 @@ function loadChart(ecg, lvp, category, timeOffset) {
 }
 
 function showECGChart(axisName, ecgPath, category) {
+  ecgName = axisName;
   if (ECGs[axisName]) {
     showECGInternal(category, axisName);
   } else {
@@ -197,6 +201,7 @@ var showECGInternal = function (category, axisName) {
 };
 
 function showLVPChart(axisName, lvpPath, category) {
+  lvpName = axisName;
   if (LVPs[axisName]) {
     showLVPInternal(category, axisName);
   } else {
@@ -264,7 +269,9 @@ function updateIndicator(normaliseTime) {
     lvpIndicator &&
     currentLVPName != " None" &&
     ecgIndicator &&
-    currentECGName != " None"
+    currentECGName != " None" &&
+    ecgName === currentECGName &&
+    lvpName === currentLVPName
   ) {
     var lvpTime = normaliseTime * (maxLVPTime - minLVPTime) + minLVPTime;
     var ecgTime = normaliseTime * (maxECGTime - minECGTime) + minECGTime;
