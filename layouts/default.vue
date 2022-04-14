@@ -15,19 +15,16 @@
     <div class="w-full lg:w-[450px] lg:h-screen lg:fixed top-0 left-0">
       <div class="pa-0" :class="mdAndUp ? 'full-height' : 'auto-height'">
         <!-- <div class="pa-0"> -->
-        <v-row class="d-flex flex-row" no-gutters>
-          <v-col ref="panel">
-            <div
-              class="pa-0 overflow-y-auto"
-              :class="mdAndUp ? 'panel-height' + multiplier : ''"
-            >
-              <left-pane :panel-height="panelHeight" />
-            </div>
-          </v-col>
-          <v-col class="fixed bottom-0 lg:static left-0">
+        <div class="flex flex-col lg:h-screen">
+          <!-- :class="mdAndUp ? 'panel-height' + multiplier : ''" -->
+          <div class="pa-0 overflow-y-auto lg:h-19/20">
+            <left-pane />
+          </div>
+
+          <div class="fixed lg:static left-0 bottom-0 lg:h-1/20">
             <navigation />
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </div>
     </div>
   </v-app>
@@ -51,11 +48,11 @@ export default {
   },
 
   mounted() {
-    this.panelHeight = this.$refs.panel.clientHeight;
+    // this.panelHeight = this.$refs.panel.clientHeight;
   },
 
   updated() {
-    this.panelHeight = this.$refs.panel.clientHeight;
+    // this.panelHeight = this.$refs.panel.clientHeight;
   },
 
   created() {
