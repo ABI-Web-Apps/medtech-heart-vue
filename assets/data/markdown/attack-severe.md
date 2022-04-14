@@ -1,9 +1,12 @@
 If a minor heart attack is left untreated, or if medication is stopped too early, then the coronary artery blockage can become more severe.
 
-![severe](img/coronary-block-severe.png)
+<div class="topic-img-big">
+<img src="img/coronary_block_severe.png" width="240px" height="auto"/>
+
 <a href="/medtech-heart-vue/attack-severe#video-div" data-play="video">
 <img id="blocked" src="img/blockage.png" class="video-icon-tall"/>
 </a>
+</div>
 
 A severe heart attack can cause permanent damage to a large portion of heart tissue. This prevents the heart from generating enough pressure to pump blood around the body (red trace).
 

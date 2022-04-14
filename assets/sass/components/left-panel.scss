@@ -31,6 +31,12 @@ p {
   // justify-content: space-around;
   align-items: center;
 }
+.topic-img-big {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 
 .sm-logo {
   position: absolute;

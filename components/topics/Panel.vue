@@ -5,7 +5,7 @@
         <h1 class="pt-2 main-heading">
           {{ $parentTopic().heading }}
         </h1>
-        <h4 :class="'sub-heading ' + $category() + '--text'">
+        <h4 :class="'sub-heading font-weight-black ' + $subTitle() + '--text'">
           {{ $heading() }}
         </h4>
       </div>

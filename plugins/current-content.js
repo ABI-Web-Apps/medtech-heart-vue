@@ -11,6 +11,9 @@ export default (context, inject) => {
     inject("category", () => {
       return context.store.getters.getCurrentContent.category;
     }),
+    inject("subTitle", () => {
+      return context.store.getters.getCurrentContent.subTitle;
+    }),
     inject("dataFile", () => {
       return context.store.getters.getCurrentContent.dataFile;
     }),
