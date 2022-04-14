@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="lg:h-screen">
     <div class="pa-0" ref="rightMost">
       <div class="w-full h-auto">
         <model />
