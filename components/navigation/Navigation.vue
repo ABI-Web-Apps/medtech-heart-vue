@@ -87,7 +87,7 @@ export default {
     activeColor() {
       return this.$route.name === "about"
         ? this.$vuetify.theme.themes.dark.secondary
-        : this.$category();
+        : this.$subTitle();
     },
     menuCaption() {
       return this.$route.name === "slug" ? this.$parentTopic().slug : "about";
