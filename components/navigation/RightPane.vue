@@ -3,7 +3,7 @@
     <div class="pa-0" ref="rightMost">
       <div class="w-full h-auto">
         <model />
-        <div class="md:hidden mr-24 ml-4 sm:hidden">
+        <div class="mr-24 ml-4 d-flex d-sm-none">
           <heart-rate />
           <!--Small screens only -->
         </div>
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="d-none d-md-flex justify-center">
-          <div class="pt-4 pa-1 logo-mdAndUp mb-4 pb-5">
+          <div class="pt-4 pa-1 logo-mdAndUp lg:-mt-32">
             <logo />
           </div>
         </div>
