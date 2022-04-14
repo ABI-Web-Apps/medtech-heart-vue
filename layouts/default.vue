@@ -12,11 +12,8 @@
         </v-main>
       </div>
     </div>
-    <div class="w-full lg:w-[400px] lg:h-screen lg:fixed top-0 left-0">
-      <v-container
-        class="pa-0"
-        :class="mdAndUp ? 'full-height' : 'auto-height'"
-      >
+    <div class="w-full lg:w-[450px] lg:h-screen lg:fixed top-0 left-0">
+      <div class="pa-0" :class="mdAndUp ? 'full-height' : 'auto-height'">
         <v-row class="d-flex flex-row" no-gutters>
           <v-col ref="panel">
             <div
@@ -30,7 +27,7 @@
             <navigation />
           </v-col>
         </v-row>
-      </v-container>
+      </div>
     </div>
   </v-app>
 </template>

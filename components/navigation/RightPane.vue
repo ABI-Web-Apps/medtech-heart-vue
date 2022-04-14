@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="d-none d-md-flex justify-center">
-          <div class="pt-4 pa-1 logo-mdAndUp">
+          <div class="pt-4 pa-1 logo-mdAndUp mb-4 pb-5">
             <logo />
           </div>
         </div>
