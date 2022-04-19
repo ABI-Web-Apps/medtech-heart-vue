@@ -6,9 +6,15 @@ The heart pumps blood to itself through blood vessels called the coronary arteri
 <a href="/medtech-heart-vue/attack-healthy#video-div" data-play="video">
 <img id="blocked" src="img/blockage.png" class="video-icon-tall"/>
 </a>
-
 </div>
+
+<div style="margin-top: 1em; margin-bottom:1em">
 Good lifestyle choices help to keep the coronary arteries healthy and prevent heart attacks. Learn more about how lifestyle factors can affect the heart in the following movie clips.
+</div>
+
+---
+
+Click through the tabs below to learn about various heart attacks.
 
 <div class="topic-img">
 <a href="/medtech-heart-vue/attack-healthy#video-div" data-play="video">

@@ -11,8 +11,8 @@
       </div>
     </div>
     <div v-if="$route.name == 'about'">
-      <!-- <v-card class="pa-4 bg-secondary" :style="panelHeightStyle"> -->
-      <v-card class="pa-4 bg-secondary lg:h-screen">
+      <v-card class="pa-4 bg-secondary" :style="panelHeightStyle">
+        <!-- <v-card class="pa-4 bg-secondary lg:h-screen"> -->
         <lazy-about-us />
       </v-card>
     </div>

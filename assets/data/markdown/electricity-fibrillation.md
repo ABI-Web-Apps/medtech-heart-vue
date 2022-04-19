@@ -6,8 +6,8 @@ This is a serious medical condition that needs to be treated immediately. An aut
 
 AED devices can be found in many public places. Click on the standard AED logo below to defibrillate the virtual heart!
 
-<div style="text-align:center">
-  <a href="/Electricity-Healthy">
+<div class="topic-fibrillation-aed">
+  <a href="/medtech-heart-vue/Electricity-Healthy">
     <img src="img/defibrillation.png" alt="AED" height="90" width="100"/>
   </a>
 </div>

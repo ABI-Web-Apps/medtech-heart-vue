@@ -22,7 +22,7 @@
 p {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  // justify-content: space-around;
   align-items: center;
 }
 .topic-img {
@@ -35,6 +35,12 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
+}
+.topic-fibrillation-aed {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
 }
 
