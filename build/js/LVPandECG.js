@@ -164,9 +164,24 @@ function onECGLoaded(xmlhttp, category, axisName) {
       var newViewData = rescaleXAxis(viewData);
       //   defaultEcgData = rescaleXAxis(defaultEcgData);
       ECGs[axisName] = newViewData;
-      showECGInternal(category, axisName);
+      if (category) {
+        showECGInternal(category, axisName);
+      }
     }
   };
+}
+
+function loadNormalECGandLVP(isECG) {
+  var xmlhttp = new XMLHttpRequest();
+  if (isECG === "ecg") {
+    xmlhttp.onreadystatechange = onECGLoaded(xmlhttp, null, "Normal");
+    xmlhttp.open("GET", "ECG/NormalECG.json", true);
+    xmlhttp.send();
+  } else {
+    xmlhttp.onreadystatechange = onLVPLoaded(xmlhttp, null, "Normal");
+    xmlhttp.open("GET", "LVP/NormalLVP.json", true);
+    xmlhttp.send();
+  }
 }
 
 var showECGInternal = function (category, axisName) {
@@ -192,6 +207,28 @@ var showECGInternal = function (category, axisName) {
     ECGchart.addSeries(axisName, currentECG, {
       stroke: { color: colourName, width: widthvar },
     });
+    if (
+      axisName == "CompensatedFailure" ||
+      axisName == "DecompensatedFailure" ||
+      axisName == "SmallInfarct" ||
+      axisName == "LargeInfarct" ||
+      axisName == "Arrhythmia"
+    ) {
+      if (ECGs["Normal"]) {
+        ECGchart.addSeries("Normal", ECGs["Normal"], {
+          stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
+        });
+      } else {
+        loadNormalECGandLVP("ecg");
+        setTimeout(() => {
+          ECGchart.addSeries("Normal", ECGs["Normal"], {
+            stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
+          });
+          ECGchart.render();
+          ECGchart.resize("100%", "100%");
+        }, 500);
+      }
+    }
 
     ECGchart.render();
     ECGchart.resize("100%", "100%");
@@ -218,7 +255,9 @@ function onLVPLoaded(xmlhttp, category, axisName) {
       var viewData = JSON.parse(xmlhttp.responseText);
       var newViewData = rescaleXAxis(viewData);
       LVPs[axisName] = newViewData;
-      showLVPInternal(category, axisName);
+      if (category) {
+        showLVPInternal(category, axisName);
+      }
     }
   };
 }
@@ -246,6 +285,28 @@ var showLVPInternal = function (category, axisName) {
     LVPchart.addSeries(axisName, currentLVP, {
       stroke: { color: colourName, width: widthvar },
     });
+    if (
+      axisName == "CompensatedFailure" ||
+      axisName == "DecompensatedFailure" ||
+      axisName == "SmallInfarct" ||
+      axisName == "LargeInfarct" ||
+      axisName == "Arrhythmia"
+    ) {
+      if (LVPs["Normal"]) {
+        LVPchart.addSeries("Normal", LVPs["Normal"], {
+          stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
+        });
+      } else {
+        loadNormalECGandLVP("lvp");
+        setTimeout(() => {
+          LVPchart.addSeries("Normal", LVPs["Normal"], {
+            stroke: { color: "rgba(50,205,50,0.6)", width: 2 },
+          });
+          LVPchart.render();
+          LVPchart.resize("100%", "100%");
+        }, 500);
+      }
+    }
     LVPchart.render();
     LVPchart.resize("100%", "100%");
   }
