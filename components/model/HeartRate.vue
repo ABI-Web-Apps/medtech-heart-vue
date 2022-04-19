@@ -1,5 +1,5 @@
 <template>
-  <div class="slider d-flex flex-column align-center">
+  <div class="slider d-flex flex-column align-center lg:-mt-10">
     <div
       class="d-flex align-center font-weight-bold text-xl-h6 text-subtitle-2 text-sm-subtitle-2 text-md-body-1"
     >
@@ -59,8 +59,12 @@ export default {
   },
   watch: {
     beat: (immediateBeat) => {
-      if (immediateBeat) {
-        $nuxt.$emit("beat-update-onTime", immediateBeat);
+      if (immediateBeat > 2) {
+        if (immediateBeat % 2 === 0) {
+          $nuxt.$emit("beat-update-onTime", immediateBeat);
+        }
+      } else {
+        $nuxt.$emit("beat-update-onTime", 0);
       }
     },
   },
