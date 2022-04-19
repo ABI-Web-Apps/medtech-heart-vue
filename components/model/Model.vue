@@ -22,7 +22,7 @@
             class="h-full w-full lg:object-contain"
           />
           <button
-            class="absolute top-0 right-0 w-1/5 h-full hover:bg-gray-50/10"
+            class="absolute top-0 right-0 w-1/4 h-full hover:bg-gray-50/10"
             @click="onHalfHeartPressed"
           />
         </div>

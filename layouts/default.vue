@@ -12,16 +12,18 @@
         </v-main>
       </div>
     </div>
-    <div class="w-full lg:w-[450px] lg:h-screen lg:fixed top-0 left-0">
+    <div class="firefox w-full lg:w-[450px] lg:h-screen lg:fixed top-0 left-0">
       <div class="pa-0" :class="mdAndUp ? 'full-height' : 'auto-height'">
-        <!-- <div class="pa-0"> -->
-        <div class="flex flex-col lg:h-screen">
-          <!-- :class="mdAndUp ? 'panel-height' + multiplier : ''" -->
-          <div class="pa-0 overflow-y-auto lg:h-19/20">
-            <left-pane />
+        <div class="d-flex flex-col" no-gutters>
+          <div ref="panel">
+            <div
+              class="pa-0 overflow-y-auto"
+              :class="mdAndUp ? 'panel-height' + multiplier : ''"
+            >
+              <left-pane :panel-height="panelHeight" />
+            </div>
           </div>
-
-          <div class="fixed lg:static left-0 bottom-0 lg:h-1/20">
+          <div class="fixed lg:static left-0 bottom-0">
             <navigation />
           </div>
         </div>
@@ -48,11 +50,11 @@ export default {
   },
 
   mounted() {
-    // this.panelHeight = this.$refs.panel.clientHeight;
+    this.panelHeight = this.$refs.panel.clientHeight;
   },
 
   updated() {
-    // this.panelHeight = this.$refs.panel.clientHeight;
+    this.panelHeight = this.$refs.panel.clientHeight;
   },
 
   created() {
@@ -68,6 +70,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.firefox {
+  z-index: 100;
+}
 .fix-it {
   position: -webkit-sticky; /* Safari */
   position: sticky;

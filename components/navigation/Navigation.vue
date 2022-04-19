@@ -17,7 +17,10 @@
           :to="{ name: 'slug', params: { slug: menuCaption + '-' + index } }"
         >
           <span>{{ subTopic.title }}</span>
-          <v-icon>{{ subTopic.icon }}</v-icon>
+          <div class="flex justify-center" style="width: 35px; height: 35px">
+            <img :src="subTopic.icon" alt="" width="100%" height="100%" />
+          </div>
+          <!-- <v-icon>{{ subTopic.icon }}</v-icon> -->
         </v-btn>
       </v-bottom-navigation>
     </div>

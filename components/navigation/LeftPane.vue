@@ -5,14 +5,14 @@
     </div>
     <div v-if="$route.name == 'slug'">
       <!-- currentBg  -->
-      <!-- <div class="pa-4" :class="currentBg" tile :style="panelHeightStyle"> -->
-      <div class="pa-4 lg:h-screen" :class="currentBg" tile>
+      <div class="pa-4" :class="currentBg" tile :style="panelHeightStyle">
+        <!-- <div class="pa-4 w-full" :class="currentBg" tile> -->
         <lazy-panel />
       </div>
     </div>
     <div v-if="$route.name == 'about'">
-      <!-- <v-card class="pa-4 bg-secondary" :style="panelHeightStyle"> -->
-      <v-card class="pa-4 bg-secondary lg:h-screen">
+      <v-card class="pa-4 bg-secondary" :style="panelHeightStyle">
+        <!-- <v-card class="pa-4 bg-secondary lg:h-screen"> -->
         <lazy-about-us />
       </v-card>
     </div>
@@ -34,9 +34,9 @@ export default {
       return this.$category() ? "bg-" + this.$category() : "bg-success";
     },
     panelHeightStyle() {
-      if (this.$vuetify.breakpoint.mdAndUp)
+      if (this.$vuetify.breakpoint.mdAndUp) {
         return { "min-height": this.panelHeight - 2 + "px" };
-      else return { height: "auto" };
+      } else return { height: "auto" };
     },
   },
 };
