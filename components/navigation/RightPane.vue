@@ -16,11 +16,11 @@
           class="flex-grow-1 d-flex flex-column justify-center"
         >
           <div class="d-none d-sm-flex justify-center">
-            <div class="pb-1 rate-mdAndUp">
+            <div class="-mt-20 pb-1 rate-mdAndUp">
               <heart-rate />
             </div>
           </div>
-          <div class="pt-5 justify-center" :style="traceMarginBottom">
+          <div class="pt-5" :style="traceMarginBottom">
             <traces />
           </div>
         </div>
