@@ -1,21 +1,17 @@
 <template>
-  <div class="slider d-flex flex-column align-center lg:-mt-10">
+  <div class="slider d-flex flex-column align-center">
     <div
       class="d-flex align-center font-weight-bold text-xl-h6 text-subtitle-2 text-sm-subtitle-2 text-md-body-1"
     >
       <div class="pr-2">Heart Rate</div>
       <div>
-        <v-tooltip>
+        <!-- <v-tooltip>
           <template v-slot:activator="{ on, attrs }">
-            <img
-              src="~/assets/images/kiwirous.png"
-              class="kiwirous"
-              v-bind="attrs"
-              v-on="on"
-            />
+            
           </template>
           <span>Got Kiwirous? Click here!</span>
-        </v-tooltip>
+        </v-tooltip> -->
+        <img src="~/assets/images/kiwirous.png" class="kiwirous" />
       </div>
     </div>
     <v-slider

@@ -8,25 +8,20 @@
           <!--Small screens only -->
         </div>
       </div>
-      <div
-        class="w-full lg:fixed top-0 right-0 lg:w-64 lg:h-screen flex flex-col justify-between"
-      >
-        <div
-          ref="rateAndTraces"
-          class="flex-grow-1 d-flex flex-column justify-center"
-        >
+      <div class="w-full lg:fixed top-0 right-0 lg:w-64 lg:h-full">
+        <div ref="rateAndTraces" class="flex flex-col justify-around lg:h-full">
           <div class="d-none d-sm-flex justify-center">
-            <div class="-mt-20 pb-1 rate-mdAndUp">
+            <div class="pb-1 rate-mdAndUp">
               <heart-rate />
             </div>
           </div>
           <div class="pt-5" :style="traceMarginBottom">
             <traces />
           </div>
-        </div>
-        <div class="d-none d-md-flex justify-center">
-          <div class="pt-4 pa-1 logo-mdAndUp lg:-mt-32">
-            <logo />
+          <div class="d-none d-md-flex justify-center">
+            <div class="pt-4 pa-1 logo-mdAndUp lg:mt-10">
+              <logo />
+            </div>
           </div>
         </div>
       </div>

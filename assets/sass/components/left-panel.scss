@@ -1,15 +1,15 @@
 @import "@/assets/sass/_mixins.scss";
 
 .bg-success {
-  @include gradient-bg($success-light, var(--v-success-base));
+  @include gradient-bg(var(--v-success-base), $success-light);
 }
 
 .bg-warning {
-  @include gradient-bg($warning-light, var(--v-warning-base));
+  @include gradient-bg(var(--v-warning-base), $warning-light);
 }
 
 .bg-error {
-  @include gradient-bg($error-light, var(--v-error-base));
+  @include gradient-bg(var(--v-error-base), $error-light);
 }
 
 .bg-secondary {
