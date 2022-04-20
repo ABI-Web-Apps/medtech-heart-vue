@@ -10,9 +10,9 @@
 
       <div
         ref="threeDControls"
-        class="lg:fixed lg:bottom-0 lg:h-24 lg:pl-48 w-full h-full flex flex-row justify-center lg:mt-0 order-first lg:order-last"
+        class="lg:fixed lg:bottom-0 lg:h-24 lg:ml-24 w-full h-full flex flex-row justify-center lg:mt-0 order-first lg:order-last"
       >
-        <div class="ml-0 h-full w-2/5 lg:w-auto relative">
+        <div class="ml-0 h-full w-2/5 lg:w-64 relative">
           <button
             class="absolute top-0 left-0 w-1/5 h-full hover:bg-gray-50/10"
             @click="onResetAllModelsView"

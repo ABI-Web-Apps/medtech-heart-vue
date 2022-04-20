@@ -16,7 +16,7 @@
       >
         ECG
       </div>
-      <div id="rightECG" ref="rightECG" class="w-full h-24 lg:h-20"></div>
+      <div id="rightECG" ref="rightECG" class="w-full h-24 lg:h-[100px]"></div>
       <div id="ecgDescription" class="text-caption text-xl-body-2">
         {{ $ecg().description }}
       </div>
@@ -27,7 +27,7 @@
       >
         Pressure (mmHg)
       </div>
-      <div id="rightLVP" ref="rightLVP" class="w-full h-24 lg:h-20"></div>
+      <div id="rightLVP" ref="rightLVP" class="w-full h-24 lg:h-[100px]"></div>
       <div id="lvpDescription" class="text-caption text-xl-body-2">
         {{ $lvp().description }}
       </div>

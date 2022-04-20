@@ -55,7 +55,7 @@ function loadChart(ecg, lvp, category, timeOffset) {
           });
           /* add the y-axis */
           ECGchart.addAxis("y", {
-            type: "Invisible",
+            // type: "Invisible",
             vertical: true,
             majorLabels: true,
             majorTickStep: 200,
@@ -94,14 +94,13 @@ function loadChart(ecg, lvp, category, timeOffset) {
           });
           /* add the y-axis */
           LVPchart.addAxis("y", {
-            type: "Invisible",
             vertical: true,
             min: -40,
             max: 160,
             minorTicks: false,
             majorTickStep: 120,
-            font: "normal normal normal 10pt Helvetica",
-            titleFont: "normal normal normal 10pt Helvetica",
+            font: "normal normal normal 14pt Helvetica",
+            titleFont: "normal normal normal 16pt Helvetica",
             title: "",
             titleFontColor: [120, 120, 120],
           });
