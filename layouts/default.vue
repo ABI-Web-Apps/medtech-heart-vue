@@ -117,7 +117,7 @@ export default {
   height: calc(100vh - 112px);
 }
 .transparent {
-  background-color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
   opacity: 0.8;
   // border-color: black !important;
 }
