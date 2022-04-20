@@ -2,7 +2,7 @@
   <div class="pa-2">
     <h1 class="pt-2 main-heading">About Us</h1>
     <div class="about-panel">
-      <div class="navigate flexbox --vertical">
+      <div class="navigate flexbox --vertical lg:-mt-10">
         <div
           class="button"
           :class="researchSelected ? 'button --active' : 'button --inactive'"
@@ -18,12 +18,12 @@
           <v-btn plain @click="toggleNavigation('team')"> Our Team </v-btn>
         </div>
       </div>
-      <div class="feedback font-weight-medium text--primary">
+      <div class="feedback font-weight-medium text--primary lg:-mt-16">
         Visit our <a href="#">Online form</a> to give us your valuable feedback
         about this app.
       </div>
 
-      <div class="mx-auto contributor" max-width="344">
+      <div class="mx-auto contributor lg:-mt-16" max-width="344">
         <v-card-text>
           <div class="text-h6 text--darken-6">Website Design</div>
           <div class="text--darken-4 pl-6">
