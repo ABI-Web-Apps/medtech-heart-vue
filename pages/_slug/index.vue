@@ -59,7 +59,7 @@ export default {
   methods: {
     closeVideo() {
       this.showVideo = false;
-
+      $nuxt.$emit("closedVideoByClick");
       /* Scroll back to the point where user clicked on video icon - for small devices */
       if (!this.$vuetify.breakpoint.mdAndUp)
         this.$vuetify.goTo(this.lastOffset, {});
