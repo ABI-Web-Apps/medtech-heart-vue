@@ -95,26 +95,17 @@ export default {
     this.$nuxt.$on("menu-height-changed", (multiplier) => {
       this.multiplier = multiplier;
     });
-    this.$nuxt.$on("load-video-player", () => {
-      console.log("ddd");
-      this.$refs.leftPanel.style.zIndex = 0;
-    });
-    this.$nuxt.$on("closedVideoByClick", () => {
-      this.$refs.leftPanel.style.zIndex = 100;
-    });
   },
 
   beforeDestroy() {
     this.$nuxt.$off("menu-height-changed");
-    this.$nuxt.$off("load-video-player");
-    this.$nuxt.$off("closedVideoByClick");
   },
 };
 </script>
 
 <style scoped lang="scss">
 .firefox {
-  z-index: 100;
+  z-index: 1;
 }
 .fix-it {
   position: -webkit-sticky; /* Safari */
