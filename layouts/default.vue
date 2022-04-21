@@ -122,6 +122,5 @@ export default {
 .transparent {
   background-color: rgba(255, 255, 255, 0.1) !important;
   opacity: 0.8;
-  // border-color: black !important;
 }
 </style>
