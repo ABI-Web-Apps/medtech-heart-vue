@@ -96,6 +96,7 @@ export default {
       this.multiplier = multiplier;
     });
     this.$nuxt.$on("load-video-player", () => {
+      console.log("ddd");
       this.$refs.leftPanel.style.zIndex = 0;
     });
     this.$nuxt.$on("closedVideoByClick", () => {
@@ -106,6 +107,7 @@ export default {
   beforeDestroy() {
     this.$nuxt.$off("menu-height-changed");
     this.$nuxt.$off("load-video-player");
+    this.$nuxt.$off("closedVideoByClick");
   },
 };
 </script>
