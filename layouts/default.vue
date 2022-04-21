@@ -51,9 +51,6 @@
                 <v-col class="d-none d-md-block fix-it">
                   <navigation />
                 </v-col>
-                <!-- <v-col class="fixed lg:static left-0 bottom-0">
-                  <navigation />
-                </v-col> -->
               </v-row>
             </div>
           </v-col>
