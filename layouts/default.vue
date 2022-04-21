@@ -51,9 +51,6 @@
                 <v-col class="d-none d-md-block fix-it">
                   <navigation />
                 </v-col>
-                <!-- <v-col class="fixed lg:static left-0 bottom-0">
-                  <navigation />
-                </v-col> -->
               </v-row>
             </div>
           </v-col>
@@ -95,24 +92,17 @@ export default {
     this.$nuxt.$on("menu-height-changed", (multiplier) => {
       this.multiplier = multiplier;
     });
-    this.$nuxt.$on("load-video-player", () => {
-      this.$refs.leftPanel.style.zIndex = 0;
-    });
-    this.$nuxt.$on("closedVideoByClick", () => {
-      this.$refs.leftPanel.style.zIndex = 100;
-    });
   },
 
   beforeDestroy() {
     this.$nuxt.$off("menu-height-changed");
-    this.$nuxt.$off("load-video-player");
   },
 };
 </script>
 
 <style scoped lang="scss">
 .firefox {
-  z-index: 100;
+  z-index: 1;
 }
 .fix-it {
   position: -webkit-sticky; /* Safari */
@@ -129,6 +119,5 @@ export default {
 .transparent {
   background-color: rgba(255, 255, 255, 0.1) !important;
   opacity: 0.8;
-  // border-color: black !important;
 }
 </style>
