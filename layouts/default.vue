@@ -29,7 +29,10 @@
         </div>
         </div>
       </div> -->
-    <div class="firefox w-full lg:w-[450px] lg:fixed top-0 left-0">
+    <div
+      class="firefox w-full lg:w-[450px] lg:fixed top-0 left-0"
+      ref="leftPanel"
+    >
       <div class="pa-0">
         <v-row class="d-flex" no-gutters>
           <v-col>
@@ -92,10 +95,17 @@ export default {
     this.$nuxt.$on("menu-height-changed", (multiplier) => {
       this.multiplier = multiplier;
     });
+    this.$nuxt.$on("load-video-player", () => {
+      this.$refs.leftPanel.style.zIndex = 0;
+    });
+    this.$nuxt.$on("closedVideoByClick", () => {
+      this.$refs.leftPanel.style.zIndex = 100;
+    });
   },
 
   beforeDestroy() {
     this.$nuxt.$off("menu-height-changed");
+    this.$nuxt.$off("load-video-player");
   },
 };
 </script>
