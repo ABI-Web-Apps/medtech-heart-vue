@@ -27,6 +27,7 @@
       @change="sliderOnChange(beat)"
     >
     </v-slider>
+
     <div
       class="text-caption text-sm-caption text-md-caption text-lg-body-2 text-xl-body-2 font-italic"
     >
