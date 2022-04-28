@@ -2,7 +2,7 @@ This is an interactive model of the heart's two main pumping chambers: the ventr
 
 <div class="topic-img-big">
 <img src="img/schematic1.png" width="250px" height="auto"/>
-<a href="/medtech-heart-vue/model-heart#video-div" data-play="video">
+<a href="/model-heart#video-div" data-play="video">
 <img id="healthy" src="img/heart-video.png" class="video-icon"/>
 </a>
 </div>

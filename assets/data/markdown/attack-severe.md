@@ -3,7 +3,7 @@ If a minor heart attack is left untreated, or if medication is stopped too early
 <div class="topic-img-big">
 <img src="img/coronary_block_severe.png" width="240px" height="auto"/>
 
-<a href="/medtech-heart-vue/attack-severe#video-div" data-play="video">
+<a href="/attack-severe#video-div" data-play="video">
 <img id="blocked" src="img/blockage.png" class="video-icon-tall"/>
 </a>
 </div>
