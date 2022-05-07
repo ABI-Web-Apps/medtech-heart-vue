@@ -25,7 +25,7 @@ export default {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/favicon2.ico",
+        href: "/medtech-heart-vue/favicon2.ico",
       },
     ],
     meta: [
@@ -153,7 +153,7 @@ export default {
 
   ...routerBase,
   generate: {
-    // dir: "build",
+    dir: "build",
     // subFolders: false,
     routes: [
       // "/",
