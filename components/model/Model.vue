@@ -1,25 +1,28 @@
 <template>
-  <div class="w-full h-full lg:h-screen">
-    <div class="w-full h-full flex flex-col justify-center items-center">
+  <!-- w-full h-full lg:h-screen -->
+  <div class="">
+    <div class="flex flex-col justify-center items-center">
+      <!-- w-full h-[400px] -mt-12 lg:h-screen lg:mt-0 -->
       <div
-        id="zincDom"
         ref="zincDomObject"
-        class="w-full h-[400px] -mt-12 lg:h-screen lg:mt-0"
+        :class="mdAndUp ? 'zincDom-md' : 'zincDom-sm'"
         @dblclick="onHalfHeartPressed"
       />
-
+      <!-- lg:fixed lg:bottom-0 lg:h-24 lg:ml-24 w-full h-full flex flex-row justify-center lg:mt-0 order-first lg:order-last -->
       <div
         ref="threeDControls"
-        class="lg:fixed lg:bottom-0 lg:h-24 lg:ml-24 w-full h-full flex flex-row justify-center lg:mt-0 order-first lg:order-last"
+        class="zincModelControl"
+        :class="mdAndUp ? 'zincModelControl-md' : 'zincModelControl-sm'"
       >
-        <div class="ml-0 h-full w-2/5 lg:w-64 relative">
+        <!-- ml-0 h-full w-2/5 lg:w-64 relative -->
+        <div class="zincModelCB" :class="mdAndUp ? 'zincModelCB-md' : ''">
           <button
             class="absolute top-0 left-0 w-1/5 h-full hover:bg-gray-50/10"
             @click="onResetAllModelsView"
           />
           <img
             src="~/assets/images/gestures-icons.png"
-            class="h-full w-full lg:object-contain"
+            class="h-full w-full md:object-contain"
           />
           <button
             class="absolute top-0 right-0 w-1/4 h-full hover:bg-gray-50/10"
@@ -81,6 +84,12 @@ export default {
     },
     availableHeight: {
       type: Number,
+    },
+  },
+
+  computed: {
+    mdAndUp() {
+      return this.$vuetify.breakpoint.mdAndUp;
     },
   },
 
@@ -322,6 +331,43 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.zincModelControl {
+  width: 100vw;
+  height: 120px;
+  // background: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  .zincModelCB {
+    width: 240px;
+    height: 70px;
+    position: relative;
+  }
+  .zincModelCB-md {
+    width: 280px;
+    height: 100px;
+  }
+}
+
+.zincModelControl-md {
+  position: fixed;
+  bottom: 10px;
+  padding-left: 100px;
+}
+.zincModelControl-sm {
+  order: -1;
+  height: 60px;
+}
+.zincDom-md {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+.zincDom-sm {
+  width: 100vw;
+  height: 400px;
+}
 .outer-model {
   height: 100%;
 }

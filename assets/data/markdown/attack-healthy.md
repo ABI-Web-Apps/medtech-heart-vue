@@ -3,9 +3,9 @@ The heart pumps blood to itself through blood vessels called the coronary arteri
 <div class="topic-img-big">
 
 <img src="img/coronary_heart.png" width="240px" height="auto"/>
-<a href="/attack-healthy#video-div" data-play="video">
+<span class="md-video" data-play="video">
 <img id="blocked" src="img/blockage.png" class="video-icon-tall"/>
-</a>
+</span>
 </div>
 
 <div style="margin-top: 1em; margin-bottom:1em">
@@ -14,16 +14,18 @@ Good lifestyle choices help to keep the coronary arteries healthy and prevent he
 
 ---
 
+<span class="md-notice"> 
 Click through the tabs below to learn about various heart attacks.
+</span>
 
 <div class="topic-img">
-<a href="/attack-healthy#video-div" data-play="video">
+<span class="md-video" data-play="video">
   <img id="exercise" src="img/exercise.png" class="video-icon"/>
-</a>
-<a href="/attack-healthy#video-div" data-play="video">
+</span>
+<span class="md-video" data-play="video">
   <img id="diet" src="img/diet.png" class="video-icon"/>
-</a>
-<a href="/attack-healthy#video-div" data-play="video">
+</span>
+<span class="md-video" data-play="video">
   <img id="smoking" src="img/smoking.png" class="video-icon"/>
-</a>
+</span>
 </div>

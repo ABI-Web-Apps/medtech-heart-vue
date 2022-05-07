@@ -6,7 +6,7 @@
           It is used in .md files for creating anchor - 
           in order to scroll to video in small screens when movie icon is clicked 
       -->
-      <div id="video-div">
+      <!-- <div id="video-div">
         <v-overlay
           color="black"
           :value="showVideo"
@@ -20,7 +20,7 @@
             />
           </div>
         </v-overlay>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -38,50 +38,50 @@ export default {
     store.commit("setCurrentContent", content);
   },
 
-  data() {
-    return {
-      currentVideoId: null,
-      showVideo: false,
-      overlay: false,
-      lastOffset: 0,
-      outerWidth: 0,
-    };
-  },
+  // data() {
+  //   return {
+  //     currentVideoId: null,
+  //     showVideo: false,
+  //     overlay: false,
+  //     lastOffset: 0,
+  //     outerWidth: 0,
+  //   };
+  // },
 
-  computed: {
-    videoStyle() {
-      return {
-        width: this.outerWidth,
-      };
-    },
-  },
+  // computed: {
+  //   videoStyle() {
+  //     return {
+  //       width: this.outerWidth,
+  //     };
+  //   },
+  // },
 
-  methods: {
-    closeVideo() {
-      this.showVideo = false;
+  // methods: {
+  //   closeVideo() {
+  //     this.showVideo = false;
 
-      /* Scroll back to the point where user clicked on video icon - for small devices */
-      if (!this.$vuetify.breakpoint.mdAndUp)
-        this.$vuetify.goTo(this.lastOffset, {});
-    },
-  },
+  //     /* Scroll back to the point where user clicked on video icon - for small devices */
+  //     if (!this.$vuetify.breakpoint.mdAndUp)
+  //       this.$vuetify.goTo(this.lastOffset, {});
+  //   },
+  // },
 
-  mounted() {
-    this.outerWidth = this.$refs.outerDiv.clientWidth + "px";
-  },
+  // mounted() {
+  //   this.outerWidth = this.$refs.outerDiv.clientWidth + "px";
+  // },
 
-  created() {
-    this.$nuxt.$on("load-video-player", (videoId) => {
-      this.currentVideoId = videoId;
-      this.showVideo = true;
-      this.lastOffset = process.client ? window.pageYOffset : 0;
-    });
-  },
+  // created() {
+  //   this.$nuxt.$on("load-video-player", (videoId) => {
+  //     this.currentVideoId = videoId;
+  //     this.showVideo = true;
+  //     this.lastOffset = process.client ? window.pageYOffset : 0;
+  //   });
+  // },
 
-  beforeDestroy() {
-    this.$nuxt.$off("load-video-player");
-    this.showVideo = false;
-  },
+  // beforeDestroy() {
+  //   this.$nuxt.$off("load-video-player");
+  //   this.showVideo = false;
+  // },
 };
 </script>
 

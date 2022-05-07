@@ -1,12 +1,9 @@
-<template>
-</template>
+<template></template>
 
 <script>
-
 export default {
   middleware({ redirect }) {
-    return redirect('/model-heart')
-  }
-}
-
+    return redirect("/model-heart");
+  },
+};
 </script>

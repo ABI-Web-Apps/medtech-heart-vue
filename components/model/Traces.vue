@@ -16,7 +16,12 @@
       >
         ECG
       </div>
-      <div id="rightECG" ref="rightECG" class="w-full h-24 lg:h-[100px]"></div>
+      <div
+        id="rightECG"
+        ref="rightECG"
+        class="w-full"
+        :class="mdAndUp ? 'rightEGC-md' : 'rightEGC-sm'"
+      ></div>
       <div id="ecgDescription" class="text-caption text-xl-body-2">
         {{ $ecg().description }}
       </div>
@@ -27,7 +32,12 @@
       >
         Pressure (mmHg)
       </div>
-      <div id="rightLVP" ref="rightLVP" class="w-full h-24 lg:h-[100px]"></div>
+      <div
+        id="rightLVP"
+        ref="rightLVP"
+        class="w-full"
+        :class="mdAndUp ? 'rightEGC-md' : 'rightEGC-sm'"
+      ></div>
       <div id="lvpDescription" class="text-caption text-xl-body-2">
         {{ $lvp().description }}
       </div>
@@ -44,6 +54,11 @@ export default {
       oldTime: new Date(),
       render: undefined,
     };
+  },
+  computed: {
+    mdAndUp() {
+      return this.$vuetify.breakpoint.mdAndUp;
+    },
   },
 
   mounted() {
@@ -88,5 +103,11 @@ export default {
 .trace-box,
 .item {
   width: 100%;
+}
+.rightEGC-sm {
+  height: 80px;
+}
+.rightEGC-md {
+  height: 100px;
 }
 </style>

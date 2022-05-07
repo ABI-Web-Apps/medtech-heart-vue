@@ -1,36 +1,19 @@
 <template>
   <v-app>
-    <div class="order-2">
-      <div class="w-full h-screen">
-        <v-main>
-          <div
-            class="pa-0 black overflow-y-auto"
-            :class="mdAndUp ? 'full-height' : 'auto-height'"
-          >
-            <Nuxt />
-          </div>
-        </v-main>
+    <div class="rightPanel">
+      <div>
+        <!-- <v-main> -->
+        <!-- class="pa-0 black"
+          :class="mdAndUp ? 'full-height' : 'auto-height'" -->
+        <div class="pa-0 black">
+          <Nuxt />
+        </div>
+        <!-- </v-main> -->
       </div>
     </div>
-    <!-- <div class="firefox w-full lg:w-[30%] lg:fixed top-0 left-0"> -->
-    <!-- <div class="pa-0" :class="mdAndUp ? 'full-height' : 'auto-height'">
-        <div class="d-flex flex-col" no-gutters>
-          <div ref="panel">
-            <div
-              class="pa-0 overflow-y-auto"
-              :class="mdAndUp ? 'panel-height' + multiplier : ''"
-            >
-              <left-pane :panel-height="panelHeight" />
-            </div>
-          </div>
-          <div class="fixed lg:static left-0 bottom-0">
-            <navigation />
-          </div>
-        </div>
-        </div>
-      </div> -->
     <div
-      class="firefox w-full lg:w-[450px] lg:fixed top-0 left-0"
+      class="firefox"
+      :class="mdAndUp ? 'outer-large' : 'outer-small'"
       ref="leftPanel"
     >
       <div class="pa-0">
@@ -38,7 +21,7 @@
           <v-col>
             <div class="pa-0" :class="mdAndUp ? 'full-height' : 'auto-height'">
               <v-row class="d-flex flex-column" no-gutters>
-                <v-col ref="panel">
+                <v-col ref="panel" class="out-card">
                   <v-card
                     outlined
                     tile
@@ -101,6 +84,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.outer-large {
+  min-width: 409px;
+  width: 30vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.outer-small {
+  width: 100vw;
+}
 .firefox {
   z-index: 1;
 }
@@ -117,7 +110,19 @@ export default {
   height: calc(100vh - 112px);
 }
 .transparent {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  // background-color: rgba(255, 255, 255, 0.1) !important;
+
+  margin: 0;
+  padding: 0;
   opacity: 0.8;
+}
+.out-card {
+  border-left: 1px solid black;
+  margin: 0;
+  padding: 0;
+}
+
+.rightPanel {
+  order: 2;
 }
 </style>

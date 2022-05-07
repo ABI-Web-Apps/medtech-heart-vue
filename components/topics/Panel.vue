@@ -37,7 +37,27 @@ export default {
 
   methods: {
     play: function (event) {
-      $nuxt.$emit("load-video-player", event.target.id);
+      // /model-heart#video-div
+      const routeStr = this.$nuxt.$route.path;
+
+      const lastChar = routeStr.charAt(routeStr.length - 1);
+
+      if (lastChar === "/") {
+        const newstr = routeStr.substr(0, routeStr.length - 1);
+        // console.log(newstr);
+        this.$router.push({
+          name: "video",
+          params: { videoId: event.target.id, originPath: newstr },
+        });
+      } else {
+        // this.$router.push({ path: routeStr, hash: "#video-div" });
+        this.$router.push({
+          name: "video",
+          params: { videoId: event.target.id, originPath: routeStr },
+        });
+      }
+
+      // $nuxt.$emit("load-video-player", {id:event.target.id, originPath:});
     },
     refreshContent: function () {
       const fileName = this.$dataFile();
@@ -52,7 +72,7 @@ export default {
     addVideoLinks: function () {
       if (this.fileFound) {
         const markedDiv = this.$refs.markedDiv;
-        const links = markedDiv.getElementsByTagName("a");
+        const links = markedDiv.getElementsByTagName("span");
         let i;
         for (i = 0; i < links.length; i++) {
           let element = links[i];

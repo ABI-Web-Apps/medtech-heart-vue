@@ -19,11 +19,19 @@
 .left-pane {
   position: relative;
 }
+
 p {
   display: flex;
   flex-direction: row;
   // justify-content: space-around;
   align-items: center;
+}
+.md-notice {
+  font-style: italic;
+  font-size: 13px;
+}
+.md-video {
+  cursor: pointer;
 }
 .topic-img {
   display: flex;
