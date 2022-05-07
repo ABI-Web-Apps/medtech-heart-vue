@@ -1,50 +1,66 @@
+.video-player {
+  row-gap: 1rem;
+  // position: relative;
 
-  .video-player{
-    row-gap:1rem; 
-    height: 100%;
-  }
+  width: 100vw;
 
-  #outer-credits{
-    padding-bottom:1px;
-  }
-  
-  .display-video{
-    display:block;
-    width:100%;
-    flex-grow:1;
-    &.--sm{height:30rem;}  
-    &.--xs{height:20rem;}  
-  }
+  background-color: black;
+}
 
-  .credits{
-    justify-content:space-between;
-    align-items: center;
-    column-gap:1rem;
-  }
+#outer-credits {
+  // padding-bottom: 1px;
+  position: fixed;
+  padding-top: 3px;
+  padding-bottom: 10px;
+  // background-color: aqua;
+  bottom: 0px;
+}
 
-  .credit-button{
-    flex-grow:1;
-    row-gap:0.5rem;
-    align-items: center;
+.display-video {
+  display: block;
+  margin-top: 0;
+  width: 100%;
+  flex-grow: 1;
+  &.--sm {
+    height: 30rem;
   }
+  &.--xs {
+    height: 20rem;
+  }
+}
 
-  .button{
-    width:90%;
-    max-width:20rem;
-  }
+.credits {
+  width: 100vw;
+  padding-left: 10px;
+  padding-right: 30px;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1rem;
+}
 
- .img-icon{
-    height:4rem;
-    width:4rem;
-  }
+.credit-button {
+  flex-grow: 1;
+  row-gap: 0.5rem;
+  align-items: center;
+}
 
-  .annie-liz{
-    padding:2px;
-    text-align:center;
-    justify-content:center;
-    span{
-      font-size:0.8rem;
-      font-style:italic;
-      color:$text-color;
-    }
+.button {
+  width: 90%;
+  max-width: 20rem;
+}
+
+.img-icon {
+  height: 4rem;
+  width: 4rem;
+}
+
+.annie-liz {
+  padding: 2px;
+  text-align: center;
+  justify-content: center;
+  span {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: $text-color;
   }
+}
