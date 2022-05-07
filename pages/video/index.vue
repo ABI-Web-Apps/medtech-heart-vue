@@ -10,11 +10,13 @@
         <video-player :videoId="currentVideoId" @close-video="closeVideo()" />
       </div>
     </v-overlay>
+    <!-- <video-player :videoId="currentVideoId" @close-video="closeVideo()" /> -->
   </div>
 </template>
 
 <script>
 export default {
+  layout: "empty",
   data() {
     return {
       currentVideoId: null,
@@ -33,11 +35,23 @@ export default {
         this.$vuetify.goTo(this.lastOffset, {});
     },
   },
-
-  created() {
-    this.currentVideoId = this.$route.params.videoId;
+  mounted() {
+    this.currentVideoId = this.$route.params.videoId
+      ? this.$route.params.videoId
+      : "";
     this.showVideo = true;
     this.lastOffset = process.client ? window.pageYOffset : 0;
+  },
+
+  created() {
+    // this.currentVideoId = this.$route.params.videoId
+    //   ? this.$route.params.videoId
+    //   : "";
+    // this.showVideo = true;
+    // this.lastOffset = process.client ? window.pageYOffset : 0;
+    // if (this.currentVideoId) {
+    //   this.$nuxt.$emit("currentVideoIdFn", this.currentVideoId);
+    // }
   },
   beforeDestroy() {
     this.showVideo = false;
@@ -45,4 +59,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#video-div {
+  width: 100vw;
+  height: 100vh;
+}
+</style>

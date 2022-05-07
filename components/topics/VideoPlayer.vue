@@ -53,6 +53,7 @@ export default {
       videoFound: false,
       videos: videosData,
       selectedVideo: {},
+
       credits1: "Movie credits to Annie Jones and Dr. Liz Broadbent,",
       credits2: " University of Auckland",
     };
@@ -68,6 +69,7 @@ export default {
   methods: {
     refreshVideo: function (currentId) {
       this.videoFound = false;
+
       if (currentId) {
         this.selectedVideo = this.videos[currentId];
         if (this.selectedVideo) {
@@ -75,6 +77,7 @@ export default {
         }
       }
     },
+
     close: function () {
       window.history.back();
       this.$emit("close-video");

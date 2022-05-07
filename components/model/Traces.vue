@@ -105,9 +105,10 @@ export default {
   width: 100%;
 }
 .rightEGC-sm {
-  height: 80px;
+  min-height: 80px;
 }
 .rightEGC-md {
-  height: 100px;
+  width: 250px;
+  min-height: 100px;
 }
 </style>
