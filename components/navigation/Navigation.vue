@@ -17,10 +17,10 @@
           :to="{ name: 'slug', params: { slug: menuCaption + '-' + index } }"
         >
           <span>{{ subTopic.title }}</span>
-          <div class="flex justify-center" style="width: 35px; height: 35px">
+          <!-- <div class="flex justify-center" style="width: 35px; height: 35px">
             <img :src="subTopic.icon" alt="" width="100%" height="100%" />
-          </div>
-          <!-- <v-icon>{{ subTopic.icon }}</v-icon> -->
+          </div> -->
+          <v-icon>{{ subTopic.icon }}</v-icon>
         </v-btn>
       </v-bottom-navigation>
     </div>
@@ -71,10 +71,10 @@ export default {
     updateAbout: function () {
       this.subMenuActive = false;
     },
-    getIconWidth() {
-      let menuItemWidth = 100 / (topics.length + 1);
-      return menuItemWidth.toFixed(2);
-    },
+    // getIconWidth() {
+    //   let menuItemWidth = 100 / (topics.length + 1);
+    //   return menuItemWidth.toFixed(2);
+    // },
     getDefaultSlug(topic) {
       return topic.subTopics != null ? Object.keys(topic.subTopics)[0] : "";
     },
@@ -120,6 +120,7 @@ export default {
 <style scoped lang="scss">
 .navi {
   position: relative;
+  width: 100%;
 }
 
 .sub-menu {

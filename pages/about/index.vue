@@ -1,5 +1,6 @@
 <template>
-  <div class="lg:ml-[450px]">
+  <!-- lg:ml-[450px] -->
+  <div :class="mdAndUp ? 'aboutPanel-l' : 'aboutPanel-s'">
     <div
       v-if="section == 'research'"
       class="container-default research-page flexbox --vertical"
@@ -58,7 +59,11 @@ export default {
       section: "research",
     };
   },
-
+  computed: {
+    mdAndUp() {
+      return this.$vuetify.breakpoint.mdAndUp;
+    },
+  },
   created() {
     this.$nuxt.$on("about-navigation", (componentName) => {
       this.section = componentName;

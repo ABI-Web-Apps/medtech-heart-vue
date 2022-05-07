@@ -2,9 +2,9 @@ This is an interactive model of the heart's two main pumping chambers: the ventr
 
 <div class="topic-img-big">
 <img src="img/schematic1.png" width="250px" height="auto"/>
-<a href="/model-heart#video-div" data-play="video">
+<span class="md-video" data-play="video">
 <img id="healthy" src="img/heart-video.png" class="video-icon"/>
-</a>
+</span>
 </div>
 
 ---
@@ -15,4 +15,4 @@ The ECG trace (top right) represents the electrical waves in the heart that stim
 
 ---
 
-Click through the tabs below to learn about various heart diseases.
+<span class="md-notice"> Click through the tabs below to learn about various heart diseases.</span>

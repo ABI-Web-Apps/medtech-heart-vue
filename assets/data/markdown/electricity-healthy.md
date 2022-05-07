@@ -4,4 +4,6 @@ The electrical waves in the heart can be measured by placing electrodes on the c
 
 ---
 
+<span class="md-notice"> 
 Click on fibrillation below to see what happens when this smooth electrical activity is disrupted.
+</span>

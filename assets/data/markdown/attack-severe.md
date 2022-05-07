@@ -3,9 +3,9 @@ If a minor heart attack is left untreated, or if medication is stopped too early
 <div class="topic-img-big">
 <img src="img/coronary_block_severe.png" width="240px" height="auto"/>
 
-<a href="/attack-severe#video-div" data-play="video">
+<span class="md-video" data-play="video">
 <img id="blocked" src="img/blockage.png" class="video-icon-tall"/>
-</a>
+</span>
 </div>
 
 A severe heart attack can cause permanent damage to a large portion of heart tissue. This prevents the heart from generating enough pressure to pump blood around the body (red trace).

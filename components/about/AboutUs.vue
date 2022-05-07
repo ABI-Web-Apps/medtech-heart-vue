@@ -95,10 +95,10 @@ export default {
   background-color: rgba(150, 30, 150, 0.3);
 }
 .about-panel {
-  height: 80vh;
+  height: 75vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .feedback {

@@ -6,7 +6,13 @@ const routerBase =
           base: "/medtech-heart-vue/",
         },
       }
-    : {};
+    : {
+        router: {
+          // mode: "hash",
+          mode: "history",
+          base: "/",
+        },
+      };
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -19,7 +25,7 @@ export default {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/favicon2.ico",
+        href: "/medtech-heart-vue/favicon2.ico",
       },
     ],
     meta: [
@@ -101,7 +107,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ["~/assets/sass/variables.scss"],
+    customVariables: ["@/assets/sass/variables.scss"],
     treeShake: true,
     theme: {
       options: { customProperties: true },
@@ -147,9 +153,12 @@ export default {
 
   ...routerBase,
   generate: {
-    // dir: "build",
+    dir: "build",
+    // subFolders: false,
     routes: [
+      // "/",
       "/model-heart",
+      "/model-heart#video-div",
       "/attack-healthy",
       "/attack-minor",
       "/attack-severe",
