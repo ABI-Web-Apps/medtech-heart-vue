@@ -1,102 +1,113 @@
 <template>
-  <div class="container-default flexbox" :class="$vuetify.breakpoint.mdAndUp?'full-height':'auto-height'">
-    <v-container class="pa-0" ref="rightMost">
-      <v-row class="d-flex" no-gutters>
-        <v-col cols="12" xs="12" sm="9" md="8" lg="9">
-          <div class="model-rate">
-            <model :availableHeight="rateAndTracesHeight" :totalHeight="rightMostHeight"/>
-            <div class="rate-smAndDown d-flex d-sm-none">
-              <heart-rate/> <!--Small screens only -->
-            </div>
-          </div>
-        </v-col>
-        <v-col cols="12" xs="12" sm="3" md="4" lg="3">
-          <div class="pa-0 d-flex flex-column justify-space-between" :style="rightContainerStyle">
-            <div ref="rateAndTraces" class="flex-grow-1 d-flex flex-column justify-center">
-              <div class="d-none d-sm-flex justify-center">
-                <div class="pb-1 rate-mdAndUp">
-                  <heart-rate/>
-                </div>
-              </div>
-              <div class="d-none d-sm-flex justify-center">
-                <traces/>
-              </div> 
-            </div>
-            <div class="d-none d-md-flex justify-center">
-              <div class="pt-4 pa-1 logo-mdAndUp">
-                <logo/>
-              </div>
-            </div>
-          </div> 
-          <div class="pt-5 d-flex d-sm-none justify-center"> <!--small screens -->
-            <traces/>
-          </div>
-        </v-col>
-      </v-row>   
-    </v-container>
+  <!-- :class="mdAndUp ? 'full-height' : 'auto-height'" -->
+  <div>
+    <div class="model-panel">
+      <model />
+      <div class="mr-24 ml-4 d-flex d-sm-none">
+        <heart-rate />
+      </div>
+    </div>
+    <!-- w-full lg:fixed top-0 right-0 lg:w-64 lg:h-full -->
+    <div
+      class="trace-main"
+      :class="mdAndUp ? 'tracePanel-md' : 'tracePanel-sm'"
+    >
+      <!-- flex flex-col justify-around lg:h-full -->
+      <!-- <div ref="rateAndTraces" class="trace-main"> -->
+      <div class="d-none d-sm-flex rate-mdAndUp">
+        <div class="heart-rate">
+          <heart-rate />
+        </div>
+      </div>
+      <div :class="mdAndUp ? 'trace-md' : 'trace-sm'">
+        <traces />
+      </div>
+      <div
+        class="d-none d-md-flex justify-center"
+        :class="mdAndUp ? 'logo-md' : 'logo-sm'"
+      >
+        <div class="logo-mdAndUp">
+          <logo />
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- </div> -->
 </template>
 
 <script>
 export default {
- 
   data() {
-    return {
-      rightMostHeight:0,
-      rateAndTracesHeight:0
-    }
+    return {};
   },
 
-  mounted(){
-    this.getDomHeights()
+  computed: {
+    mdAndUp() {
+      return this.$vuetify.breakpoint.mdAndUp;
+    },
   },
+};
+</script>
 
-  updated(){
-    this.getDomHeights()
-  },
+<style scoped lang="scss">
+.model-panel {
+  width: 100vw;
+  height: auto;
+}
+.model-rate {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
 
-  computed:{
-    rightContainerStyle(){
-      if(this.$vuetify.breakpoint.mdAndUp){
-        return {
-          'height':this.rightMostHeight+'px'
-        }
-      }
-    }
-  },
-
-  methods:{
-    getDomHeights(){
-      this.rightMostHeight=this.$refs.rightMost.clientHeight
-      this.rateAndTracesHeight=this.$refs.rateAndTraces.clientHeight
-    }
+.rate-mdAndUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: 20%;
+  .heart-rate {
+    width: 60%;
+    height: 100px;
   }
 }
 
-</script>
+.logo-mdAndUp {
+  width: 50%;
+  // height: 100px;
+  // display: block;
+}
+.logo-md {
+  display: block;
+  height: 10%;
+}
 
-
-<style scoped lang="scss">
-
-  .model-rate{
-    position:relative;
-    width:100%;
-    text-align: center; 
-  }
-
-  .rate-mdAndUp{
-    width:80%;
-  }
-
-  .rate-smAndDown{
-    position:absolute;
-    bottom:20px;
-    width:120px;
-    left: 2%;  
-  }
-
-  .logo-mdAndUp{
-    width:70%;
-    display:block;
-  }
+.trace-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 25px 3px;
+}
+.tracePanel-md {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  min-width: 280px;
+  max-width: 25vw;
+}
+.tracePanel-sm {
+  width: 100vw;
+  height: auto;
+}
+.trace-md {
+  min-height: 60%;
+}
+.trace-sm {
+  width: 100%;
+  margin-bottom: 100px;
+  padding-right: 10px;
+}
 </style>

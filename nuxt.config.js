@@ -1,63 +1,89 @@
-import colors from 'vuetify/es5/util/colors'
-
+import colors from "vuetify/es5/util/colors";
+const routerBase =
+  process.env.DEPLOY_ENV === "GH_PAGES"
+    ? {
+        router: {
+          base: "/medtech-heart-vue/",
+        },
+      }
+    : {
+        router: {
+          // mode: "hash",
+          mode: "history",
+          base: "/",
+        },
+      };
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     //titleTemplate: '%s - medtech-heart-vue',
-    title: 'MedTechHeart',
+    title: "MedTechHeart",
     htmlAttrs: {
-      lang: 'en'
+      lang: "en",
     },
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon2.ico' }
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/medtech-heart-vue/favicon2.ico",
+      },
     ],
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" },
+      { name: "format-detection", content: "telephone=no" },
     ],
     script: [
       {
-        "data-dojo-config":"async: 1, dojoBlankHtmlUrl: '/blank.html'",
+        "data-dojo-config": "async: 1, dojoBlankHtmlUrl: '/blank.html'",
         /*"packages":[
           {
             'name': 'js',
             'location':  location.pathname.replace(/\/[^/]+$/, '') + '/js'
           }
         ],*/
-        src:'//ajax.googleapis.com/ajax/libs/dojo/1.11.2/dojo/dojo.js',
+        src: "//ajax.googleapis.com/ajax/libs/dojo/1.11.2/dojo/dojo.js",
       },
       {
-        hid: 'chartMaker',
-        type:'text/javascript',
-        src:'js/LVPandECG.js',
+        src: "https://cdn.tailwindcss.com",
       },
       {
-        type: 'text/javascript',
-        src: 'zincJS/three.min.js'
+        hid: "chartMaker",
+        type: "text/javascript",
+        src: "js/LVPandECG.js",
       },
       {
-        type: 'text/javascript',
-        src: 'zincJS/zinc_3js_renderer.js'
+        type: "text/javascript",
+        src: "js/Add3DLabel.js",
       },
       {
-        type: 'text/javascript',
-        src: 'zincJS/zinc_threejs_control.js'
+        type: "text/javascript",
+        src: "zincJS/three.min.js",
       },
-    ]
+      {
+        type: "text/javascript",
+        src: "zincJS/zinc_3js_renderer.js",
+      },
+      {
+        type: "text/javascript",
+        src: "zincJS/zinc_threejs_control.js",
+      },
+      {
+        type: "text/javascript",
+        src: "initZinc/index.js",
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@/assets/sass/global.scss',
-    '@/assets/sass/base.scss',
-  ],
+  css: ["@/assets/sass/global.scss", "@/assets/sass/base.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "@/plugins/topics",
-    "@/plugins/current-content"
+    "@/plugins/current-content",
+    "@/plugins/models",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -66,23 +92,22 @@ export default {
       "~/components/about",
       "~/components/model",
       "~/components/navigation",
-      "~/components/topics"
+      "~/components/topics",
     ],
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    "@nuxtjs/vuetify",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-  ],
+  modules: [],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/sass/variables.scss'],
+    customVariables: ["@/assets/sass/variables.scss"],
     treeShake: true,
     theme: {
       options: { customProperties: true },
@@ -93,13 +118,17 @@ export default {
           accent: colors.grey.darken3,
           secondary: "#7d1e7d",
           info: colors.teal.lighten1,
-          warning:"#827717",    
-          error: "#DD2C00",
-          success: "#558B2F"
-
-        }
-      }
-    }
+          warning: "#695e01",
+          subWarning: "#dede09",
+          error: "#451306",
+          subError: "#fc2400",
+          // success: "#558B2F",
+          // success: "#194b17",
+          success: "#162415",
+          subSuccess: "#27a425",
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -108,31 +137,37 @@ export default {
       config.module.rules.push({
         test: /\.md$/i,
         use: "raw-loader",
-      })
+      });
     },
     loaders: {
       sass: {
-        implementation: require('sass'),
+        implementation: require("sass"),
       },
       scss: {
-        implementation: require('sass'),
+        implementation: require("sass"),
       },
-    }
+    },
   },
 
-  target: 'static',
+  target: "static",
 
+  ...routerBase,
   generate: {
+    dir: "build",
+    // subFolders: false,
     routes: [
-      '/model-heart',
-      '/attack-healthy',
-      '/attack-minor',
-      '/attack-severe',
-      '/electricity-healthy',
-      '/electricity-fibrillation',
-      '/failure-healthy',
-      '/failure-compensated',
-      '/failure-decompensated'
-    ]
-  }
-}
+      // "/",
+      "/model-heart",
+      "/model-heart#video-div",
+      "/attack-healthy",
+      "/attack-minor",
+      "/attack-severe",
+      "/electricity-healthy",
+      "/electricity-fibrillation",
+      "/failure-healthy",
+      "/failure-compensated",
+      "/failure-decompensated",
+    ],
+  },
+  // generate:...generateBase,
+};
