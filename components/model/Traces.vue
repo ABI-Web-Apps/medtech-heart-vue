@@ -102,13 +102,13 @@ export default {
 
 .trace-box,
 .item {
-  width: 100%;
+  min-width: 280px;
+  max-width: 25vw;
 }
 .rightEGC-sm {
   min-height: 80px;
 }
 .rightEGC-md {
-  width: 250px;
   min-height: 100px;
 }
 </style>

@@ -73,6 +73,11 @@ export default {
   },
 
   created() {
+    console.log(
+      "%cMedtech Heart Vue App %cBeta:v1.0.1",
+      "padding: 3px;color:white; background:#023047",
+      "padding: 3px;color:white; background:#219EBC"
+    );
     this.$nuxt.$on("menu-height-changed", (multiplier) => {
       this.multiplier = multiplier;
     });
