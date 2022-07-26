@@ -1,14 +1,10 @@
 <template>
-  <v-app>
+  <v-app ref="base_background">
     <div class="rightPanel">
       <div>
-        <!-- <v-main> -->
-        <!-- class="pa-0 black"
-          :class="mdAndUp ? 'full-height' : 'auto-height'" -->
         <div class="pa-0 black">
           <Nuxt />
         </div>
-        <!-- </v-main> -->
       </div>
     </div>
     <div
@@ -66,6 +62,17 @@ export default {
 
   mounted() {
     this.panelHeight = this.$refs.panel.clientHeight;
+    const base_background = this.$refs.base_background.$el;
+    const Copper = this.$Copper();
+    document.addEventListener("keydown", (e) => {
+      if (e.code === "KeyF") {
+        Copper.fullScreenListenner(base_background);
+      }
+    });
+  },
+
+  watch: {
+    panelHeight: (height) => {},
   },
 
   updated() {
@@ -74,7 +81,7 @@ export default {
 
   created() {
     console.log(
-      "%cMedtech Heart Vue App %cBeta:v1.0.1",
+      "%cMedtech Heart Vue App %cBeta:v3.0.0",
       "padding: 3px;color:white; background:#023047",
       "padding: 3px;color:white; background:#219EBC"
     );
@@ -116,8 +123,6 @@ export default {
   height: calc(100vh - 112px);
 }
 .transparent {
-  // background-color: rgba(255, 255, 255, 0.1) !important;
-
   margin: 0;
   padding: 0;
   opacity: 0.8;

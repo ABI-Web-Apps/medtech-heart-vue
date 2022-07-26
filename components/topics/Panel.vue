@@ -16,6 +16,18 @@
       class="pt-2 pt-xl-4 marked"
       v-html="markedText"
     ></div>
+    <!-- <div v-if="$parentTopic().heading === 'Te Manawa'">
+      <v-select
+        v-model="select"
+        :items="items"
+        class="select"
+        label="Switch versions"
+        dense
+        color="#fff"
+        height="20px"
+        @change="onselectChange(select)"
+      ></v-select>
+    </div> -->
     <div v-if="!fileFound" class="error-message">
       <span>Data Not Found</span>
     </div>
@@ -30,12 +42,25 @@ export default {
 
   data() {
     return {
+      select: "",
       currentPanel: "",
       fileFound: false,
+      items: ["latest", "version 2.0", "version 1.0"],
     };
   },
 
   methods: {
+    // onselectChange(select) {
+    //   // if (select === "latest")
+    //   //   window.location.href =
+    //   //     "https://uoa-heart-mechanics-research.github.io/medtech-heart/latest/";
+    //   if (select === "version 2.0")
+    //     window.location.href =
+    //       "https://uoa-heart-mechanics-research.github.io/medtech-heart/v2/";
+    //   if (select === "version 1.0")
+    //     window.location.href =
+    //       "https://sites.bioeng.auckland.ac.nz/medtech/heart/";
+    // },
     play: function (event) {
       // /model-heart#video-div
       const routeStr = this.$nuxt.$route.path;
@@ -104,3 +129,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.select {
+  width: 127px;
+}
+.v-input__slot {
+  background: #fff;
+}
+.theme--dark.v-list {
+  // v-secondary-base
+  background: rgba(34, 155, 34, 1);
+}
+// .primary--text {
+//   // color: var(--v-secondary-base) !important;
+//   // caret-color: var(--v-secondary-base) !important;
+//   color: #fff;
+// }
+</style>
