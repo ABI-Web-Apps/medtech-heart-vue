@@ -3,7 +3,7 @@ const routerBase =
   process.env.DEPLOY_ENV === "GH_PAGES"
     ? {
         router: {
-          base: "/medtech-heart-vue/",
+          base: "/medtech-heart/",
         },
       }
     : {
@@ -13,11 +13,12 @@ const routerBase =
           base: "/",
         },
       };
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     //titleTemplate: '%s - medtech-heart-vue',
-    title: "MedTechHeart",
+    title: "MedTech Heart",
     htmlAttrs: {
       lang: "en",
     },
@@ -25,24 +26,32 @@ export default {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "/medtech-heart-vue/favicon2.ico",
+        href: "/medtech-heart/favicon2.ico",
       },
     ],
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      {
+        name: "google-site-verification",
+        content: "L6CIHWX38cm1gLthoxa4mWPpp_l6UGCrtyRe5ZNeKB0",
+      },
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "A latest MedTechHeart App(v3.0.0). You can spin, zoom, drag, and open the heart using the gestures shown at the bottom. Vary the heart rate using the slider on the right. ",
+      },
       { name: "format-detection", content: "telephone=no" },
+      {
+        name: "keywords",
+        content:
+          "MedTechHeart3.0 ABIMedTechHeart ABIMedTechHeart3.0 HeartResearch",
+      },
     ],
     script: [
       {
         "data-dojo-config": "async: 1, dojoBlankHtmlUrl: '/blank.html'",
-        /*"packages":[
-          {
-            'name': 'js',
-            'location':  location.pathname.replace(/\/[^/]+$/, '') + '/js'
-          }
-        ],*/
         src: "//ajax.googleapis.com/ajax/libs/dojo/1.11.2/dojo/dojo.js",
       },
       {
@@ -58,20 +67,8 @@ export default {
         src: "js/Add3DLabel.js",
       },
       {
-        type: "text/javascript",
-        src: "zincJS/three.min.js",
-      },
-      {
-        type: "text/javascript",
-        src: "zincJS/zinc_3js_renderer.js",
-      },
-      {
-        type: "text/javascript",
-        src: "zincJS/zinc_threejs_control.js",
-      },
-      {
-        type: "text/javascript",
-        src: "initZinc/index.js",
+        src: "https://www.googletagmanager.com/gtag/js?id=G-LXD5LJXP2Y",
+        async: true,
       },
     ],
   },
@@ -84,6 +81,9 @@ export default {
     "@/plugins/topics",
     "@/plugins/current-content",
     "@/plugins/models",
+    { src: "~/plugins/copper.js", ssr: false },
+    { src: "~plugins/ga.js", mode: "client" },
+    { src: "~plugins/ga4.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

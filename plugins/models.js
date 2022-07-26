@@ -1,6 +1,6 @@
 export default (context, inject) => {
   inject("currentRender", () => {
-    return context.store.getters.getZincRender;
+    return context.store.getters.getBaseRender;
   }),
     inject("modelToSceneArray", () => {
       return context.store.getters.getModelToSceneArray;
