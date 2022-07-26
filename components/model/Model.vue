@@ -1,21 +1,17 @@
 <template>
-  <!-- w-full h-full lg:h-screen -->
   <div class="">
     <div class="flex flex-col justify-center items-center">
-      <!-- w-full h-[400px] -mt-12 lg:h-screen lg:mt-0 -->
       <div
-        ref="zincDomObject"
-        :class="mdAndUp ? 'zincDom-md' : 'zincDom-sm'"
+        ref="baseDomObject"
+        :class="mdAndUp ? 'baseDom-md' : 'baseDom-sm'"
         @dblclick="onHalfHeartPressed"
       />
-      <!-- lg:fixed lg:bottom-0 lg:h-24 lg:ml-24 w-full h-full flex flex-row justify-center lg:mt-0 order-first lg:order-last -->
       <div
         ref="threeDControls"
-        class="zincModelControl"
-        :class="mdAndUp ? 'zincModelControl-md' : 'zincModelControl-sm'"
+        class="baseModelControl"
+        :class="mdAndUp ? 'baseModelControl-md' : 'baseModelControl-sm'"
       >
-        <!-- ml-0 h-full w-2/5 lg:w-64 relative -->
-        <div class="zincModelCB" :class="mdAndUp ? 'zincModelCB-md' : ''">
+        <div class="baseModelCB" :class="mdAndUp ? 'baseModelCB-md' : ''">
           <button
             class="absolute top-0 left-0 w-1/5 h-full hover:bg-gray-50/10"
             @click="onResetAllModelsView"
@@ -40,39 +36,42 @@ export default {
     return {
       heartRate: 2500,
       threeDControlsHeight: 0,
-      zincRenderer: null,
-      halfHeartFlag: false,
+      Copper: null,
+      THREE: null,
+      baseRenderer: null,
       oldCam: null,
+      scene: null,
       modelToSceneArray: [],
       container: null,
+      modelName: "",
       modelURLsArray: {
         NoInfarct_highres: [
-          "heartInfarct/noInfarct_highres_metadata.json",
-          "heartInfarct/noInfarct_view.json",
+          "heartInfarct/noInfarct.glb",
+          "modelView/noInfarct_view_setmodel.json",
         ],
         NormalElectricity_highres: [
-          "heartElectricity/normalActivity_highres_metadata.json",
-          "heartElectricity/normalActivity_view.json",
+          "heartElectricity/normalActivity.glb",
+          "modelView/noInfarct_view_setmodel.json",
         ],
         CompensatedFailure_highres: [
-          "heartFailure/compensated_highres_metadata.json",
-          "heartFailure/compensated_view.json",
+          "heartFailure/compensated.glb",
+          "modelView/noInfarct_view_setmodel.json",
         ],
         SmallInfarct_highres: [
-          "heartInfarct/smallInfarct_highres_metadata.json",
-          "heartInfarct/smallInfarct_view.json",
+          "heartInfarct/smallInfarct.glb",
+          "modelView/noInfarct_view_setmodel.json",
         ],
         LargeInfarct_highres: [
-          "heartInfarct/largeInfarct_highres_metadata.json",
-          "heartInfarct/largeInfarct_view.json",
+          "heartInfarct/largeInfarct.glb",
+          "modelView/noInfarct_view_setmodel.json",
         ],
         ArrythmiaElectricity_highres: [
-          "heartElectricity/arrythmiaActivity_highres_metadata.json",
-          "heartElectricity/arrythmiaActivity_view.json",
+          "heartElectricity/arrythmiaActivity.glb",
+          "modelView/arrythmiaActivity_view.json",
         ],
         DecompensatedFailure_highres: [
-          "heartFailure/decompensated_highres_metadata.json",
-          "heartFailure/decompensated_view.json",
+          "heartFailure/decompensated.glb",
+          "modelView/noInfarct_view_setmodel.json",
         ],
       },
     };
@@ -94,103 +93,83 @@ export default {
   },
 
   mounted() {
+    this.THREE = this.$three();
+    this.modelName = this.$model().name;
+    this.container = this.$refs.baseDomObject;
+    const baseContainer = this.$baseContainer();
+
+    setTimeout(() => {
+      this.mdAndUp
+        ? (baseContainer.style.height = "100vh")
+        : (baseContainer.style.height = "400px");
+    }, 100);
+    this.container.appendChild(baseContainer);
     this.start();
   },
 
   methods: {
     start() {
-      this.container = this.$refs.zincDomObject;
-      this.zincRenderer = this.$currentRender();
+      this.Copper = this.$Copper();
+      this.baseRenderer = this.$baseRenderer();
       this.modelToSceneArray = this.$modelToSceneArray();
-      if (this.container) {
-        if (this.zincRenderer === undefined) {
-          this.initialZinc();
-        }
-        this.zincRenderer.switchContainer(this.container);
-        this.halfHeartFlag = this.$isHalfModel();
-      }
 
       if (
-        this.$model().name === "NoInfarct" ||
-        this.$model().name === "SmallInfarct" ||
-        this.$model().name === "LargeInfarct" ||
-        this.$model().name === "CompensatedFailure" ||
-        this.$model().name === "DecompensatedFailure" ||
-        this.$model().name === "NormalElectricity"
+        this.modelName === "NoInfarct" ||
+        this.modelName === "SmallInfarct" ||
+        this.modelName === "LargeInfarct" ||
+        this.modelName === "CompensatedFailure" ||
+        this.modelName === "DecompensatedFailure" ||
+        this.modelName === "NormalElectricity"
       ) {
         this.oldCam = this.$perviousCamera();
       }
       if (this.$model().name === "ArrythmiaElectricity") {
-        this.loadModel(this.$model().name, 0.25);
+        this.loadModel(this.modelName, 0.25);
       } else {
-        this.loadModel(this.$model().name, 1.0);
+        this.loadModel(this.modelName, 1.0);
       }
 
-      this.trackHalfModel();
-
-      // when home click
-      // if (this.$route.params.slug === "model-heart") {
-      //   // const that = this
-      //   setTimeout(() => {
-      //     this.onResetAllModelsView();
-      //   }, 100);
-      // }
       this.heartRate = this.$heartBeat();
       this.updateSlider(this.heartRate);
-    },
-    initialZinc() {
-      this.zincRenderer = new Zinc.Renderer(this.container, window);
-      Zinc.defaultMaterialColor = 0xffff9c;
-      this.zincRenderer.initialiseVisualisation();
-      this.zincRenderer.getThreeJSRenderer().setClearColor(0x000000, 1);
-
-      // zincRenderer.getThreeJSRenderer().setClearColor(0x050505, 1);
-      var defaultScene = this.zincRenderer.getSceneByName("default");
-      this.zincRenderer.setCurrentScene(defaultScene);
-      let render = this.zincRenderer;
-      this.$store.commit("setZincRender", render);
-      this.zincRenderer.animate();
     },
     loadModel(model_name, rateScaling) {
       let model_prefix = "_highres";
       const metaURL = this.modelURLsArray[model_name + model_prefix][0];
       const viewURL = this.modelURLsArray[model_name + model_prefix][1];
 
-      let scene = this.zincRenderer.getSceneByName(model_name);
-      if (scene == undefined) {
-        scene = this.zincRenderer.createScene(model_name);
-        scene.setDuration(scene.getDuration() / rateScaling);
-        scene.loadViewURL(viewURL);
-        scene.loadMetadataURL(metaURL, this.meshReady(this.oldCam));
-        this.zincRenderer.setCurrentScene(scene);
+      this.scene = this.baseRenderer.getSceneByName(model_name);
+      if (this.scene === undefined) {
+        this.scene = this.baseRenderer.createScene(model_name);
+        this.scene.controls.staticMoving = true;
+        this.scene.controls.rotateSpeed = 2.0;
+        this.baseRenderer.setCurrentScene(this.scene);
+        this.scene.loadGltf(metaURL, (content) => {
+          if (model_name === "ArrythmiaElectricity") {
+            this.scene.setModelPosition(content, { x: 5, y: 2 });
+          } else {
+            this.scene.setModelPosition(content, { y: 3 });
+          }
 
-        const old_scene = {
-          name: model_name,
-          sceneObj: scene,
-        };
-        this.$store.commit("setModelToSceneArray", old_scene);
-        this.addLabel(this.$model().name);
+          if (this.oldCam && this.oldCam.near) {
+            this.shareCameraSettings(this.oldCam);
+          }
+        });
+        this.$store.commit("setModelToSceneArray", this.scene);
+
+        this.scene.loadViewUrl(viewURL);
+        this.scene.updateBackground("#000", "#000");
+        this.Copper.setHDRFilePath("environment/footprint_court_2k.hdr");
+        this.baseRenderer.updateEnvironment();
+        this.addLabel(this.modelName);
       } else {
-        scene.switchContainer(this.container);
-        this.zincRenderer.setCurrentScene(scene);
-        this.shareCameraSettings(this.oldCam);
+        this.meshReady(this.oldCam);
+        this.baseRenderer.setCurrentScene(this.scene);
       }
     },
     meshReady(oldCam) {
-      const that = this;
-      return function (mygeometry) {
-        if (mygeometry.groupName && mygeometry.groupName.includes("Post")) {
-          mygeometry.setVisibility(!that.halfHeartFlag);
-        }
-        if (mygeometry.groupName && mygeometry.groupName.includes("Fibres")) {
-          mygeometry.setVisibility(false);
-        }
-        that.shareCameraSettings(oldCam);
-        that.zincRenderer
-          .getCurrentScene()
-          .getZincCameraControls()
-          .updateAutoTumble();
-      };
+      if (this.oldCam && oldCam.near) {
+        this.shareCameraSettings(oldCam);
+      }
     },
 
     shareCameraSettings(oldCam) {
@@ -199,91 +178,110 @@ export default {
         oldCam.near !== null &&
         oldCam.near !== undefined
       ) {
-        var newCam = this.zincRenderer.getCurrentScene().camera;
-        newCam.near = oldCam.near;
-        newCam.far = oldCam.far;
-        newCam.position.copy(oldCam.position);
-        newCam.target = new THREE.Vector3(
-          oldCam.target.x,
-          oldCam.target.y,
-          oldCam.target.z
-        );
-        newCam.up.copy(oldCam.up);
-        this.zincRenderer.getCurrentScene().updateDirectionalLight();
+        const target = [
+          -0.9551143646240234, 2.91867446899414, 2.7563438415527344,
+        ];
+        const viewpoint = this.scene.setViewPoint(oldCam, target);
+        this.scene.updateCamera(viewpoint);
       }
     },
 
     onResetAllModelsView() {
-      this.halfHeartFlag = false;
       this.heartRate = 2500;
       $nuxt.$emit("beat-reset", 2500);
       this.$store.commit("setHeartBeat", 2500);
-      this.$store.commit("setIsHalfModel", false);
-      this.$store.commit("setPreviousCamera", null);
+
+      this.$store.commit("setPreviousCamera", {});
+
       for (var k in this.modelToSceneArray) {
         if (this.modelToSceneArray.hasOwnProperty(k)) {
           this.modelToSceneArray[k].resetView();
-          this.modelToSceneArray[k].forEachGeometry(this.geometryShowHalf());
+          if (this.modelToSceneArray[k].isHalfed) {
+            this.showHalf(this.modelToSceneArray[k]);
+          }
         }
       }
     },
-    trackHalfModel() {
-      for (var k in this.modelToSceneArray) {
-        if (this.modelToSceneArray.hasOwnProperty(k)) {
-          this.modelToSceneArray[k].forEachGeometry(this.geometryShowHalf());
-        }
+    convertHeartRate(heartRate) {
+      if (this.modelName === "ArrythmiaElectricity") {
+        return heartRate / 2000;
+      } else {
+        return heartRate / 500;
       }
     },
     updateSlider(heartRate) {
-      this.zincRenderer.setPlayRate(heartRate);
+      const convertRate = this.convertHeartRate(heartRate);
+      this.scene.setPlayRate(convertRate);
     },
     addLabel(model_name) {
-      var scene = this.zincRenderer.getSceneByName(model_name);
       if (model_name === "NoInfarct" || model_name === "NormalElectricity") {
-        addLabelToScene(
-          scene,
+        this.Copper.addLabelToScene(
+          this.scene,
           "right ventricle",
-          -38.056679,
-          35.639515,
+          -45.323991175632,
+          44.1417335930078,
           10.421283,
           60.0
         );
-        addLabelToScene(
-          scene,
+        this.Copper.addLabelToScene(
+          this.scene,
           "left ventricle",
-          -48.056679,
-          -5.639515,
+          -55.056679,
+          4.82123313284426,
           5.421283,
           60.0
         );
       } else if (model_name === "SmallInfarct") {
-        addLabelToScene(scene, "damaged tissue", 30, -50, 0, 60.0);
+        this.Copper.addLabelToScene(
+          this.scene,
+          "damaged tissue",
+          30,
+          -40,
+          0,
+          60.0
+        );
       } else if (model_name === "LargeInfarct") {
-        addLabelToScene(scene, "damaged tissue", 15, -55, 0, 60.0);
+        this.Copper.addLabelToScene(
+          this.scene,
+          "damaged tissue",
+          15,
+          -45,
+          0,
+          60.0
+        );
       }
     },
     onHalfHeartPressed() {
-      if (this.halfHeartFlag) {
-        this.halfHeartFlag = false;
-        this.$store.commit("setIsHalfModel", false);
-      } else {
-        this.halfHeartFlag = true;
-        this.$store.commit("setIsHalfModel", true);
-      }
       this.showHalf();
     },
-    showHalf() {
-      // this.isHalfModel ? (this.isHalfModel = false) : (this.isHalfModel = true);
-      var currentScene = this.zincRenderer.getCurrentScene();
-      currentScene.forEachGeometry(this.geometryShowHalf());
-    },
-    geometryShowHalf() {
-      const that = this;
-      return function (zincGeometry) {
-        if (zincGeometry.groupName && zincGeometry.groupName.includes("Post")) {
-          zincGeometry.setVisibility(!that.halfHeartFlag);
+    showHalf(sceneObj) {
+      console.log("hala");
+      let scene;
+      if (sceneObj) {
+        scene = sceneObj;
+      } else {
+        scene = this.baseRenderer.getSceneByName(this.modelName);
+      }
+      scene.content.traverse((child) => {
+        if (
+          child.name === "Post_top" ||
+          child.name === "Post_inner" ||
+          child.name === "Post_NonInfarct" ||
+          child.name === "Post_top_1" ||
+          child.name === "Post_inner_1" ||
+          child.name === "Post_NonInfarct_1" ||
+          child.name === "Post"
+        ) {
+          scene.updateModelChildrenVisualisation(child);
         }
-      };
+      });
+      if (this.modelName === "NormalElectricity") {
+        scene.content.traverse((child) => {
+          if (child.name === "Ant" || child.name === "Post") {
+            scene.updateModelChildrenVisualisation(child);
+          }
+        });
+      }
     },
   },
 
@@ -305,18 +303,14 @@ export default {
 
   beforeDestroy() {
     if (this.oldCam) {
-      const currentCamera = this.zincRenderer.getCurrentScene().camera;
-      const position = new THREE.Vector3();
-      const up = new THREE.Vector3();
-      const target = new THREE.Vector3();
-
-      target.copy(currentCamera.target);
+      const currentCamera = this.baseRenderer.getCurrentScene().camera;
+      const position = new this.THREE.Vector3();
+      const up = new this.THREE.Vector3();
       position.copy(currentCamera.position);
       up.copy(currentCamera.up);
 
       const currentCameraInfo = {
         position: position,
-        target: target,
         up: up,
         near: currentCamera.near,
         far: currentCamera.far,
@@ -331,7 +325,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.zincModelControl {
+.baseModelControl {
   width: 100vw;
   height: 120px;
   // background: red;
@@ -339,34 +333,37 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-content: center;
-  .zincModelCB {
+  .baseModelCB {
     width: 240px;
     height: 70px;
     position: relative;
   }
-  .zincModelCB-md {
+  .baseModelCB-md {
     width: 280px;
     height: 100px;
   }
 }
 
-.zincModelControl-md {
+.baseModelControl-md {
   position: fixed;
   bottom: 10px;
   padding-left: 100px;
 }
-.zincModelControl-sm {
+.baseModelControl-sm {
   order: -1;
   height: 60px;
 }
-.zincDom-md {
+.baseDom-md {
   width: 100vw;
   height: 100vh;
   margin: 0;
+  padding: 0;
 }
-.zincDom-sm {
+.baseDom-sm {
   width: 100vw;
   height: 400px;
+  margin: 0;
+  padding: 0;
 }
 .outer-model {
   height: 100%;

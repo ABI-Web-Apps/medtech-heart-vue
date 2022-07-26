@@ -2,7 +2,7 @@ export const state = () => ({
   currentContent: {},
   chartLoaded: "",
   previousCamera: {},
-  zincRenderer: undefined,
+  baseRenderer: undefined,
   modelToSceneArray: [],
   isHalfmodel: false,
   heartBeat: 2500,
@@ -11,7 +11,7 @@ export const state = () => ({
 export const getters = {
   getCurrentContent: (state) => state.currentContent,
   getChartLoaded: (state) => state.chartLoaded,
-  getZincRender: (state) => state.zincRenderer,
+  getBaseRender: (state) => state.baseRenderer,
   getModelToSceneArray: (state) => state.modelToSceneArray,
   getPreviousCamera: (state) => state.previousCamera,
   getIsHalfModel: (state) => state.isHalfmodel,
@@ -25,11 +25,11 @@ export const mutations = {
   setChartLoaded(state, currentChart) {
     state.chartLoaded = currentChart;
   },
-  setZincRender(state, currentRender) {
-    state.zincRenderer = currentRender;
+  setBaseRender(state, currentRender) {
+    state.baseRenderer = currentRender;
   },
   setModelToSceneArray(state, old_scene) {
-    state.modelToSceneArray[old_scene.name] = old_scene.sceneObj;
+    state.modelToSceneArray[old_scene.sceneName] = old_scene;
   },
   setPreviousCamera(state, preCamera) {
     state.previousCamera = preCamera;
